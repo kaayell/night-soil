@@ -9,7 +9,7 @@ test:
     - mv build/libs/*.jar $CIRCLE_ARTIFACTS
     - cf api https://api.run.pivotal.io
     - cf auth $CF_USER $CF_PASSWORD
-    - cf target -o labs-playground -s Kristie-Lynne Koss
+    - cf target -o labs-playground -s Kristie-Lynne\ Koss
     - cf a
 
 deployment:
