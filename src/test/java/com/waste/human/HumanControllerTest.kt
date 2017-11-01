@@ -8,8 +8,10 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 internal class HumanControllerTest {
@@ -19,26 +21,41 @@ internal class HumanControllerTest {
     var mockMvc: MockMvc = MockMvcBuilders.standaloneSetup(controller).build()
 
     @Test
-    fun `should have an endpoint to create human`(){
-        mockMvc.perform(MockMvcRequestBuilders.post("/human")
+    fun `should have an endpoint to create human`() {
+        mockMvc.perform(post("/human")
             .contentType(MediaType.APPLICATION_JSON)
             .content("{\n  \"firstName\": \"Micah\",\n  \"lastName\": \"Dorn\",\n  \"email\": \"boop@sup.com\"\n}")
-        ).andExpect(MockMvcResultMatchers.status().isCreated)
+        ).andExpect(status().isCreated)
     }
 
     @Test
-    fun `should call service on create`(){
+    fun `should call service on create`() {
         val humanRequest = HumanApiWrapper("Bear", "D", "email@hi.com")
         controller.create(humanRequest)
         verify(humanService).create(humanRequest)
     }
 
     @Test
-    fun `should return the created human`(){
+    fun `should return the created human`() {
         val humanRequest = HumanApiWrapper("Bear", "D", "email@hi.com")
         val expectedHumanResponse = HumanApiWrapper(id = 20L, firstName = "Bear", lastName = "D", email = "email@hi.com")
         whenever(humanService.create(any())).thenReturn(expectedHumanResponse)
         val actualHuman = controller.create(humanRequest)
         assertThat(actualHuman).isEqualTo(expectedHumanResponse)
+    }
+
+    @Test
+    fun `should have an endpoint to retrieve all humans`() {
+        mockMvc.perform(get("/human"))
+            .andExpect(content().json("[]"))
+    }
+
+    @Test
+    fun `should get all humans from service`() {
+        val expectedList = listOf(HumanApiWrapper())
+        whenever(humanService.getAll()).thenReturn(expectedList)
+        val actualHumanList = controller.getAll()
+        verify(humanService).getAll()
+        assertThat(actualHumanList).isEqualTo(expectedList)
     }
 }

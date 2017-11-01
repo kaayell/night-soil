@@ -11,10 +11,17 @@ open class HumanService(var humanRepository: HumanRepository) {
             lastName = humanRequest.lastName,
             email = humanRequest.email))
             .let { savedEntity ->
-                HumanApiWrapper(
-                    id = savedEntity.id,
-                    firstName = savedEntity.firstName,
-                    lastName = savedEntity.lastName,
-                    email = savedEntity.email)
+                transform(savedEntity)
             }
+
+    open fun getAll(): List<HumanApiWrapper> =
+        humanRepository.findAll().map { humanEntity -> transform(humanEntity) }
+
+    private fun transform(savedEntity: HumanEntity): HumanApiWrapper {
+        return HumanApiWrapper(
+            id = savedEntity.id,
+            firstName = savedEntity.firstName,
+            lastName = savedEntity.lastName,
+            email = savedEntity.email)
+    }
 }

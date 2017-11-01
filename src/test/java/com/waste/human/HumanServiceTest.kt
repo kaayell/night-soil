@@ -36,4 +36,16 @@ internal class HumanServiceTest {
         assertThat(actualHuman.lastName).isEqualTo("last")
         assertThat(actualHuman.email).isEqualTo("email")
     }
+
+    @Test
+    fun `should get all humans from repo`() {
+        whenever(humanRepository.findAll()).thenReturn(
+            listOf(HumanEntity(id = 1L, firstName = "hi", lastName = "yo", email = "sup")))
+        val humanList = humanService.getAll()
+        assertThat(humanList).hasSize(1)
+        assertThat(humanList[0].id).isEqualTo(1L)
+        assertThat(humanList[0].firstName).isEqualTo("hi")
+        assertThat(humanList[0].lastName).isEqualTo("yo")
+        assertThat(humanList[0].email).isEqualTo("sup")
+    }
 }
