@@ -1,11 +1,11 @@
-package com.excrement.poop
+package com.waste
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
-open class PoopApplication
+open class WasteApplication
 
 fun main(args: Array<String>) {
-    SpringApplication.run(PoopApplication::class.java, *args)
+    SpringApplication.run(WasteApplication::class.java, *args)
 }
