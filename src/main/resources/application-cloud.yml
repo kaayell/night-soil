@@ -1,0 +1,4 @@
+spring:
+  datasource:
+    testOnBorrow: true
+    validationQuery: SELECT 1

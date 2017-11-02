@@ -30,15 +30,15 @@ internal class HumanControllerTest {
 
     @Test
     fun `should call service on create`() {
-        val humanRequest = HumanApiWrapper("Bear", "D", "email@hi.com")
+        val humanRequest = HumanApiWrapper("Bear", "D", "email@hi.com", 2.0)
         controller.create(humanRequest)
         verify(humanService).create(humanRequest)
     }
 
     @Test
     fun `should return the created human`() {
-        val humanRequest = HumanApiWrapper("Bear", "D", "email@hi.com")
-        val expectedHumanResponse = HumanApiWrapper(id = 20L, firstName = "Bear", lastName = "D", email = "email@hi.com")
+        val humanRequest = HumanApiWrapper("Bear", "D", "email@hi.com", 1.0)
+        val expectedHumanResponse = HumanApiWrapper(20L, "Bear", "D", "email@hi.com", 1.0)
         whenever(humanService.create(any())).thenReturn(expectedHumanResponse)
         val actualHuman = controller.create(humanRequest)
         assertThat(actualHuman).isEqualTo(expectedHumanResponse)

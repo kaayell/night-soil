@@ -9,7 +9,8 @@ open class HumanService(var humanRepository: HumanRepository) {
         humanRepository.save(HumanEntity(
             firstName = humanRequest.firstName,
             lastName = humanRequest.lastName,
-            email = humanRequest.email))
+            email = humanRequest.email,
+            hourlyRate = humanRequest.hourlyRate))
             .let { savedEntity ->
                 transform(savedEntity)
             }
@@ -22,6 +23,7 @@ open class HumanService(var humanRepository: HumanRepository) {
             id = savedEntity.id,
             firstName = savedEntity.firstName,
             lastName = savedEntity.lastName,
-            email = savedEntity.email)
+            email = savedEntity.email,
+            hourlyRate = savedEntity.hourlyRate)
     }
 }

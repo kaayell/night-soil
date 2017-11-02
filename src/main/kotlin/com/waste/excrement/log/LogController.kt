@@ -8,8 +8,11 @@ open class LogController(val service: LogService) {
 
     @PostMapping("/human/{humanId}/log")
     @ResponseStatus(HttpStatus.CREATED)
-    open fun create(@PathVariable(name = "humanId") humanId: Long, @RequestBody logRequest: LogRequest) {
-        service.create(humanId, logRequest)
+    open fun create(@PathVariable(name = "humanId") humanId: Long, @RequestBody logApiWrapper: LogApiWrapper) {
+        service.create(humanId, logApiWrapper)
     }
+
+    @GetMapping("/human/{humanId}/log")
+    open fun getLogs(@PathVariable(name = "humanId") humanId: Long): List<LogApiWrapper> = service.getLogs(humanId)
 
 }
