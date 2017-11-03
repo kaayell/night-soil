@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Layout from './Layout';
 import {MuiThemeProvider} from "material-ui/styles/index";
+import Layout from "./Layout/Layout";
 
 const App = () => (
     <MuiThemeProvider>

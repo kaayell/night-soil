@@ -1,0 +1,12 @@
+.main_container {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.add_human_form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+

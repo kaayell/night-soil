@@ -1,10 +1,10 @@
 import React from 'react';
 import {shallow} from 'enzyme'
 
-import Header from "./Header";
+import Header from "../Header/Header";
+import Bod from "../Bod/Bod";
 
 import Layout from "./Layout";
-import Bod from "./Bod";
 
 describe('Layout', () => {
     it('renders', () => {
