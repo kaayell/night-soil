@@ -2,14 +2,14 @@ import React from 'react'
 import {shallow} from 'enzyme'
 import {TextField, RaisedButton} from 'material-ui'
 import * as api from '../api/apiClient'
-import Bod from './Bod'
+import {SignUp} from './SignUp'
 
-describe('Bod', () => {
+describe('SignUp', () => {
     let wrapper;
 
     beforeEach(() => {
         api.createHuman = jest.fn()
-        wrapper = shallow(<Bod/>)
+        wrapper = shallow(<SignUp/>)
     })
 
     it('renders', () => {
@@ -46,7 +46,6 @@ describe('Bod', () => {
     })
 
     describe('on submit', () => {
-
         it('sends data to api client', () => {
             wrapper.setState({firstName: "first", lastName: "last", email: "email", hourlyRate: "2.3" })
             wrapper.rerender()
@@ -55,6 +54,5 @@ describe('Bod', () => {
 
             expect(api.createHuman).toHaveBeenCalledWith({firstName: "first", lastName: "last", email: "email", hourlyRate: "2.3"})
         })
-
     })
 });

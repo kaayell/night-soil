@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import './Layout.css';
-import Header from "../Header/Header";
-import Bod from "../Bod/Bod";
+import SignUp from "../SignUp/SignUp";
+import Menu from "../Menu/Menu";
 
 class Layout extends Component {
     render() {
         return (
             <div>
-                <Header/>
-                <Bod/>
+                <Menu/>
+                <SignUp/>
             </div>
         );
     }
