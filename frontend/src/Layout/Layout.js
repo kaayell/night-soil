@@ -1,17 +1,35 @@
 import React, {Component} from 'react';
+import Header from "../Header/Header";
 import './Layout.css';
-import SignUp from "../SignUp/SignUp";
-import Menu from "../Menu/Menu";
+import Timer from "../Timer/Timer";
+import BottomNavigation from "../Navigation/Navigation";
+import {connect} from "react-redux";
+import Home from "../Home/Home";
 
-class Layout extends Component {
+export class Layout extends Component {
     render() {
+
+        let body
+        switch(this.props.activePage){
+            case 'timer': body = <Timer />; break;
+            default: body = <Home/>; break;
+        }
+
         return (
             <div>
-                <Menu/>
-                <SignUp/>
+                <Header/>
+                {body}
+                <BottomNavigation/>
             </div>
         );
     }
 }
 
-export default Layout;
+
+const mapStateToProps = state => {
+    return {
+        activePage: state.activePage
+    }
+}
+
+export default connect(mapStateToProps)(Layout)

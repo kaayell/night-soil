@@ -9,8 +9,7 @@ export class Menu extends Component {
             <Drawer open={this.props.menuOpen}
                     docked={false}
                     onRequestChange={this.props.toggleMenu}>
-                <MenuItem onClick={this.props.toggleMenu}>Sign Up</MenuItem>
-                <MenuItem onClick={this.props.toggleMenu}>Users</MenuItem>
+                <MenuItem onClick={this.props.toggleMenu}>Log History</MenuItem>
             </Drawer>
         )
     }
