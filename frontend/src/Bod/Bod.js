@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {RaisedButton, TextField} from "material-ui";
+import * as api from "../api/apiClient"
 import "./Bod.css"
 
 class Bod extends Component {
@@ -17,6 +18,7 @@ class Bod extends Component {
     }
 
     handleClick() {
+        api.createHuman(this.state)
     }
 
     onValueChange(field, event){

@@ -1,12 +1,14 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-import {TextField} from 'material-ui'
+import {TextField, RaisedButton} from 'material-ui'
+import * as api from '../api/apiClient'
 import Bod from './Bod'
 
 describe('Bod', () => {
     let wrapper;
 
     beforeEach(() => {
+        api.createHuman = jest.fn()
         wrapper = shallow(<Bod/>)
     })
 
@@ -39,14 +41,19 @@ describe('Bod', () => {
         textFields.at(2).simulate('change', {target: {value: "wut"}})
         expect(wrapper.state().email).toEqual("wut")
 
-        textFields.at(2).simulate('change', {target: {value: "hour"}})
+        textFields.at(3).simulate('change', {target: {value: "hour"}})
         expect(wrapper.state().hourlyRate).toEqual("hour")
     })
 
     describe('on submit', () => {
 
         it('sends data to api client', () => {
-            
+            wrapper.setState({firstName: "first", lastName: "last", email: "email", hourlyRate: "2.3" })
+            wrapper.rerender()
+
+            wrapper.find(RaisedButton).simulate('click')
+
+            expect(api.createHuman).toHaveBeenCalledWith({firstName: "first", lastName: "last", email: "email", hourlyRate: "2.3"})
         })
 
     })

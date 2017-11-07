@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@CrossOrigin
 open class LogController(val service: LogService) {
 
     @PostMapping("/human/{humanId}/log")
