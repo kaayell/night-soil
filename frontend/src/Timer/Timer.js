@@ -56,7 +56,7 @@ class Timer extends Component {
                      width="200"
                      height="160"/>
                 <div className="stopwatch-container">
-                    <label>{this.formatSeconds(this.state.secondsElapsed)}</label>
+                    <label className="timer-label">{this.formatSeconds(this.state.secondsElapsed)}</label>
                     <div className="stopwatch-buttons">
                         {startOrStopButton}
                         <FlatButton label="Reset" onClick={this.handleResetClick}/>

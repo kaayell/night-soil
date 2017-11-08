@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import Header from "../Header/Header";
-import './Layout.css';
-import Timer from "../Timer/Timer";
-import BottomNavigation from "../Navigation/Navigation";
 import {connect} from "react-redux";
+import Header from "../Header/Header";
+import BottomNavigation from "../Navigation/Navigation";
+import Timer from "../Timer/Timer";
 import Home from "../Home/Home";
+import Create from "../Create/Create";
+import './Layout.css';
 
 export class Layout extends Component {
     render() {
@@ -12,6 +13,7 @@ export class Layout extends Component {
         let body
         switch(this.props.activePage){
             case 'timer': body = <Timer />; break;
+            case 'create': body = <Create />; break;
             default: body = <Home/>; break;
         }
 
