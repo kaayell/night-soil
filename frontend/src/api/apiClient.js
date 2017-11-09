@@ -9,3 +9,7 @@ if(window.location.href.includes('cfapps')) {
 export function createHuman(human) {
     return axios.post(`${apiUrl}/human`, human)
 }
+
+export function createLog(logData) {
+    return axios.post(`${apiUrl}/human/${logData.humanId}/log`, logData)
+}

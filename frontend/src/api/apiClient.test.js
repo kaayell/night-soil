@@ -13,13 +13,14 @@ describe('apiClient', () => {
         expect(axios.post).toHaveBeenCalledWith('http://localhost:8080/human', {})
     })
 
-    //FIXME why no work?
-    // it('changes url depending on window environment', () => {
-    //     window.location.href = "http://poop.cfapps.io/"
-    //     axios.post = jest.fn()
-    //
-    //     api.createHuman({})
-    //     expect(axios.post).toHaveBeenCalledWith('http://poop.cfapps.io', {})
-    // })
+    it('should make a post request to create log for human', () => {
+        const resolved = new Promise((r) => r());
+
+        axios.post = jest.fn()
+        axios.post.mockReturnValueOnce(resolved)
+        const data = {humanId: "1", bristolType: "1"}
+        api.createLog(data)
+        expect(axios.post).toHaveBeenCalledWith('http://localhost:8080/human/1/log', data)
+    })
 
 })
