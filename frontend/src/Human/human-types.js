@@ -1,0 +1,1 @@
+export const SET_HUMAN_INFO="SET_HUMAN_INFO"

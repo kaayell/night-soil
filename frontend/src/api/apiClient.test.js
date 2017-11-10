@@ -3,6 +3,16 @@ import * as api from './apiClient'
 
 describe('apiClient', () => {
 
+    it('should make a get request to get human', () => {
+        const resolved = new Promise((r) => r());
+
+        axios.get = jest.fn()
+        axios.get.mockReturnValueOnce(resolved)
+
+        api.getHuman("booga")
+        expect(axios.get).toHaveBeenCalledWith("http://localhost:8080/human?email=booga")
+    })
+
     it('should make a post request to create human', () => {
         const resolved = new Promise((r) => r());
 

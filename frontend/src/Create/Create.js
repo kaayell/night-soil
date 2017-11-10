@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {DatePicker, DropDownMenu, FlatButton, MenuItem, TextField} from "material-ui";
 import * as apiClient from "../api/apiClient"
 import "./Create.css"
+import {connect} from "react-redux";
 
 export class Create extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ export class Create extends Component {
     }
 
     handleSubmit() {
-        apiClient.createLog({...this.state, ...{humanId: "1"}})
+        apiClient.createLog({...this.state, ...{humanId: this.props.humanId}})
         this.setState({
             bristolType: null,
             durationInMinutes: null,
@@ -71,4 +72,10 @@ export class Create extends Component {
 
 }
 
-export default Create
+const mapStateToProps = state => {
+    return {
+        humanId: state.humanInfo.id
+    }
+}
+
+export default connect(mapStateToProps)(Create)

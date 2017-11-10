@@ -3,7 +3,7 @@ import {shallow} from "enzyme";
 import {DatePicker, DropDownMenu, FlatButton, TextField} from "material-ui";
 import * as apiClient from "../api/apiClient"
 
-import Create from "./Create";
+import {Create} from "./Create";
 
 describe('Create', () => {
     it('should render', () => {
@@ -20,7 +20,7 @@ describe('Create', () => {
 
         it('takes all entered values and calls api', () => {
             apiClient.createLog = jest.fn()
-            let wrapper = shallow(<Create/>)
+            let wrapper = shallow(<Create humanId={"8928"}/>)
 
             wrapper.find(DropDownMenu).simulate('change', null, null, "3")
             wrapper.find(TextField).at(0).simulate('change', {target: {value: "12"}})
@@ -30,7 +30,7 @@ describe('Create', () => {
             wrapper.find(FlatButton).simulate('click')
 
             expect(apiClient.createLog).toHaveBeenCalledWith({
-                humanId: "1",
+                humanId: "8928",
                 bristolType: "3",
                 durationInMinutes: "12",
                 comments: "pewp",

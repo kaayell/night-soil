@@ -6,6 +6,10 @@
   version "6.0.90"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.90.tgz#0ed74833fa1b73dcdb9409dcb1c97ec0a8b13b02"
 
+"@types/react@*":
+  version "16.0.22"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.22.tgz#19ad106e124aceebd2b4d430a278d55413ee8759"
+
 abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -5379,6 +5383,13 @@ react-event-listener@^0.5.1:
     fbjs "^0.8.16"
     prop-types "^15.6.0"
     warning "^3.0.0"
+
+react-google-login@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-google-login/-/react-google-login-3.0.2.tgz#b08752e0ba0bb334ae5580ed8acd4c6dadb823a8"
+  dependencies:
+    "@types/react" "*"
+    prop-types "^15.6.0"
 
 react-redux@^5.0.6:
   version "5.0.6"

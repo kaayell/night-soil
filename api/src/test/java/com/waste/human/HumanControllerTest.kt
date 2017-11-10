@@ -54,8 +54,23 @@ internal class HumanControllerTest {
     fun `should get all humans from service`() {
         val expectedList = listOf(HumanApiWrapper())
         whenever(humanService.getAll()).thenReturn(expectedList)
-        val actualHumanList = controller.getAll()
+        val actualHumanList = controller.get()
         verify(humanService).getAll()
+        assertThat(actualHumanList).isEqualTo(expectedList)
+    }
+
+    @Test
+    fun `should have an endpoint to retrieve one human`(){
+        mockMvc.perform(get("/human?email=oh@kaay"))
+            .andExpect(content().json("[]"))
+    }
+
+    @Test
+    fun `should get human if email is passed in`(){
+        val expectedList = listOf(HumanApiWrapper())
+        whenever(humanService.find(any())).thenReturn(expectedList)
+        val actualHumanList = controller.get("email@stuff.com")
+        verify(humanService).find("email@stuff.com")
         assertThat(actualHumanList).isEqualTo(expectedList)
     }
 }

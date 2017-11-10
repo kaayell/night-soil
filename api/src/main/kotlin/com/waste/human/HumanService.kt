@@ -18,6 +18,11 @@ open class HumanService(var humanRepository: HumanRepository) {
     open fun getAll(): List<HumanApiWrapper> =
         humanRepository.findAll().map { humanEntity -> transform(humanEntity) }
 
+    open fun find(email: String): List<HumanApiWrapper> =
+        humanRepository.findByEmail(email)?.let {
+            listOf(transform(it))
+        }.orEmpty()
+
     private fun transform(savedEntity: HumanEntity): HumanApiWrapper {
         return HumanApiWrapper(
             id = savedEntity.id,

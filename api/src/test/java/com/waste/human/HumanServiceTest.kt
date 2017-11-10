@@ -51,4 +51,18 @@ internal class HumanServiceTest {
         assertThat(humanList[0].email).isEqualTo("sup")
         assertThat(humanList[0].hourlyRate).isEqualTo(1.0)
     }
+
+    @Test
+    fun `should find human in repo`() {
+        whenever(humanRepository.findByEmail(any())).thenReturn(
+            HumanEntity(id = 1L, firstName = "hi", lastName = "yo", email = "sup", hourlyRate = 1.0))
+        val humanList = humanService.find("sup")
+        assertThat(humanList).hasSize(1)
+        assertThat(humanList[0].id).isEqualTo(1L)
+        assertThat(humanList[0].firstName).isEqualTo("hi")
+        assertThat(humanList[0].lastName).isEqualTo("yo")
+        assertThat(humanList[0].email).isEqualTo("sup")
+        assertThat(humanList[0].hourlyRate).isEqualTo(1.0)
+    }
+
 }

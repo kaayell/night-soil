@@ -3,3 +3,15 @@ spring:
     url: jdbc:mysql://localhost:3306/waste
     username: user
     password: blahblah
+
+security:
+  oauth2:
+    client:
+      clientId: 760697789556-gpv6rvjm3u6eato59r0dq7a1jqch9ap2.apps.googleusercontent.com
+      clientSecret:
+      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      clientAuthenticationScheme: form
+    resource:
+      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+      preferTokenInfo: true
