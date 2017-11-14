@@ -8,7 +8,7 @@ describe('Navigation', () => {
 
     it('should render', () => {
         let wrapper = shallow(<Navigation/>)
-        expect(wrapper.find(BottomNavigationItem).length).toEqual(3)
+        expect(wrapper.find(BottomNavigationItem).length).toEqual(4)
     })
 
     it('should send an action on a button click', () => {

@@ -5,50 +5,44 @@ import Timer from "../Timer/Timer";
 import * as apiClient from "../api/apiClient"
 
 import {Layout} from "./Layout";
-import {GoogleLogin} from "react-google-login";
 
 describe('Layout', () => {
     let wrapper
 
-    beforeEach(() => {
-        wrapper = shallow(<Layout/>)
-    })
-
-    describe('on google login', () => {
-        it('has google login component', () => {
-            expect(wrapper.find(GoogleLogin).props().isSignedIn).toEqual(true)
-        })
-    })
-
     describe('on successful login', () => {
-        let googleLoginResponse
+        let auth0Response
+        let auth
 
         beforeEach(() => {
-            googleLoginResponse = {
-                profileObj: {
-                    email: "me@sup.com",
-                    familyName: "sup",
-                    givenName: "me"
-                }
+            auth0Response = {
+                email: "me@sup.com",
+                family_name: "sup",
+                given_name: "me"
             }
+            auth = {
+                userProfile: auth0Response,
+                isAuthenticated: () => true,
+                getProfile: jest.fn(),
+                login: jest.fn()
+            }
+            wrapper = shallow(<Layout auth={auth}/>)
+
         })
 
         it('should render home by default', () => {
-            wrapper.setState({loggedIn: true})
-            wrapper.rerender()
             expect(wrapper.find(Home).length).toEqual(1)
         })
 
         it('should render timer page based off state', () => {
-            wrapper = shallow(<Layout activePage={"timer"}/>)
-            wrapper.setState({loggedIn: true})
-            wrapper.rerender()
+            wrapper = shallow(<Layout activePage={"timer"} auth={auth}/>)
             expect(wrapper.find(Timer).length).toEqual(1)
         })
 
-        it('should set login state to true', () => {
-            wrapper.instance().handleSuccessfulLogin(googleLoginResponse)
-            expect(wrapper.state().loggedIn).toEqual(true)
+        xit('should call get human', () => {
+            apiClient.getHuman = jest.fn()
+
+            wrapper.instance().handleSuccessfulLogin()
+            expect(apiClient.getHuman).toHaveBeenCalledWith("me@sup.com")
         })
 
         describe('on retrieving human from api', () => {
@@ -59,9 +53,9 @@ describe('Layout', () => {
 
                 apiClient.getHuman = jest.fn()
 
-                wrapper = shallow(<Layout/>)
+                wrapper = shallow(<Layout auth={auth}/>)
 
-                wrapper.instance().handleSuccessfulLogin(googleLoginResponse)
+                wrapper.instance().handleSuccessfulLogin(auth0Response)
                     .then(() => {
                             expect(apiClient.createHuman)
                                 .toHaveBeenCalledWith({

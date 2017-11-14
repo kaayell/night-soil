@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BottomNavigation, BottomNavigationItem, Paper} from "material-ui";
-import {AddCircle, Alarm, Home} from "material-ui-icons";
+import {AddCircle, Alarm, Face, Home} from "material-ui-icons";
 import "./Navigation.css"
 import {connect} from "react-redux";
 import {setActivePage} from "./navigation-actions";
@@ -24,6 +24,11 @@ export class Navigation extends Component {
                         label="Add Poop"
                         icon={<AddCircle/>}
                         onClick={() => this.props.setActivePage("create")}
+                    />
+                    <BottomNavigationItem
+                        label="Profile"
+                        icon={<Face/>}
+                        onClick={() => this.props.setActivePage("profile")}
                     />
                 </BottomNavigation>
             </Paper>
