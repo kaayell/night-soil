@@ -15,6 +15,15 @@ open class HumanService(var humanRepository: HumanRepository) {
                 transform(savedEntity)
             }
 
+    open fun update(humanRequest: HumanApiWrapper) {
+        humanRepository.save(HumanEntity(
+            id = humanRequest.id,
+            firstName = humanRequest.firstName,
+            lastName = humanRequest.lastName,
+            email = humanRequest.email,
+            hourlyRate = humanRequest.hourlyRate))
+    }
+
     open fun getAll(): List<HumanApiWrapper> =
         humanRepository.findAll().map { humanEntity -> transform(humanEntity) }
 

@@ -40,6 +40,20 @@ internal class HumanServiceTest {
     }
 
     @Test
+    fun `should update a human`(){
+        humanService.update(HumanApiWrapper(1, "first", "last", "email", 1.0))
+        argumentCaptor<HumanEntity>().let {
+            verify(humanRepository).save(it.capture())
+            val humanEntity = it.firstValue
+            assertThat(humanEntity.id).isEqualTo(1)
+            assertThat(humanEntity.firstName).isEqualTo("first")
+            assertThat(humanEntity.lastName).isEqualTo("last")
+            assertThat(humanEntity.email).isEqualTo("email")
+            assertThat(humanEntity.hourlyRate).isEqualTo(1.0)
+        }
+    }
+
+    @Test
     fun `should get all humans from repo`() {
         whenever(humanRepository.findAll()).thenReturn(
             listOf(HumanEntity(id = 1L, firstName = "hi", lastName = "yo", email = "sup", hourlyRate = 1.0)))

@@ -23,7 +23,7 @@ export class Navigation extends Component {
                     <BottomNavigationItem
                         label="Profile"
                         icon={<Face/>}
-                        onClick={() => this.props.setActivePage("profile")}
+                        onClick={() => this.props.setActivePage("human")}
                     />
                 </BottomNavigation>
             </Paper>

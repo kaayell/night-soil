@@ -10,10 +10,15 @@ open class HumanController(var humanService: HumanService) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    open fun create(@RequestBody humanRequest: HumanApiWrapper) : HumanApiWrapper = humanService.create(humanRequest)
+    open fun create(@RequestBody humanRequest: HumanApiWrapper): HumanApiWrapper =
+        humanService.create(humanRequest)
 
     @GetMapping
-    open fun get(@Param("email") email: String? = null) : List<HumanApiWrapper> =
-        if(email != null) humanService.find(email) else humanService.getAll()
+    open fun get(@Param("email") email: String? = null): List<HumanApiWrapper> =
+        if (email != null) humanService.find(email) else humanService.getAll()
+
+    @PutMapping
+    open fun update(@RequestBody humanRequest: HumanApiWrapper) =
+        humanService.update(humanRequest)
 
 }

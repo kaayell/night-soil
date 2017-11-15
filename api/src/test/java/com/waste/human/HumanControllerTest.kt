@@ -8,8 +8,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
@@ -42,6 +41,21 @@ internal class HumanControllerTest {
         whenever(humanService.create(any())).thenReturn(expectedHumanResponse)
         val actualHuman = controller.create(humanRequest)
         assertThat(actualHuman).isEqualTo(expectedHumanResponse)
+    }
+
+    @Test
+    fun `should have an endpoint to update human`(){
+        mockMvc.perform(put("/human")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\n  \"firstName\": \"Micah\",\n  \"hourlySalary\": \"1\",\n  \"email\": \"boop@sup.com\"\n}")
+        ).andExpect(status().isOk)
+    }
+
+    @Test
+    fun `should call service on update`(){
+        val humanRequest = HumanApiWrapper("Bear", "D", "email@hi.com", 2.0)
+        controller.update(humanRequest)
+        verify(humanService).update(humanRequest)
     }
 
     @Test

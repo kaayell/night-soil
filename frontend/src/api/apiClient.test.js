@@ -23,6 +23,16 @@ describe('apiClient', () => {
         expect(axios.post).toHaveBeenCalledWith('http://localhost:8080/human', {})
     })
 
+    it('should make a put request to update human', () => {
+        const resolved = new Promise((r) => r());
+
+        axios.put = jest.fn()
+        axios.put.mockReturnValueOnce(resolved)
+
+        api.updateHuman({})
+        expect(axios.put).toHaveBeenCalledWith('http://localhost:8080/human', {})
+    })
+
     it('should make a post request to create log for human', () => {
         const resolved = new Promise((r) => r());
 

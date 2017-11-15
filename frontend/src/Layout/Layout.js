@@ -9,6 +9,7 @@ import * as apiClient from "../api/apiClient"
 import './Layout.css';
 import {setHumanInfo} from "../Human/human-actions";
 import Home from "../Home/Home";
+import Human from "../Human/Human";
 
 
 export class Layout extends Component {
@@ -62,6 +63,9 @@ export class Layout extends Component {
                 break;
             case 'create':
                 body = <Create/>;
+                break;
+            case 'human':
+                body = <Human/>
                 break;
             default:
                 body = <Home/>
