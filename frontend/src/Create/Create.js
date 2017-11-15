@@ -3,6 +3,7 @@ import {DatePicker, DropDownMenu, FlatButton, MenuItem, TextField} from "materia
 import * as apiClient from "../api/apiClient"
 import "./Create.css"
 import {connect} from "react-redux";
+import {setActivePage} from "../Navigation/navigation-actions";
 
 export class Create extends Component {
     constructor(props) {
@@ -28,6 +29,7 @@ export class Create extends Component {
             comments: null,
             dateTimeInMilliseconds: null
         })
+        this.props.setActivePage("home")
     }
 
     onDropDownChange(event, index, value) {
@@ -78,4 +80,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Create)
+export default connect(mapStateToProps, {setActivePage})(Create)

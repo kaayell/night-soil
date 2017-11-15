@@ -20,7 +20,7 @@ describe('Create', () => {
 
         it('takes all entered values and calls api', () => {
             apiClient.createLog = jest.fn()
-            let wrapper = shallow(<Create humanId={"8928"}/>)
+            let wrapper = shallow(<Create humanId={"8928"} setActivePage={jest.fn()}/>)
 
             wrapper.find(DropDownMenu).simulate('change', null, null, "3")
             wrapper.find(TextField).at(0).simulate('change', {target: {value: "12"}})
@@ -43,6 +43,15 @@ describe('Create', () => {
                 comments: null,
                 dateTimeInMilliseconds: null
             })
+        })
+
+        it('should call action to change page', () => {
+            let setActivePage = jest.fn()
+            let wrapper = shallow(<Create setActivePage={setActivePage}/>)
+            wrapper.find(FlatButton).simulate('click')
+
+            expect(setActivePage).toHaveBeenCalledWith("home")
+
         })
 
     })
