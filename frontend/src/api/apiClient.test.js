@@ -43,4 +43,14 @@ describe('apiClient', () => {
         expect(axios.post).toHaveBeenCalledWith('http://localhost:8080/human/1/log', data)
     })
 
+    it('should make a get request to get summary', () => {
+        const resolved = new Promise((r) => r());
+
+        axios.get = jest.fn()
+        axios.get.mockReturnValueOnce(resolved)
+
+        api.getSummary(1)
+        expect(axios.get).toHaveBeenCalledWith("http://localhost:8080/human/1/log/summary")
+    })
+
 })

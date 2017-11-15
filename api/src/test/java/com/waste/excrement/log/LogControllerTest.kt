@@ -55,4 +55,22 @@ class LogControllerTest {
         assertThat(logList).hasSize(1)
     }
 
+    @Test
+    fun `should have an endpoint to summary to date for a user`(){
+        val logSummaryApiWrapper = LogSummaryApiWrapper(14, "300.0")
+        whenever(logService.getSummary(any())).thenReturn(logSummaryApiWrapper)
+
+        mockMvc.perform(get("/human/12345/log/summary"))
+            .andExpect(content().json("{}"))
+    }
+
+    @Test
+    fun `should get summary from service`(){
+        val logSummaryApiWrapper = LogSummaryApiWrapper(14, "300.0")
+        whenever(logService.getSummary(any())).thenReturn(logSummaryApiWrapper)
+        val summary = controller.getSummary(12344)
+        assertThat(summary).isEqualTo(logSummaryApiWrapper)
+        verify(logService).getSummary(12344)
+    }
+
 }

@@ -15,16 +15,18 @@ class ExcrementEntity {
     var durationInMinutes: Int = 0
     var comments: String = ""
     var dateTimeInMilliseconds: String = ""
+    var atWork: Boolean = true
 
     constructor() {}
 
-    constructor(id: Long, humanId: Long, bristolType: Int, durationInMinutes: Int, comments: String, dateTimeInMilliseconds: String) {
+    constructor(id: Long, humanId: Long, bristolType: Int, durationInMinutes: Int, comments: String, dateTimeInMilliseconds: String, atWork: Boolean) {
         this.id = id
         this.humanId = humanId
         this.bristolType = bristolType
         this.durationInMinutes = durationInMinutes
         this.comments = comments
         this.dateTimeInMilliseconds = dateTimeInMilliseconds
+        this.atWork = atWork
     }
 
     constructor(humanId: Long, bristolType: Int, durationInMinutes: Int, comments: String, dateTimeInMilliseconds: String) {

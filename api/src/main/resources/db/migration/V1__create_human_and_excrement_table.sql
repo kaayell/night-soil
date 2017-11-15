@@ -14,6 +14,7 @@ CREATE TABLE excrement (
   duration_in_minutes       INT,
   comments                  MEDIUMTEXT,
   date_time_in_milliseconds VARCHAR(255),
+  at_work                   BOOLEAN,
   PRIMARY KEY (id),
   FOREIGN KEY (human_id) REFERENCES human (id)
 );

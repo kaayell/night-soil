@@ -68,7 +68,7 @@ internal class HumanServiceTest {
 
     @Test
     fun `should find human in repo`() {
-        whenever(humanRepository.findByEmail(any())).thenReturn(
+        whenever(humanRepository.findFirstByEmail(any())).thenReturn(
             HumanEntity(id = 1L, firstName = "hi", lastName = "yo", email = "sup", hourlyRate = 1.0))
         val humanList = humanService.find("sup")
         assertThat(humanList).hasSize(1)

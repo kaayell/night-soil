@@ -15,4 +15,7 @@ open class LogController(val service: LogService) {
     @GetMapping("/human/{humanId}/log")
     open fun getLogs(@PathVariable(name = "humanId") humanId: Long): List<LogApiWrapper> = service.getLogs(humanId)
 
+    @GetMapping("/human/{humanId}/log/summary")
+    open fun getSummary(@PathVariable(name = "humanId") humanId: Long): LogSummaryApiWrapper = service.getSummary(humanId)
+
 }

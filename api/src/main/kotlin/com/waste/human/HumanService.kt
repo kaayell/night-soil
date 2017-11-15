@@ -28,7 +28,7 @@ open class HumanService(var humanRepository: HumanRepository) {
         humanRepository.findAll().map { humanEntity -> transform(humanEntity) }
 
     open fun find(email: String): List<HumanApiWrapper> =
-        humanRepository.findByEmail(email)?.let {
+        humanRepository.findFirstByEmail(email)?.let {
             listOf(transform(it))
         }.orEmpty()
 

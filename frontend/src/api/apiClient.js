@@ -21,3 +21,7 @@ export function updateHuman(human) {
 export function createLog(logData) {
     return axios.post(`${apiUrl}/human/${logData.humanId}/log`, logData)
 }
+
+export function getSummary(humanId) {
+    return axios.get(`${apiUrl}/human/${humanId}/log/summary`)
+}
