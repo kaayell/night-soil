@@ -1,9 +1,8 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 
-
 import FlatButton from 'material-ui/FlatButton'
-import Timer from "./Timer"
+import {Timer} from "./Timer"
 
 describe('Timer', () => {
     let wrapper;
@@ -99,6 +98,23 @@ describe('Timer', () => {
             wrapper.rerender()
             expect(wrapper.state().secondsElapsed).toBe(0);
         })
+    })
 
+    describe('on click of record', () => {
+        it('should send an action of time in minutes', () => {
+            let saveTime = jest.fn()
+            wrapper = shallow(<Timer saveTime={saveTime} setActivePage={jest.fn()}/>)
+            wrapper.setState({secondsElapsed: 80, stopTimer: true})
+            wrapper.find(FlatButton).at(2).simulate('click')
+            expect(saveTime).toHaveBeenCalledWith("1")
+        })
+
+        it('should send an action to go to the create page', () => {
+            let setActivePage = jest.fn()
+            wrapper = shallow(<Timer saveTime={jest.fn()} setActivePage={setActivePage}/>)
+            wrapper.setState({secondsElapsed: 80, stopTimer: true})
+            wrapper.find(FlatButton).at(2).simulate('click')
+            expect(setActivePage).toHaveBeenCalledWith("create")
+        })
     })
 })

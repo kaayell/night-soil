@@ -2,14 +2,18 @@ import React, {Component} from 'react'
 import kawaiipoop from '../kawaii-poop.png'
 import './Timer.css'
 import {FlatButton} from "material-ui";
+import {connect} from "react-redux";
+import {saveTime} from "./timer-actions";
+import {setActivePage} from "../Navigation/navigation-actions";
 
-class Timer extends Component {
+export class Timer extends Component {
     constructor(props) {
         super(props)
 
         this.handleStartClick = this.handleStartClick.bind(this)
         this.handleStopClick = this.handleStopClick.bind(this)
         this.handleResetClick = this.handleResetClick.bind(this)
+        this.handleRecordClick = this.handleRecordClick.bind(this)
 
         this.state = {
             secondsElapsed: 0,
@@ -37,6 +41,11 @@ class Timer extends Component {
         this.setState({secondsElapsed: 0})
     }
 
+    handleRecordClick(){
+        this.props.saveTime(`${Math.floor(this.state.secondsElapsed / 60)}`)
+        this.props.setActivePage("create")
+    }
+
     formatSeconds(sec) {
         return Math.floor(sec / 60) + ':' + ('0' + sec % 60).slice(-2)
     }
@@ -47,7 +56,7 @@ class Timer extends Component {
             : <FlatButton label="Stop" onClick={this.handleStopClick}/>
 
         const recordButton = this.state.secondsElapsed > 0 && this.state.stopTimer ?
-            <FlatButton label="Record?"/> : ""
+            <FlatButton label="Record?" onClick={this.handleRecordClick}/> : ""
         return (
             <div className="timer-container">
                 <img className={this.state.secondsElapsed === 0 || this.state.stopTimer ? "" : "poop-timer"}
@@ -70,4 +79,4 @@ class Timer extends Component {
     }
 }
 
-export default Timer;
+export default connect(null, {saveTime, setActivePage})(Timer);

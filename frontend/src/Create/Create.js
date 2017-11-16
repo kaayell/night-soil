@@ -4,6 +4,7 @@ import * as apiClient from "../api/apiClient"
 import "./Create.css"
 import {connect} from "react-redux";
 import {setActivePage} from "../Navigation/navigation-actions";
+import {clearTime} from "../Timer/timer-actions";
 
 export class Create extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export class Create extends Component {
 
         this.state = {
             bristolType: null,
-            durationInMinutes: null,
+            durationInMinutes: this.props.poopTime,
             comments: null,
             dateTimeInMilliseconds: null,
 
@@ -42,6 +43,7 @@ export class Create extends Component {
         }
 
         apiClient.createLog({...this.state, ...{humanId: this.props.humanId}})
+        this.props.clearTime()
         this.props.setActivePage("home")
     }
 
@@ -85,6 +87,7 @@ export class Create extends Component {
                 <TextField floatingLabelText="Duration (minutes)"
                            onChange={this.onTextFieldChange.bind(this, "durationInMinutes")}
                            errorText={this.state.errorTexts.durationInMinutesErrorText}
+                           defaultValue={this.props.poopTime}
                 />
                 <TextField floatingLabelText="Comments"
                            onChange={this.onTextFieldChange.bind(this, "comments")}
@@ -103,8 +106,9 @@ export class Create extends Component {
 
 const mapStateToProps = state => {
     return {
-        humanId: state.humanInfo.id
+        humanId: state.humanInfo.id,
+        poopTime: state.poopTime
     }
 }
 
-export default connect(mapStateToProps, {setActivePage})(Create)
+export default connect(mapStateToProps, {setActivePage, clearTime})(Create)
