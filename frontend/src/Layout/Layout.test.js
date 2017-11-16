@@ -23,7 +23,8 @@ describe('Layout', () => {
                 userProfile: auth0Response,
                 isAuthenticated: () => true,
                 getProfile: jest.fn(),
-                login: jest.fn()
+                login: jest.fn(),
+                getAccessToken: () => "12345"
             }
             wrapper = shallow(<Layout auth={auth}/>)
 

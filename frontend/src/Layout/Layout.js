@@ -35,6 +35,7 @@ export class Layout extends Component {
     }
 
     loadOrCreateProfile(profile) {
+        apiClient.setHeader(this.props.auth.getAccessToken())
         apiClient.getHuman(profile.email)
             .then((response) => {
                 if (response.data && response.data.length > 0) {

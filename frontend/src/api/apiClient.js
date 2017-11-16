@@ -1,27 +1,32 @@
 import axios from 'axios'
 
+const instance = axios.create();
 
 let apiUrl = "http://localhost:8080"
-if(window.location.href.includes('cfapps')) {
+if (window.location.href.includes('cfapps')) {
     apiUrl = "https://poop-api.cfapps.io"
 }
 
-export function getHuman(email){
-    return axios.get(`${apiUrl}/human?email=${email}`)
+export function setHeader(token) {
+    instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
+
+export function getHuman(email) {
+    return instance.get(`${apiUrl}/human?email=${email}`)
 }
 
 export function createHuman(human) {
-    return axios.post(`${apiUrl}/human`, human)
+    return instance.post(`${apiUrl}/human`, human)
 }
 
 export function updateHuman(human) {
-    return axios.put(`${apiUrl}/human`, human)
+    return instance.put(`${apiUrl}/human`, human)
 }
 
 export function createLog(logData) {
-    return axios.post(`${apiUrl}/human/${logData.humanId}/log`, logData)
+    return instance.post(`${apiUrl}/human/${logData.humanId}/log`, logData)
 }
 
 export function getSummary(humanId) {
-    return axios.get(`${apiUrl}/human/${humanId}/log/summary`)
+    return instance.get(`${apiUrl}/human/${humanId}/log/summary`)
 }

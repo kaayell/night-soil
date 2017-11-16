@@ -39,8 +39,7 @@ dependencies {
 	compile 'org.springframework.cloud:spring-cloud-spring-service-connector:2.0.0.RELEASE'
 	compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector:2.0.0.RELEASE'
 
-//	compile 'org.springframework.boot:spring-boot-starter-security'
-//	compile 'org.springframework.security.oauth:spring-security-oauth2'
+//	compile 'com.auth0:auth0-spring-security-api:1.0.0-rc.3'
 
 	runtime('mysql:mysql-connector-java')
 
