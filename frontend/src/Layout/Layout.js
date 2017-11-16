@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import Header from "../Header/Header";
 import BottomNavigation from "../Navigation/Navigation";
 import Timer from "../Timer/Timer";
 import Create from "../Create/Create";
@@ -83,7 +82,6 @@ export class Layout extends Component {
 
         return (
             <div>
-                <Header/>
                 {body}
                 <BottomNavigation/>
             </div>

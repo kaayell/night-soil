@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {DatePicker, DropDownMenu, FlatButton, MenuItem, TextField} from "material-ui";
+import {DatePicker, FlatButton, MenuItem, SelectField, TextField} from "material-ui";
 import * as apiClient from "../api/apiClient"
 import "./Create.css"
 import {connect} from "react-redux";
@@ -49,25 +49,25 @@ export class Create extends Component {
     render() {
         return (
             <div className="create-container">
-                <DropDownMenu
+                <SelectField
+                    floatingLabelText="Bristol Type"
                     value={this.state.bristolType}
-                    className="drop-down"
-                    autoWidth={false}
                     onChange={this.onDropDownChange}
+                    autoWidth={true}
                 >
-                    <MenuItem value={1} primaryText="1"/>
-                    <MenuItem value={2} primaryText="2"/>
-                    <MenuItem value={3} primaryText="3"/>
-                    <MenuItem value={4} primaryText="4"/>
-                    <MenuItem value={5} primaryText="5"/>
-                    <MenuItem value={6} primaryText="6"/>
-                    <MenuItem value={7} primaryText="7"/>
-                </DropDownMenu>
+                    <MenuItem value={1} primaryText="1 (Separate hard lumps)"/>
+                    <MenuItem value={2} primaryText="2 (Lumpy and sausage like)"/>
+                    <MenuItem value={3} primaryText="3 (Cracked sausage shape)"/>
+                    <MenuItem value={4} primaryText="4 (Smooth sausage)"/>
+                    <MenuItem value={5} primaryText="5 (Soft blobs with clear edges)"/>
+                    <MenuItem value={6} primaryText="6 (Mushy with ragged edges)"/>
+                    <MenuItem value={7} primaryText="7 (Liquid)"/>
+                </SelectField>
                 <TextField floatingLabelText="Duration (minutes)"
                            onChange={this.onTextFieldChange.bind(this, "durationInMinutes")}/>
                 <TextField floatingLabelText="Comments" onChange={this.onTextFieldChange.bind(this, "comments")}/>
                 <DatePicker floatingLabelText="Date" onChange={this.onDateChange}/>
-                <FlatButton label="Submit" onClick={this.handleSubmit}/>
+                <FlatButton label="Add my poop!" onClick={this.handleSubmit}/>
             </div>
         )
     }

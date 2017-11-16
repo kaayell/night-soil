@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FloatingActionButton} from "material-ui";
+import {Card, CardText, CardTitle, FloatingActionButton} from "material-ui";
 import {ContentAdd} from "material-ui/svg-icons/index"
 import "./Home.css"
 import {connect} from "react-redux";
@@ -17,11 +17,9 @@ export class Home extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps.humanInfo)
         if (nextProps.humanInfo) {
             apiClient.getSummary(nextProps.humanInfo.id)
                 .then((response) => {
-                console.log(response)
                     if (response.data) {
                         this.setState({
                             minutesToDate: response.data.minutesToDate,
@@ -36,8 +34,14 @@ export class Home extends Component {
         return (
             <div className="home-container">
                 <h2>Hi {this.props.humanInfo.firstName}</h2>
-                <div>Minutes Spent Pooping: {this.state.minutesToDate}</div>
-                <div>Money Made While Pooping: {this.state.moneyToDate}</div>
+                <Card className="stat-card">
+                    <CardTitle className="stat-header" title={"Minutes Pooping"}/>
+                    <CardText className="stat">{this.state.minutesToDate}</CardText>
+                </Card>
+                <Card className="stat-card">
+                    <CardTitle className="stat-header" title={"Money Made"}/>
+                    <CardText className="stat">{this.state.moneyToDate}</CardText>
+                </Card>
                 <div className="add-poop-button">
                     <FloatingActionButton onClick={() => this.props.setActivePage("create")}>
                         <ContentAdd/>

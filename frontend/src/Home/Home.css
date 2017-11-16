@@ -3,3 +3,22 @@
     bottom: 15%;
     right: 8%;
 }
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.stat-card {
+    margin-top: 20px;
+    background-color: red;
+}
+
+.stat-header {
+    font-size: 12px !important;
+}
+
+.stat {
+    font-size: 25px !important;
+}

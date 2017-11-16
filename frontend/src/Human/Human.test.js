@@ -40,10 +40,11 @@ describe('Human', () => {
         expect(wrapper.state().hourlyRate).toEqual("hour")
     })
 
-    describe('on submit', () => {
-        it('sends data to api client', () => {
+    describe('on component will unmount', () => {
+        it('sends data to api client if hourly rate was changed', () => {
             wrapper.find(TextField).at(2).simulate('change', {target: {value: "2"}})
-            wrapper.find(RaisedButton).simulate('click')
+
+            wrapper.instance().componentWillUnmount()
 
             expect(api.updateHuman).toHaveBeenCalledWith({
                 id: 22,
@@ -55,8 +56,15 @@ describe('Human', () => {
         })
 
         it('should tell the rest of the system there was an update to human info', () => {
-            wrapper.find(RaisedButton).simulate('click')
-            expect(setHumanInfo).toHaveBeenCalledWith(humanInfo)
+            wrapper.find(TextField).at(2).simulate('change', {target: {value: "2"}})
+            wrapper.instance().componentWillUnmount()
+            expect(setHumanInfo).toHaveBeenCalledWith({
+                id: 22,
+                firstName: "Mary",
+                lastName: "Hary",
+                email: "hi@sup.com",
+                hourlyRate: "2"
+            })
         })
     })
 });

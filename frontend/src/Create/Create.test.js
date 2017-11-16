@@ -1,6 +1,6 @@
 import React from 'react'
 import {shallow} from "enzyme";
-import {DatePicker, DropDownMenu, FlatButton, TextField} from "material-ui";
+import {DatePicker, SelectField, FlatButton, TextField} from "material-ui";
 import * as apiClient from "../api/apiClient"
 
 import {Create} from "./Create";
@@ -9,11 +9,11 @@ describe('Create', () => {
     it('should render', () => {
         let wrapper = shallow(<Create/>)
 
-        expect(wrapper.find(DropDownMenu).length).toEqual(1)
+        expect(wrapper.find(SelectField).length).toEqual(1)
         expect(wrapper.find(TextField).at(0).props().floatingLabelText).toEqual("Duration (minutes)")
         expect(wrapper.find(TextField).at(1).props().floatingLabelText).toEqual("Comments")
         expect(wrapper.find(DatePicker).length).toEqual(1)
-        expect(wrapper.find(FlatButton).props().label).toEqual("Submit")
+        expect(wrapper.find(FlatButton).props().label).toEqual("Add my poop!")
     })
 
     describe('on submit', () => {
@@ -22,7 +22,7 @@ describe('Create', () => {
             apiClient.createLog = jest.fn()
             let wrapper = shallow(<Create humanId={"8928"} setActivePage={jest.fn()}/>)
 
-            wrapper.find(DropDownMenu).simulate('change', null, null, "3")
+            wrapper.find(SelectField).simulate('change', null, null, "3")
             wrapper.find(TextField).at(0).simulate('change', {target: {value: "12"}})
             wrapper.find(TextField).at(1).simulate('change', {target: {value: "pewp"}})
             wrapper.find(DatePicker).simulate('change', null, new Date("2017-05-20"))
