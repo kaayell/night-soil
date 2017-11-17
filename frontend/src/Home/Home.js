@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import {Card, CardText, CardTitle, FloatingActionButton} from "material-ui";
-import {ContentAdd} from "material-ui/svg-icons/index"
-import "./Home.css"
+// import "./Home.css"
 import {connect} from "react-redux";
 import {setActivePage} from "../Navigation/navigation-actions";
 import * as apiClient from "../api/apiClient"
+import {Body, Card, CardItem, Content, Fab, Icon, Text} from "native-base";
 
 export class Home extends Component {
     constructor(props) {
@@ -32,24 +31,57 @@ export class Home extends Component {
 
     render() {
         return (
-            <div className="home-container">
-                <h2>Hi {this.props.humanInfo.firstName}</h2>
-                <Card className="stat-card">
-                    <CardTitle className="stat-header" title={"Minutes Pooping"}/>
-                    <CardText className="stat">{this.state.minutesToDate}</CardText>
+            <Content style={{flex: 1, flexDirection: 'row', marginTop: 20, width: "100%", backgroundColor: "rgb(248,248,248)"}}>
+                <Text>Hi {this.props.humanInfo.firstName}</Text>
+                <Card>
+                    <CardItem header>
+                        <Text>MINUTES POOPING</Text>
+                    </CardItem>
+                    <CardItem>
+                        <Body>
+                        <Text>{this.state.minutesToDate}</Text>
+                        </Body>
+                    </CardItem>
                 </Card>
-                <Card className="stat-card">
-                    <CardTitle className="stat-header" title={"Money Made"}/>
-                    <CardText className="stat">{this.state.moneyToDate}</CardText>
+                <Card>
+                    <CardItem header>
+                        <Text>MONEY MADE</Text>
+                    </CardItem>
+                    <CardItem>
+                        <Body>
+                        <Text>{this.state.moneyToDate}</Text>
+                        </Body>
+                    </CardItem>
                 </Card>
-                <div className="add-poop-button">
-                    <FloatingActionButton onClick={() => this.props.setActivePage("create")}>
-                        <ContentAdd/>
-                    </FloatingActionButton>
-                </div>
-            </div>
+                <Fab position={"bottomRight"}
+                     onPress={() => this.props.setActivePage("create")}>
+                    <Icon name={"add"}/>
+                </Fab>
+            </Content>
+
         )
     }
+
+    // render() {
+    //     return (
+    //         <div className="home-container">
+    //             <h2>Hi {this.props.humanInfo.firstName}</h2>
+    //             <Card className="stat-card">
+    //                 <CardTitle className="stat-header" title={"Minutes Pooping"}/>
+    //                 <CardText className="stat">{this.state.minutesToDate}</CardText>
+    //             </Card>
+    //             <Card className="stat-card">
+    //                 <CardTitle className="stat-header" title={"Money Made"}/>
+    //                 <CardText className="stat">{this.state.moneyToDate}</CardText>
+    //             </Card>
+    //             <div className="add-poop-button">
+    //                 <FloatingActionButton onClick={() => this.props.setActivePage("create")}>
+    //                     <ContentAdd/>
+    //                 </FloatingActionButton>
+    //             </div>
+    //         </div>
+    //     )
+    // }
 }
 
 const mapStateToProps = state => {

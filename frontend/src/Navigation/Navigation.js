@@ -1,32 +1,26 @@
 import React, {Component} from 'react';
-import {BottomNavigation, BottomNavigationItem, Paper} from "material-ui";
-import {Alarm, Face, Home} from "material-ui-icons";
-import "./Navigation.css"
 import {connect} from "react-redux";
 import {setActivePage} from "./navigation-actions";
+import {Button, Footer, FooterTab, Icon} from "native-base";
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 export class Navigation extends Component {
     render() {
         return (
-            <Paper zDepth={1} className="bottom-nav">
-                <BottomNavigation>
-                    <BottomNavigationItem
-                        label="Home"
-                        icon={<Home/>}
-                        onClick={() => this.props.setActivePage("home")}
-                    />
-                    <BottomNavigationItem
-                        label="Time Poop"
-                        icon={<Alarm/>}
-                        onClick={() => this.props.setActivePage("timer")}
-                    />
-                    <BottomNavigationItem
-                        label="Profile"
-                        icon={<Face/>}
-                        onClick={() => this.props.setActivePage("human")}
-                    />
-                </BottomNavigation>
-            </Paper>
+            <Footer>
+                <FooterTab>
+                    <Button vertical onPress={() => this.props.setActivePage("home")}>
+                        <MaterialIcons name="home" size={30} color={"white"}/>
+                    </Button>
+                    <Button vertical onPress={() => this.props.setActivePage("timer")}>
+                        <MaterialIcons name="timer" size={30} color={"white"}/>
+                    </Button>
+                    <Button vertical onPress={() => this.props.setActivePage("human")}>
+                        <SimpleLineIcons name="user" size={30} color={"white"}/>
+                    </Button>
+                </FooterTab>
+            </Footer>
         )
     }
 }

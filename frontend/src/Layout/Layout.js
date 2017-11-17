@@ -1,59 +1,59 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import BottomNavigation from "../Navigation/Navigation";
-import Timer from "../Timer/Timer";
-import Create from "../Create/Create";
 import * as apiClient from "../api/apiClient"
-
-import './Layout.css';
 import {setHumanInfo} from "../Human/human-actions";
+import {Text, View} from "react-native";
+import {Container, Content, Header} from "native-base";
+import Navigation from "../Navigation/Navigation";
 import Home from "../Home/Home";
 import Human from "../Human/Human";
+import Create from "../Create/Create";
+import Timer from "../Timer/Timer";
 
 
 export class Layout extends Component {
     constructor(props) {
         super(props)
 
-        this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this)
-        this.login = this.login.bind(this)
+        // this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this)
+        // this.login = this.login.bind(this)
     }
 
-    login() {
-        this.props.auth.login();
-    }
-
-    handleSuccessfulLogin() {
-        const {userProfile, getProfile} = this.props.auth;
-        if (!userProfile) {
-            getProfile((err, profile) => {
-                this.loadOrCreateProfile(profile)
-            });
-        } else {
-            this.loadOrCreateProfile(userProfile)
-        }
-    }
-
-    loadOrCreateProfile(profile) {
-        apiClient.setHeader(this.props.auth.getAccessToken())
-        apiClient.getHuman(profile.email)
-            .then((response) => {
-                if (response.data && response.data.length > 0) {
-                    this.props.setHumanInfo(response.data[0]);
-                } else {
-                    const humanInfo = {
-                        firstName: profile.given_name,
-                        lastName: profile.family_name,
-                        email: profile.email,
-                        hourlyRate: "0"
-                    }
-                    apiClient.createHuman(humanInfo)
-                        .then((response) => {
-                            this.props.setHumanInfo(response.data);
-                        })
-                }
-            })
-    }
+    // login() {
+    //     this.props.auth.login();
+    // }
+    //
+    // handleSuccessfulLogin() {
+    //     const {userProfile, getProfile} = this.props.auth;
+    //     if (!userProfile) {
+    //         getProfile((err, profile) => {
+    //             this.loadOrCreateProfile(profile)
+    //         });
+    //     } else {
+    //         this.loadOrCreateProfile(userProfile)
+    //     }
+    // }
+    //
+    // loadOrCreateProfile(profile) {
+    //     apiClient.setHeader(this.props.auth.getAccessToken())
+    //     apiClient.getHuman(profile.email)
+    //         .then((response) => {
+    //             if (response.data && response.data.length > 0) {
+    //                 this.props.setHumanInfo(response.data[0]);
+    //             } else {
+    //                 const humanInfo = {
+    //                     firstName: profile.given_name,
+    //                     lastName: profile.family_name,
+    //                     email: profile.email,
+    //                     hourlyRate: "0"
+    //                 }
+    //                 apiClient.createHuman(humanInfo)
+    //                     .then((response) => {
+    //                         this.props.setHumanInfo(response.data);
+    //                     })
+    //             }
+    //         })
+    // }
 
     render() {
         let body
@@ -71,22 +71,29 @@ export class Layout extends Component {
                 body = <Home/>
                 break;
         }
-
-        const {isAuthenticated} = this.props.auth;
-
-        if (!isAuthenticated()) {
-            this.login()
-            return ""
-        }
-
-        this.handleSuccessfulLogin()
+        //
+        // const {isAuthenticated} = this.props.auth;
+        //
+        // if (!isAuthenticated()) {
+        //     this.login()
+        //     return ""
+        // }
+        //
+        // this.handleSuccessfulLogin()
+        //
+        // return (
+        //     <div>
+        //         {body}
+        //         <BottomNavigation/>
+        //     </div>
+        // );
 
         return (
-            <div>
+            <Container>
                 {body}
-                <BottomNavigation/>
-            </div>
-        );
+                <Navigation/>
+            </Container>
+        )
     }
 }
 

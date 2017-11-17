@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import kawaiipoop from '../kawaii-poop.png'
-import './Timer.css'
-import {FlatButton} from "material-ui";
+// import './Timer.css'
 import {connect} from "react-redux";
 import {saveTime} from "./timer-actions";
 import {setActivePage} from "../Navigation/navigation-actions";
+import {Button, Content, Text} from "native-base";
+import {Image} from "react-native";
 
 export class Timer extends Component {
     constructor(props) {
@@ -41,7 +41,7 @@ export class Timer extends Component {
         this.setState({secondsElapsed: 0})
     }
 
-    handleRecordClick(){
+    handleRecordClick() {
         this.props.saveTime(`${Math.floor(this.state.secondsElapsed / 60)}`)
         this.props.setActivePage("create")
     }
@@ -52,29 +52,22 @@ export class Timer extends Component {
 
     render() {
         const startOrStopButton = this.state.secondsElapsed === 0 || this.state.stopTimer ?
-            <FlatButton label="Start" onClick={this.handleStartClick}/>
-            : <FlatButton label="Stop" onClick={this.handleStopClick}/>
+            <Button transparent dark onPress={this.handleStartClick}><Text>START</Text></Button>
+            : <Button transparent dark onPress={this.handleStopClick}><Text>STOP</Text></Button>
 
         const recordButton = this.state.secondsElapsed > 0 && this.state.stopTimer ?
-            <FlatButton label="Record?" onClick={this.handleRecordClick}/> : ""
+            <Button transparent dark onPress={this.handleRecordClick}><Text>RECORD?</Text></Button> : null
+
         return (
-            <div className="timer-container">
-                <img className={this.state.secondsElapsed === 0 || this.state.stopTimer ? "" : "poop-timer"}
-                     src={kawaiipoop}
-                     alt="poop"
-                     width="200"
-                     height="160"/>
-                <div className="stopwatch-container">
-                    <label className="timer-label">{this.formatSeconds(this.state.secondsElapsed)}</label>
-                    <div className="stopwatch-buttons">
-                        {startOrStopButton}
-                        <FlatButton label="Reset" onClick={this.handleResetClick}/>
-                    </div>
-                    <div>
-                        {recordButton}
-                    </div>
-                </div>
-            </div>
+            <Content padder style={{flex: 1, flexDirection: 'row', marginTop: 20, width: "100%", backgroundColor: "rgb(248,248,248)"}}>
+                <Image source={require("../kawaii-poop.png")} style={{width:270, height: 220}}/>
+                <Text>{this.formatSeconds(this.state.secondsElapsed)}</Text>
+                {startOrStopButton}
+                <Button transparent dark onPress={this.handleResetClick}>
+                    <Text>RESET</Text>
+                </Button>
+                {recordButton}
+            </Content>
         )
     }
 }

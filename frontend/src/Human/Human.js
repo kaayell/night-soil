@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {TextField} from "material-ui";
 import * as api from "../api/apiClient"
-import "./Human.css"
 import {setHumanInfo} from "./human-actions";
+import {Content, Form, Input, Item, Label} from "native-base";
 
 export class Human extends Component {
     constructor(props) {
@@ -34,21 +33,43 @@ export class Human extends Component {
 
     render() {
         return (
-            <div className="main_container">
-                <div className="human_form">
-                    <TextField floatingLabelText="Name"
-                               defaultValue={`${this.props.humanInfo.firstName} ${this.props.humanInfo.lastName}`}
-                               disabled={true}/>
-                    <TextField floatingLabelText="Email" onChange={this.onValueChange.bind(this, "email")}
-                               defaultValue={this.props.humanInfo.email}
-                               disabled={true}/>
-                    <TextField floatingLabelText="Hourly Rate"
-                               onChange={this.onValueChange.bind(this, "hourlyRate")}
-                               defaultValue={this.props.humanInfo.hourlyRate}/>
-                </div>
-            </div>
+            <Content padder style={{marginTop: 20, backgroundColor: "rgb(248,248,248)"}}>
+                <Form>
+                    <Item floatingLabel disabled>
+                        <Label>Name</Label>
+                        <Input disabled
+                               placeholder={`${this.props.humanInfo.firstName} ${this.props.humanInfo.lastName}`}/>
+                    </Item>
+                    <Item floatingLabel disabled>
+                        <Label>Email</Label>
+                        <Input disabled placeholder={this.props.humanInfo.email}/>
+                    </Item>
+                    <Item floatingLabel>
+                        <Label>Hourly Rate</Label>
+                        <Input placeholder={this.props.humanInfo.hourlyRate}/>
+                    </Item>
+                </Form>
+            </Content>
         )
     }
+
+    // render() {
+    //     return (
+    //         <div className="main_container">
+    //             <div className="human_form">
+    //                 <TextField floatingLabelText="Name"
+    //                            defaultValue={`${this.props.humanInfo.firstName} ${this.props.humanInfo.lastName}`}
+    //                            disabled={true}/>
+    //                 <TextField floatingLabelText="Email" onChange={this.onValueChange.bind(this, "email")}
+    //                            defaultValue={this.props.humanInfo.email}
+    //                            disabled={true}/>
+    //                 <TextField floatingLabelText="Hourly Rate"
+    //                            onChange={this.onValueChange.bind(this, "hourlyRate")}
+    //                            defaultValue={this.props.humanInfo.hourlyRate}/>
+    //             </div>
+    //         </div>
+    //     )
+    // }
 }
 
 
