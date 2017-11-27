@@ -9,12 +9,23 @@ import Home from "../Home/Home";
 import Human from "../Human/Human";
 import Create from "../Create/Create";
 import Timer from "../Timer/Timer";
+import { AuthSession } from 'expo';
+
+const auth0ClientId = 'U4IZAovglJbFOek8uNTzJgk7CpazQSdB';
+const auth0Domain = 'https://poop.auth0.com';
+
+function toQueryString(params) {
+    return '?' + Object.entries(params)
+        .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+        .join('&');
+}
 
 
 export class Layout extends Component {
     constructor(props) {
         super(props)
 
+        // this._loginWithAuth0 = this._loginWithAuth0.bind(this)
         // this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this)
         // this.login = this.login.bind(this)
     }
@@ -55,6 +66,31 @@ export class Layout extends Component {
     //         })
     // }
 
+
+    _loginWithAuth0 = async () => {
+        const redirectUrl = AuthSession.getRedirectUrl();
+        const result = await AuthSession.startAsync({
+            authUrl: `${auth0Domain}/authorize` + toQueryString({
+                client_id: auth0ClientId,
+                response_type: 'token',
+                scope: 'openid profile email',
+                redirect_uri: redirectUrl,
+            }),
+        });
+
+        console.log(result);
+        if (result.type === 'success') {
+            this.handleParams(result.params);
+        }
+    }
+
+    handleParams = (responseObj) => {
+        console.log(responseObj)
+        // const encodedToken = responseObj.id_token;
+        // const decodedToken = jwtDecoder(encodedToken);
+        // const username = decodedToken.name;
+    }
+
     render() {
         let body
         switch (this.props.activePage) {
@@ -71,16 +107,17 @@ export class Layout extends Component {
                 body = <Home/>
                 break;
         }
-        //
+
         // const {isAuthenticated} = this.props.auth;
         //
         // if (!isAuthenticated()) {
-        //     this.login()
+        //     this._loginWithAuth0()
         //     return ""
         // }
-        //
+
+        this._loginWithAuth0()
         // this.handleSuccessfulLogin()
-        //
+
         // return (
         //     <div>
         //         {body}

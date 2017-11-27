@@ -6,12 +6,19 @@ import Home from "./src/Home/Home";
 import Human from "./src/Human/Human";
 import {Container} from "native-base";
 import Layout from "./src/Layout/Layout";
+import Timer from "./src/Timer/Timer";
 
 const RootTabs = TabNavigator({
         Home: {
             screen: Home,
             navigationOptions: {
                 tabBarLabel: 'Home'
+            }
+        },
+        Timer: {
+            screen: Timer,
+            navationOptions: {
+                tabBarLabel: 'Timer'
             }
         },
         Profile: {
