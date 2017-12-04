@@ -9,7 +9,8 @@ import Home from "../Home/Home";
 import Human from "../Human/Human";
 import Create from "../Create/Create";
 import Timer from "../Timer/Timer";
-import { AuthSession } from 'expo';
+import {AuthSession} from 'expo';
+import axios from 'axios'
 
 const auth0ClientId = 'U4IZAovglJbFOek8uNTzJgk7CpazQSdB';
 const auth0Domain = 'https://poop.auth0.com';
@@ -78,14 +79,24 @@ export class Layout extends Component {
             }),
         });
 
-        console.log(result);
+
         if (result.type === 'success') {
             this.handleParams(result.params);
         }
     }
 
     handleParams = (responseObj) => {
-        console.log(responseObj)
+        console.log(responseObj);
+        console.log("YO I'M HERE");
+        axios.get(`${auth0Domain}/userinfo`, {
+            headers: {'Authorization': responseObj.access_token}
+        }).then((response) => {
+            console.log("SOMETHING GOOD?");
+            console.log(response)
+        }).catch((anger) => {
+            console.log("SOMETHING BAD?");
+            console.log(anger)
+        })
         // const encodedToken = responseObj.id_token;
         // const decodedToken = jwtDecoder(encodedToken);
         // const username = decodedToken.name;
