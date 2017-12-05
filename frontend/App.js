@@ -7,6 +7,7 @@ import Human from "./src/Human/Human";
 import {Container} from "native-base";
 import Layout from "./src/Layout/Layout";
 import Timer from "./src/Timer/Timer";
+import Auth from "./src/Auth/Auth";
 
 const RootTabs = TabNavigator({
         Home: {
@@ -48,10 +49,11 @@ export default class App extends Component {
     }
 
     render() {
+        const auth = new Auth()
         return (
             this.state.fontLoaded ?
                 <Provider store={store}>
-                    <Layout/>
+                    <Layout auth={auth}/>
                 </Provider> : null
         );
     }

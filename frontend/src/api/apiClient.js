@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const instance = axios.create();
 
-let apiUrl = "http://localhost:8080"
+let apiUrl = "http://10.35.98.65:8080"
 // if (window.location.href.includes('cfapps')) {
 //     apiUrl = "https://poop-api.cfapps.io"
 // }

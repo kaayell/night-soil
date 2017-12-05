@@ -1,41 +1,45 @@
-import auth0 from 'auth0-js';
-import history from "../history"
 import {AUTH_CONFIG} from './secrets';
+import {AuthSession} from "expo";
+import Auth0 from 'react-native-auth0';
 
-//DUPE FROM AUTH0 WEBSITE
+const auth0 = new Auth0({domain: AUTH_CONFIG.domain, clientId: AUTH_CONFIG.clientId});
+
+function toQueryString(params) {
+    return '?' + Object.entries(params)
+        .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+        .join('&');
+}
+
 export default class Auth {
-    auth0 = new auth0.WebAuth({
-        domain: AUTH_CONFIG.domain,
-        clientID: AUTH_CONFIG.clientId,
-        redirectUri: AUTH_CONFIG.callbackUrl,
-        audience: `https://${AUTH_CONFIG.domain}/userinfo`,
-        responseType: 'token id_token',
-        scope: 'openid profile email'
-    });
 
     constructor() {
-        this.login = this.login.bind(this);
-        this.logout = this.logout.bind(this);
-        this.handleAuthentication = this.handleAuthentication.bind(this);
+        this.loginWithAuth0 = this.loginWithAuth0.bind(this);
         this.isAuthenticated = this.isAuthenticated.bind(this);
         this.getAccessToken = this.getAccessToken.bind(this);
-        this.getProfile = this.getProfile.bind(this);
     }
 
-    login() {
-        this.auth0.authorize();
-    }
 
-    handleAuthentication() {
-        this.auth0.parseHash((err, authResult) => {
-            if (authResult && authResult.accessToken && authResult.idToken) {
-                this.setSession(authResult);
-                history.replace('/');
-            } else if (err) {
-                console.log(err);
-                history.replace('/');
-            }
+    loginWithAuth0 = async () => {
+        const redirectUrl = AuthSession.getRedirectUrl();
+        const result = await AuthSession.startAsync({
+            authUrl: `${AUTH_CONFIG.domain}/authorize` + toQueryString({
+                client_id: AUTH_CONFIG.clientId,
+                response_type: 'token',
+                scope: 'openid profile email',
+                redirect_uri: redirectUrl,
+            }),
         });
+
+        if (result.type === 'success') {
+            console.log(result.params)
+            auth0
+                .auth
+                .userInfo({token: result.params.access_token})
+                .then((response) => {
+                    this.userProfile = response
+                })
+                .catch(console.error);
+        }
     }
 
     setSession(authResult) {
@@ -44,7 +48,6 @@ export default class Auth {
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
-        history.replace('/');
     }
 
     getAccessToken() {
@@ -53,24 +56,6 @@ export default class Auth {
             throw new Error('No access token found');
         }
         return accessToken;
-    }
-
-    getProfile(cb) {
-        let accessToken = this.getAccessToken();
-        this.auth0.client.userInfo(accessToken, (err, profile) => {
-            if (profile) {
-                this.userProfile = profile;
-            }
-            cb(err, profile);
-        });
-    }
-
-    logout() {
-        // Clear access token and ID token from local storage
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('id_token');
-        localStorage.removeItem('expires_at');
-        history.replace('/');
     }
 
     isAuthenticated() {

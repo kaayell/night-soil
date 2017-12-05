@@ -1,5 +1,5 @@
 ---
 applications:
-- name: poop-api
+- name: night-soil-api
   services:
     - mysql
