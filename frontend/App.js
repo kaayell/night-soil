@@ -18,7 +18,7 @@ const RootTabs = TabNavigator({
         },
         Timer: {
             screen: Timer,
-            navationOptions: {
+            navigationOptions: {
                 tabBarLabel: 'Timer'
             }
         },
@@ -36,7 +36,7 @@ const RootTabs = TabNavigator({
 
 export default class App extends Component {
     state = {
-        fontLoaded: false,
+        fontLoaded: false
     };
 
     async componentWillMount() {
@@ -49,11 +49,10 @@ export default class App extends Component {
     }
 
     render() {
-        const auth = new Auth()
         return (
             this.state.fontLoaded ?
                 <Provider store={store}>
-                    <Layout auth={auth}/>
+                    <Layout/>
                 </Provider> : null
         );
     }

@@ -2,38 +2,69 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import * as apiClient from "../api/apiClient"
 import {setHumanInfo} from "../Human/human-actions";
-import {Text, View} from "react-native";
 import {Container, Content, Header} from "native-base";
 import Navigation from "../Navigation/Navigation";
 import Home from "../Home/Home";
 import Human from "../Human/Human";
 import Create from "../Create/Create";
 import Timer from "../Timer/Timer";
+import {AuthSession} from "expo";
+import {AUTH_CONFIG} from "../Auth/secrets";
+import jwt_decode from "jwt-decode"
 
+function toQueryString(params) {
+    return '?' + Object.entries(params)
+        .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+        .join('&');
+}
 
 export class Layout extends Component {
     constructor(props) {
         super(props)
 
         this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this)
-        this.login = this.login.bind(this)
+
+        this.state = {
+            access_token: null,
+            expires_at: "0"
+        }
+
+        this.loginWithAuth0 = this.loginWithAuth0.bind(this);
+        this.isAuthenticated = this.isAuthenticated.bind(this);
+        this.getAccessToken = this.getAccessToken.bind(this);
+        this.setSession = this.setSession.bind(this);
     }
 
-    login() {
-        this.props.auth.loginWithAuth0();
+    loginWithAuth0 = async () => {
+        const redirectUrl = AuthSession.getRedirectUrl();
+        const result = await AuthSession.startAsync({
+            authUrl: `${AUTH_CONFIG.domain}/authorize` +
+            toQueryString({
+                client_id: AUTH_CONFIG.clientId,
+                response_type: 'id_token token',
+                scope: 'openid profile email',
+                redirect_uri: redirectUrl,
+                nonce: 'yoyogenerateme'
+            }),
+        });
+
+        if (result.type === 'success') {
+            this.setSession(result.params)
+            let decoded = jwt_decode(result.params.id_token);
+            this.handleSuccessfulLogin(decoded)
+        }
     }
 
-    handleSuccessfulLogin() {
-        const {profile} = this.props.auth;
-        apiClient.getHuman(profile.email)
+    handleSuccessfulLogin(userProfile) {
+        apiClient.getHuman(userProfile.email)
             .then((response) => {
                 if (response.data && response.data.length > 0) {
                     this.props.setHumanInfo(response.data[0]);
                 } else {
                     const humanInfo = {
-                        firstName: profile.given_name,
-                        lastName: profile.family_name,
-                        email: profile.email,
+                        firstName: userProfile.given_name,
+                        lastName: userProfile.family_name,
+                        email: userProfile.email,
                         hourlyRate: "0"
                     }
                     apiClient.createHuman(humanInfo)
@@ -42,6 +73,30 @@ export class Layout extends Component {
                         })
                 }
             })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    setSession(authResult) {
+        // Set the time that the access token will expire at
+        let expiresAt = JSON.stringify((authResult.expires_in * 1000) + new Date().getTime());
+        this.setState({expires_at: expiresAt, access_token: authResult.access_token})
+    }
+
+    getAccessToken() {
+        const accessToken = this.state.access_token
+        if (!accessToken) {
+            console.error("noh access_token");
+        }
+        return accessToken;
+    }
+
+    isAuthenticated() {
+        // Check whether the current time is past the
+        // access token's expiry time
+        let expiresAt = JSON.parse(this.state.expires_at);
+        return new Date().getTime() < expiresAt;
     }
 
     render() {
@@ -61,14 +116,10 @@ export class Layout extends Component {
                 break;
         }
 
-        const {isAuthenticated} = this.props.auth;
-
-        if (!isAuthenticated()) {
-            this.login()
-            return ""
+        if (!this.isAuthenticated()) {
+            this.loginWithAuth0()
+            return <Container></Container>
         }
-
-        this.handleSuccessfulLogin()
 
         return (
             <Container>
