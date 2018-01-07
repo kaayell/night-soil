@@ -8,7 +8,14 @@ export class Home extends Component {
     title: 'Home',
     tabBarIcon: ({tintColor}) =>
       <Image source={require('../../assets/icons/home_grey_24x24.png')}
-             style={{tintColor: tintColor}}/>
+             style={{tintColor: tintColor}}/>,
+    headerStyle: {
+      backgroundColor: '#9AC0CD'
+    },
+    headerTitleStyle: {
+      color: '#fafafa',
+      fontFamily: 'roboto-medium'
+    }
   })
 
   constructor (props) {

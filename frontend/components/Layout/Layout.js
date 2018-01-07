@@ -24,7 +24,7 @@ const BottomNavigation = TabNavigator({
     tabBarPosition: 'bottom',
     swipeEnabled: true,
     tabBarOptions: {
-      activeTintColor: '#6CBBF0',
+      activeTintColor: '#9AC0CD',
       style: {
         backgroundColor: '#fafafa'
       }

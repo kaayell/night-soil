@@ -8,7 +8,14 @@ export class Timer extends Component {
     title: 'Timer',
     tabBarIcon: ({tintColor}) =>
       <Image source={require('../../assets/icons/timer_grey_24x24.png')}
-             style={{tintColor: tintColor}}/>
+             style={{tintColor: tintColor}}/>,
+    headerStyle: {
+      backgroundColor: '#9AC0CD'
+    },
+    headerTitleStyle: {
+      color: '#fafafa',
+      fontFamily: 'roboto-medium'
+    }
   })
 
   constructor (props) {

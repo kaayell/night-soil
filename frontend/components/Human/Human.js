@@ -9,7 +9,14 @@ export class Human extends Component {
     title: 'Profile',
     tabBarIcon: ({tintColor}) =>
       <Image source={require('../../assets/icons/face_grey_24x24.png')}
-             style={{tintColor: tintColor}}/>
+             style={{tintColor: tintColor}}/>,
+    headerStyle: {
+      backgroundColor: '#9AC0CD'
+    },
+    headerTitleStyle: {
+      color: '#fafafa',
+      fontFamily: 'roboto-medium'
+    }
   })
 
   constructor (props) {
