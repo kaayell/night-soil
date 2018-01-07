@@ -34,10 +34,8 @@ const BottomNavigation = TabNavigator({
 )
 
 const Root = StackNavigator({
-    Root: {screen: BottomNavigation}
-  },
-  {
-  })
+  Root: {screen: BottomNavigation}
+})
 
 export class Layout extends Component {
   constructor (props) {

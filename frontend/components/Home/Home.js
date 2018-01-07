@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as apiClient from '../../api/apiClient'
 import { Image, Text, View } from 'react-native'
+import BaseView from '../BaseView/BaseView'
 
 export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -42,7 +43,10 @@ export class Home extends Component {
   }
 
   render () {
-    return <View><Text>Pooooopin</Text></View>
+    return (
+      <BaseView>
+        <Text>Pooooopin</Text>
+      </BaseView>)
   }
 }
 

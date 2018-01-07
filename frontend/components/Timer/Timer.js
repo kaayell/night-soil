@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { saveTime } from './timer-actions'
 import { Image, View } from 'react-native'
+import BaseView from '../BaseView/BaseView'
 
 export class Timer extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -62,7 +63,7 @@ export class Timer extends Component {
   }
 
   render () {
-    return <View/>
+    return <BaseView/>
 
   }
 }

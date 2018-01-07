@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import * as api from '../../api/apiClient'
 import { setHumanInfo } from './human-actions'
 import { Image, View } from 'react-native'
+import BaseView from '../BaseView/BaseView'
+import { FormInput, FormLabel } from 'react-native-elements'
 
 export class Human extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -41,33 +43,22 @@ export class Human extends Component {
 
   onValueChange (field, event) {
     const obj = {}
-    obj[field] = event.target.value
+    obj[field] = event
     this.setState(obj)
   }
 
   render () {
     return (
-      <View/>
+      <BaseView>
+        <FormLabel>Name</FormLabel>
+        <FormInput disabled value={`${this.props.humanInfo.firstName} ${this.props.humanInfo.lastName}`}/>
+        <FormLabel>Email</FormLabel>
+        <FormInput disabled value={this.props.humanInfo.email}/>
+        <FormLabel>Hourly Rate</FormLabel>
+        <FormInput value={this.props.humanInfo.hourlyRate} onChangeText={this.onValueChange.bind(this, "hourlyRate")}/>
+      </BaseView>
     )
   }
-
-  // render() {
-  //     return (
-  //         <div className="main_container">
-  //             <div className="human_form">
-  //                 <TextField floatingLabelText="Name"
-  //                            defaultValue={`${this.props.humanInfo.firstName} ${this.props.humanInfo.lastName}`}
-  //                            disabled={true}/>
-  //                 <TextField floatingLabelText="Email" onChange={this.onValueChange.bind(this, "email")}
-  //                            defaultValue={this.props.humanInfo.email}
-  //                            disabled={true}/>
-  //                 <TextField floatingLabelText="Hourly Rate"
-  //                            onChange={this.onValueChange.bind(this, "hourlyRate")}
-  //                            defaultValue={this.props.humanInfo.hourlyRate}/>
-  //             </div>
-  //         </div>
-  //     )
-  // }
 }
 
 const mapStateToProps = state => {
