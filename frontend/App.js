@@ -1,59 +1,27 @@
-import React, {Component} from 'react';
-import {Provider} from 'react-redux'
-import store from "./src/store-index"
-import {TabNavigator} from 'react-navigation'
-import Home from "./src/Home/Home";
-import Human from "./src/Human/Human";
-import {Container} from "native-base";
-import Layout from "./src/Layout/Layout";
-import Timer from "./src/Timer/Timer";
-import Auth from "./src/Auth/Auth";
-
-const RootTabs = TabNavigator({
-        Home: {
-            screen: Home,
-            navigationOptions: {
-                tabBarLabel: 'Home'
-            }
-        },
-        Timer: {
-            screen: Timer,
-            navigationOptions: {
-                tabBarLabel: 'Timer'
-            }
-        },
-        Profile: {
-            screen: Human,
-            navigationOptions: {
-                tabBarLabel: 'Profile'
-            }
-        }
-    }, {
-        tabBarPosition: 'bottom',
-        animationEnabled: true
-    }
-)
+import React, { Component } from 'react'
+import { Provider } from 'react-redux'
+import store from './store-index'
+import Layout from './components/Layout/Layout'
 
 export default class App extends Component {
-    state = {
-        fontLoaded: false
-    };
+  state = {
+    fontLoaded: false
+  }
 
-    async componentWillMount() {
-        await Expo.Font.loadAsync({
-            'Roboto': require('native-base/Fonts/Roboto.ttf'),
-            'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-        });
+  async componentWillMount () {
+    await Expo.Font.loadAsync({
+      'roboto': require('./assets/fonts/Roboto-Regular.ttf'),
+      'roboto-medium': require('./assets/fonts/Roboto-Medium.ttf'),
+    })
 
-        this.setState({fontLoaded: true})
-    }
+    this.setState({fontLoaded: true})
+  }
 
-    render() {
-        return (
-            this.state.fontLoaded ?
-                <Provider store={store}>
-                    <Layout/>
-                </Provider> : null
-        );
-    }
+  render () {
+    return (
+      this.state.fontLoaded ? <Provider store={store}>
+        <Layout/>
+      </Provider> : null
+    )
+  }
 }
