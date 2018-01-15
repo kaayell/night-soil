@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import * as apiClient from '../../api/apiClient'
 import { Image, Text, View } from 'react-native'
 import BaseView from '../BaseView/BaseView'
+import ActionButton from 'react-native-action-button'
+import { Icon } from 'expo'
 
 export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -46,6 +48,11 @@ export class Home extends Component {
     return (
       <BaseView>
         <Text>Pooooopin</Text>
+        <ActionButton
+          position="right"
+          buttonColor="rgb(154, 192, 205)"
+          onPress={() =>{ this.props.navigation.navigate("Create")}}
+          />
       </BaseView>)
   }
 }

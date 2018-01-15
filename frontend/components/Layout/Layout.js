@@ -9,6 +9,7 @@ import jwt_decode from 'jwt-decode'
 import { StackNavigator, TabNavigator } from 'react-navigation'
 import Timer from '../Timer/Timer'
 import Human from '../Human/Human'
+import Create from '../Create/Create'
 
 function toQueryString (params) {
   return '?' + Object.entries(params)
@@ -34,7 +35,8 @@ const BottomNavigation = TabNavigator({
 )
 
 const Root = StackNavigator({
-  Root: {screen: BottomNavigation}
+  Root: {screen: BottomNavigation},
+  Create: {screen: Create}
 })
 
 export class Layout extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { saveTime } from './timer-actions'
-import { Image, View } from 'react-native'
+import { Button, Image, Text, View } from 'react-native'
 import BaseView from '../BaseView/BaseView'
 
 export class Timer extends Component {
@@ -55,7 +55,6 @@ export class Timer extends Component {
 
   handleRecordClick () {
     this.props.saveTime(`${Math.floor(this.state.secondsElapsed / 60)}`)
-    this.props.setActivePage('create')
   }
 
   formatSeconds (sec) {
@@ -63,28 +62,22 @@ export class Timer extends Component {
   }
 
   render () {
-    return <BaseView/>
+    const startOrStopButton = this.state.secondsElapsed === 0 || this.state.stopTimer ?
+      <Button title={'START'} onPress={this.handleStartClick}/>
+      : <Button title={'STOP'} onPress={this.handleStopClick}/>
 
+    const recordButton = this.state.secondsElapsed > 0 && this.state.stopTimer ?
+      <Button title={'RECORD?'} onPress={this.handleRecordClick}/> : null
+
+    return (
+      <BaseView>
+        <Text>{this.formatSeconds(this.state.secondsElapsed)}</Text>
+        {startOrStopButton}
+        <Button title={'RESET'} onPress={this.handleResetClick}/>
+        {recordButton}
+      </BaseView>
+    )
   }
 }
-
-// const startOrStopButton = this.state.secondsElapsed === 0 || this.state.stopTimer ?
-//     <Button transparent dark onPress={this.handleStartClick}><Text>START</Text></Button>
-//     : <Button transparent dark onPress={this.handleStopClick}><Text>STOP</Text></Button>
-//
-// const recordButton = this.state.secondsElapsed > 0 && this.state.stopTimer ?
-//     <Button transparent dark onPress={this.handleRecordClick}><Text>RECORD?</Text></Button> : null
-//
-// return (
-//     <Content padder style={{flex: 1, flexDirection: 'row', marginTop: 20, width: "100%", backgroundColor: "rgb(248,248,248)"}}>
-//         <Image source={require("../kawaii-poop.png")} style={{width:270, height: 220}}/>
-//         <Text>{this.formatSeconds(this.state.secondsElapsed)}</Text>
-//         {startOrStopButton}
-//         <Button transparent dark onPress={this.handleResetClick}>
-//             <Text>RESET</Text>
-//         </Button>
-//         {recordButton}
-//     </Content>
-// )
 
 export default connect(null, {saveTime})(Timer)

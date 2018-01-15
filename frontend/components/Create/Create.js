@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import * as apiClient from '../../api/apiClient'
 import { connect } from 'react-redux'
 import { clearTime } from '../Timer/timer-actions'
-import { View } from 'react-native'
+import { Picker, View } from 'react-native'
+import BaseView from '../BaseView/BaseView'
+import { FormInput, FormLabel } from 'react-native-elements'
 
 export class Create extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -74,7 +76,23 @@ export class Create extends Component {
 
   render () {
     return (
-      <View></View>
+      <BaseView>
+        <FormLabel>Bristol Type</FormLabel>
+        <Picker>
+          <Picker.Item label="1 (Separate hard lumps)" value="1" />
+          <Picker.Item label="2 (Lumpy and sausage like)" value="2" />
+          <Picker.Item label="3 (Cracked sausage shape)" value="3" />
+          <Picker.Item label="4 (Smooth sausage)" value="4" />
+          <Picker.Item label="5 (Soft blobs with clear edges)" value="5" />
+          <Picker.Item label="6 (Mushy with ragged edges)" value="6" />
+          <Picker.Item label="7 (Liquid)" value="7" />
+        </Picker>
+        <FormLabel>Duration</FormLabel>
+        <FormInput onChangeText={this.onTextFieldChange.bind(this, "durationInMinutes")}/>
+        <FormLabel>Comments</FormLabel>
+        <FormInput onChangeText={this.onTextFieldChange.bind(this, "comments")}/>
+        <FormLabel>Date</FormLabel>
+      </BaseView>
     )
   }
 
