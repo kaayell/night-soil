@@ -2,23 +2,27 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as api from '../../api/apiClient'
 import { setHumanInfo } from './human-actions'
-import { Image, View } from 'react-native'
-import BaseView from '../BaseView/BaseView'
-import { FormInput, FormLabel } from 'react-native-elements'
+import { View } from 'react-native'
+import { FormInput, FormLabel, Icon } from 'react-native-elements'
+import { POPPINS, POPPINS_MEDIUM } from '../StyleGuide/fonts'
+import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
+import style from '../StyleGuide/icon-styles'
+import formStyle from './Human.style'
 
 export class Human extends Component {
   static navigationOptions = ({navigation}) => ({
     title: 'Profile',
-    tabBarIcon: ({tintColor}) =>
-      <Image source={require('../../assets/icons/face_grey_24x24.png')}
-             style={{tintColor: tintColor}}/>,
     headerStyle: {
-      backgroundColor: '#9AC0CD'
+      backgroundColor: BLUE,
+      borderBottomWidth: 0
     },
     headerTitleStyle: {
-      color: '#fafafa',
-      fontFamily: 'roboto-medium'
-    }
+      color: OFF_WHITE,
+      fontFamily: POPPINS_MEDIUM
+    },
+    headerLeft: null,
+    headerRight: <Icon name={'clear'} iconStyle={style.icon} color={'white'}
+                       onPress={() => navigation.goBack()} underlayColor={BLUE}/>
   })
 
   constructor (props) {
@@ -49,14 +53,13 @@ export class Human extends Component {
 
   render () {
     return (
-      <BaseView>
-        <FormLabel>Name</FormLabel>
+      <View style={{flex: 1, backgroundColor: BLUE, height: '100%'}}>
+        <FormLabel labelStyle={{color: "white", fontSize: 16}} fontFamily={POPPINS}>Name</FormLabel>
         <FormInput disabled value={`${this.props.humanInfo.firstName} ${this.props.humanInfo.lastName}`}/>
-        <FormLabel>Email</FormLabel>
+        <FormLabel labelStyle={{color: "white", fontSize: 16}} fontFamily={POPPINS}>Email</FormLabel>
         <FormInput disabled value={this.props.humanInfo.email}/>
-        <FormLabel>Hourly Rate</FormLabel>
-        <FormInput value={this.props.humanInfo.hourlyRate} onChangeText={this.onValueChange.bind(this, "hourlyRate")}/>
-      </BaseView>
+        <FormLabel labelStyle={{color: "white", fontSize: 16}} fontFamily={POPPINS}>Hourly Rate</FormLabel>
+      </View>
     )
   }
 }

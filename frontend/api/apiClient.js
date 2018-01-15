@@ -3,7 +3,7 @@ import axios from 'axios'
 const instance = axios.create();
 
 let apiUrl = "http://localhost:8080"
-apiUrl = "https://night-soil-api.cfapps.io"
+// apiUrl = "https://night-soil-api.cfapps.io"
 
 // export function setHeader(token) {
 //     instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;

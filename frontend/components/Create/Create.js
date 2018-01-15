@@ -4,11 +4,25 @@ import { connect } from 'react-redux'
 import { clearTime } from '../Timer/timer-actions'
 import { Picker, View } from 'react-native'
 import BaseView from '../BaseView/BaseView'
-import { FormInput, FormLabel } from 'react-native-elements'
+import { FormInput, FormLabel, Icon } from 'react-native-elements'
+import { POPPINS, POPPINS_MEDIUM } from '../StyleGuide/fonts'
+import style from '../StyleGuide/icon-styles'
+import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
 
 export class Create extends Component {
   static navigationOptions = ({navigation}) => ({
     title: 'Create',
+    headerStyle: {
+      backgroundColor: BLUE,
+      borderBottomWidth: 0
+    },
+    headerTitleStyle: {
+      color: OFF_WHITE,
+      fontFamily: POPPINS_MEDIUM
+    },
+    headerLeft: null,
+    headerRight: <Icon name={'clear'} iconStyle={style.icon} color={'white'}
+                       onPress={() => navigation.goBack()} underlayColor={BLUE}/>
   })
 
   constructor (props) {
@@ -65,73 +79,36 @@ export class Create extends Component {
     })
   }
 
-  onTextFieldChange (field, event) {
+  onTextFieldChange (field, value) {
     const errorObj = {}
     errorObj[`${field}ErrorText`] = ''
     const obj = {}
-    obj[field] = event.target.value === '' ? null : event.target.value
+    obj[field] = value === '' ? null : value
     obj['errorTexts'] = {...this.state.errorTexts, ...errorObj}
     this.setState(obj)
   }
 
   render () {
     return (
-      <BaseView>
-        <FormLabel>Bristol Type</FormLabel>
+      <View style={{backgroundColor: BLUE, height: '100%'}}>
+        <FormLabel labelStyle={{color: 'white', fontSize: 16}} fontFamily={POPPINS}>Bristol Type</FormLabel>
         <Picker>
-          <Picker.Item label="1 (Separate hard lumps)" value="1" />
-          <Picker.Item label="2 (Lumpy and sausage like)" value="2" />
-          <Picker.Item label="3 (Cracked sausage shape)" value="3" />
-          <Picker.Item label="4 (Smooth sausage)" value="4" />
-          <Picker.Item label="5 (Soft blobs with clear edges)" value="5" />
-          <Picker.Item label="6 (Mushy with ragged edges)" value="6" />
-          <Picker.Item label="7 (Liquid)" value="7" />
+          <Picker.Item label="1 (Separate hard lumps)" value="1"/>
+          <Picker.Item label="2 (Lumpy and sausage like)" value="2"/>
+          <Picker.Item label="3 (Cracked sausage shape)" value="3"/>
+          <Picker.Item label="4 (Smooth sausage)" value="4"/>
+          <Picker.Item label="5 (Soft blobs with clear edges)" value="5"/>
+          <Picker.Item label="6 (Mushy with ragged edges)" value="6"/>
+          <Picker.Item label="7 (Liquid)" value="7"/>
         </Picker>
-        <FormLabel>Duration</FormLabel>
-        <FormInput onChangeText={this.onTextFieldChange.bind(this, "durationInMinutes")}/>
-        <FormLabel>Comments</FormLabel>
-        <FormInput onChangeText={this.onTextFieldChange.bind(this, "comments")}/>
-        <FormLabel>Date</FormLabel>
-      </BaseView>
+        <FormLabel labelStyle={{color: 'white', fontSize: 16}} fontFamily={POPPINS}>Duration</FormLabel>
+        <FormInput onChangeText={this.onTextFieldChange.bind(this, 'durationInMinutes')}/>
+        <FormLabel labelStyle={{color: 'white', fontSize: 16}} fontFamily={POPPINS}>Comments</FormLabel>
+        <FormInput onChangeText={this.onTextFieldChange.bind(this, 'comments')}/>
+        <FormLabel labelStyle={{color: 'white', fontSize: 16}} fontFamily={POPPINS}>Date</FormLabel>
+      </View>
     )
   }
-
-  // render() {
-  //     return (
-  //         <div className="create-container">
-  //             <SelectField
-  //                 floatingLabelText="Bristol Type"
-  //                 value={this.state.bristolType}
-  //                 onChange={this.onDropDownChange}
-  //                 autoWidth={true}
-  //                 errorText={this.state.errorTexts.bristolTypeErrorText}
-  //             >
-  //                 <MenuItem value={1} primaryText="1 (Separate hard lumps)"/>
-  //                 <MenuItem value={2} primaryText="2 (Lumpy and sausage like)"/>
-  //                 <MenuItem value={3} primaryText="3 (Cracked sausage shape)"/>
-  //                 <MenuItem value={4} primaryText="4 (Smooth sausage)"/>
-  //                 <MenuItem value={5} primaryText="5 (Soft blobs with clear edges)"/>
-  //                 <MenuItem value={6} primaryText="6 (Mushy with ragged edges)"/>
-  //                 <MenuItem value={7} primaryText="7 (Liquid)"/>
-  //             </SelectField>
-  //             <TextField floatingLabelText="Duration (minutes)"
-  //                        onChange={this.onTextFieldChange.bind(this, "durationInMinutes")}
-  //                        errorText={this.state.errorTexts.durationInMinutesErrorText}
-  //                        defaultValue={this.props.poopTime}
-  //             />
-  //             <TextField floatingLabelText="Comments"
-  //                        onChange={this.onTextFieldChange.bind(this, "comments")}
-  //                        errorText={this.state.errorTexts.commentsErrorText}
-  //             />
-  //             <DatePicker floatingLabelText="Date"
-  //                         onChange={this.onDateChange}
-  //                         errorText={this.state.errorTexts.dateTimeInMillisecondsErrorText}
-  //             />
-  //             <FlatButton label="Add my poop!" onClick={this.handleSubmit}/>
-  //         </div>
-  //     )
-  // }
-
 }
 
 const mapStateToProps = state => {

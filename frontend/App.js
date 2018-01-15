@@ -10,8 +10,8 @@ export default class App extends Component {
 
   async componentWillMount () {
     await Expo.Font.loadAsync({
-      'roboto': require('./assets/fonts/Roboto-Regular.ttf'),
-      'roboto-medium': require('./assets/fonts/Roboto-Medium.ttf'),
+      'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),
+      'poppins-medium': require('./assets/fonts/Poppins-Medium.ttf'),
     })
 
     this.setState({fontLoaded: true})
@@ -19,9 +19,7 @@ export default class App extends Component {
 
   render () {
     return (
-      this.state.fontLoaded ? <Provider store={store}>
-        <Layout/>
-      </Provider> : null
+      this.state.fontLoaded ? <Provider store={store}><Layout/></Provider> : null
     )
   }
 }

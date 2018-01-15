@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { saveTime } from './timer-actions'
 import { Button, Image, Text, View } from 'react-native'
 import BaseView from '../BaseView/BaseView'
+import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
+import { POPPINS_MEDIUM } from '../StyleGuide/fonts'
 
 export class Timer extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -11,11 +13,11 @@ export class Timer extends Component {
       <Image source={require('../../assets/icons/timer_grey_24x24.png')}
              style={{tintColor: tintColor}}/>,
     headerStyle: {
-      backgroundColor: '#9AC0CD'
+      backgroundColor: BLUE
     },
     headerTitleStyle: {
-      color: '#fafafa',
-      fontFamily: 'roboto-medium'
+      color: OFF_WHITE,
+      fontFamily: POPPINS_MEDIUM
     }
   })
 

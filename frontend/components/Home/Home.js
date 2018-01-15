@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as apiClient from '../../api/apiClient'
-import { Image, Text, View } from 'react-native'
+import { Image, Text, TouchableHighlight } from 'react-native'
 import BaseView from '../BaseView/BaseView'
 import ActionButton from 'react-native-action-button'
-import { Icon } from 'expo'
+import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
+import { POPPINS_MEDIUM } from '../StyleGuide/fonts'
+import { Icon } from 'react-native-elements'
+import style from '../StyleGuide/icon-styles'
 
 export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -13,12 +16,17 @@ export class Home extends Component {
       <Image source={require('../../assets/icons/home_grey_24x24.png')}
              style={{tintColor: tintColor}}/>,
     headerStyle: {
-      backgroundColor: '#9AC0CD'
+      backgroundColor: BLUE
     },
     headerTitleStyle: {
-      color: '#fafafa',
-      fontFamily: 'roboto-medium'
-    }
+      color: OFF_WHITE,
+      fontFamily: POPPINS_MEDIUM
+    },
+    headerRight:
+      <Icon name={'perm-identity'} iconStyle={style.icon} color={'white'}
+            onPress={() => {navigation.navigate('Profile')}}
+            underlayColor={BLUE}/>
+
   })
 
   constructor (props) {
@@ -46,13 +54,13 @@ export class Home extends Component {
 
   render () {
     return (
-      <BaseView>
+      <BaseView style={{flex: 1}}>
         <Text>Pooooopin</Text>
         <ActionButton
           position="right"
           buttonColor="rgb(154, 192, 205)"
-          onPress={() =>{ this.props.navigation.navigate("Create")}}
-          />
+          onPress={() => { this.props.navigation.navigate('Create')}}
+        />
       </BaseView>)
   }
 }
