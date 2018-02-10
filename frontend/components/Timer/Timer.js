@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { saveTime } from './timer-actions'
 import { Button, Image, Text, View } from 'react-native'
-import BaseView from '../BaseView/BaseView'
 import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
 import { POPPINS_MEDIUM } from '../StyleGuide/fonts'
 
@@ -72,12 +71,12 @@ export class Timer extends Component {
       <Button title={'RECORD?'} onPress={this.handleRecordClick}/> : null
 
     return (
-      <BaseView>
+      <View>
         <Text>{this.formatSeconds(this.state.secondsElapsed)}</Text>
         {startOrStopButton}
         <Button title={'RESET'} onPress={this.handleResetClick}/>
         {recordButton}
-      </BaseView>
+      </View>
     )
   }
 }

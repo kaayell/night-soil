@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import store from './store-index'
-import Layout from './components/Layout/Layout'
+import Firebase from './components/Firebase/Firebase'
+import { Welcome } from './components/Welcome/Welcome'
+import { Layout } from './components/Layout/Layout'
 
 export default class App extends Component {
   state = {
-    fontLoaded: false
+    fontLoaded: false,
+    userLoggedIn: undefined
+  }
+
+  constructor (props) {
+    super(props)
+    Firebase.init()
   }
 
   async componentWillMount () {
@@ -17,9 +25,23 @@ export default class App extends Component {
     this.setState({fontLoaded: true})
   }
 
+  componentDidMount () {
+    Firebase.getAuth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({userLoggedIn: true})
+      } else {
+        this.setState({userLoggedIn: false})
+      }
+    }).bind(this)
+  }
+
   render () {
+    if (this.state.userLoggedIn === undefined || !this.state.fontLoaded) return null
+
     return (
-      this.state.fontLoaded ? <Provider store={store}><Layout/></Provider> : null
+      <Provider store={store}>
+        {this.state.userLoggedIn ? <Layout/> : <Welcome/>}
+      </Provider>
     )
   }
 }

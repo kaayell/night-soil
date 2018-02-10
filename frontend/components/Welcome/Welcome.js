@@ -1,10 +1,28 @@
-import React, {Component} from "react"
-import { Text, View } from 'react-native'
+import React from 'react'
+import { Image, Text, View } from 'react-native'
+import Firebase from '../Firebase/Firebase'
+import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
+import { POPPINS } from '../StyleGuide/fonts'
+import { Button } from 'react-native-elements'
 
-export default class Welcome extends Component {
-  render(){
-    return <View>
-      <Text>Welcome!</Text>
-    </View>
-  }
+export const Welcome = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: BLUE}}>
+      <Image source={require('../../assets/poop.png')}
+             style={{width: 100, height: 100}}/>
+      <Text style={{color: OFF_WHITE, fontFamily: POPPINS, fontSize: 30}}>NIGHT SOIL</Text>
+      <Button
+        title='SIGN IN WITH GOOGLE'
+        onPress={() => Firebase.loginWithGoogle()}
+        textStyle={{color: OFF_WHITE, fontWeight: '700'}}
+        buttonStyle={{
+          backgroundColor: 'transparent',
+          width: 300,
+          height: 45,
+          borderColor: OFF_WHITE,
+          borderWidth: .5,
+          borderRadius: 5
+        }}
+      />
+    </View>)
 }

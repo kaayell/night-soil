@@ -22,18 +22,8 @@ const BottomNavigation = TabNavigator({
   }
 )
 
-const Root = StackNavigator({
+export const Layout = StackNavigator({
   Root: {screen: BottomNavigation},
   Create: {screen: Create},
   Profile: {screen: Human}
 })
-
-export default class Layout extends Component {
-  render () {
-    return <Root/>
-  }
-}
-
-const mapStateToProps = state => {
-  return {}
-}

@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as apiClient from '../../api/apiClient'
-import { Image, Text, TouchableHighlight } from 'react-native'
-import BaseView from '../BaseView/BaseView'
+import { Image, Text, View } from 'react-native'
 import ActionButton from 'react-native-action-button'
 import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
 import { POPPINS_MEDIUM } from '../StyleGuide/fonts'
@@ -11,7 +9,8 @@ import style from '../StyleGuide/icon-styles'
 
 export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
-    title: 'Home',
+    title: <Image source={require('../../assets/poop.png')}
+                  style={{width: 35, height: 35}}/>,
     tabBarIcon: ({tintColor}) =>
       <Image source={require('../../assets/icons/home_grey_24x24.png')}
              style={{tintColor: tintColor}}/>,
@@ -38,30 +37,20 @@ export class Home extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.humanInfo) {
-      apiClient.getSummary(nextProps.humanInfo.id)
-        .then((response) => {
-          if (response.data) {
-            this.setState({
-              minutesToDate: response.data.minutesToDate,
-              moneyToDate: response.data.moneyToDate
-            })
-          }
-        })
-    }
-  }
-
   render () {
     return (
-      <BaseView style={{flex: 1}}>
-        <Text>Pooooopin</Text>
-        <ActionButton
-          position="right"
-          buttonColor="rgb(154, 192, 205)"
-          onPress={() => { this.props.navigation.navigate('Create')}}
-        />
-      </BaseView>)
+      <View style={{flex: 1}}>
+        <View style={{flex: 1}}>
+          <Text>Pooooopin</Text>
+        </View>
+        <View style={{height: 100}}>
+          <ActionButton
+            position="right"
+            buttonColor="rgb(154, 192, 205)"
+            onPress={() => { this.props.navigation.navigate('Create')}}
+          />
+        </View>
+      </View>)
   }
 }
 
