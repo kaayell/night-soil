@@ -8,8 +8,8 @@ import { Button } from 'react-native-elements'
 export const Welcome = () => {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: BLUE}}>
-      <Image source={require('../../assets/poop.png')}
-             style={{width: 100, height: 100}}/>
+      <Image source={require('../../assets/poop-white.png')}
+             style={{width: 150, height: 150}}/>
       <Text style={{color: OFF_WHITE, fontFamily: POPPINS, fontSize: 30}}>NIGHT SOIL</Text>
       <Button
         title='SIGN IN WITH GOOGLE'

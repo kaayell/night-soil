@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { FormInput, FormLabel, Icon } from 'react-native-elements'
 import { POPPINS, POPPINS_MEDIUM } from '../StyleGuide/fonts'
 import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
-import style from '../StyleGuide/icon-styles'
+import style from '../StyleGuide/styles'
 import Firebase from '../Firebase/Firebase'
 
 export class Human extends Component {

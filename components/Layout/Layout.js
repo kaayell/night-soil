@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Home from '../Home/Home'
 import { StackNavigator, TabNavigator } from 'react-navigation'
 import Timer from '../Timer/Timer'
@@ -13,6 +13,7 @@ const BottomNavigation = TabNavigator({
     tabBarPosition: 'bottom',
     swipeEnabled: true,
     tabBarOptions: {
+      showLabel: false,
       activeTintColor: BLUE,
       style: {
         backgroundColor: OFF_WHITE

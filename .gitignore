@@ -24,6 +24,6 @@ nbdist/
 **/out/**
 
 node_modules/
-.expo/
+/.expo/
 
 **secrets**

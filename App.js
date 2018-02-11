@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import store from './store-index'
 import Firebase from './components/Firebase/Firebase'
 import { Welcome } from './components/Welcome/Welcome'
 import { Layout } from './components/Layout/Layout'
@@ -8,7 +6,7 @@ import { Layout } from './components/Layout/Layout'
 export default class App extends Component {
   state = {
     fontLoaded: false,
-    userLoggedIn: undefined
+    userLoggedIn: undefined,
   }
 
   constructor (props) {
@@ -36,12 +34,11 @@ export default class App extends Component {
   }
 
   render () {
-    if (this.state.userLoggedIn === undefined || !this.state.fontLoaded) return null
+    if (this.state.userLoggedIn === undefined ||
+      !this.state.fontLoaded) return null
 
     return (
-      <Provider store={store}>
-        {this.state.userLoggedIn ? <Layout/> : <Welcome/>}
-      </Provider>
+      this.state.userLoggedIn ? <Layout/> : <Welcome/>
     )
   }
 }

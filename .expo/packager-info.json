@@ -1,6 +1,8 @@
 {
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://t5-auq.kaayell.night-soil.exp.direct",
+  "packagerNgrokUrl": "https://packager.t5-auq.kaayell.night-soil.exp.direct",
+  "ngrokPid": 1375,
+  "packagerPort": 19001,
+  "packagerPid": 1363
 }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { saveTime } from './timer-actions'
-import { Button, Image, Text, View } from 'react-native'
+import { Image, Text, View } from 'react-native'
 import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
 import { POPPINS_MEDIUM } from '../StyleGuide/fonts'
+import { Button } from 'react-native-elements'
+import moment from 'moment'
 
 export class Timer extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -12,73 +12,108 @@ export class Timer extends Component {
       <Image source={require('../../assets/icons/timer_grey_24x24.png')}
              style={{tintColor: tintColor}}/>,
     headerStyle: {
-      backgroundColor: BLUE
+      backgroundColor: BLUE,
     },
     headerTitleStyle: {
       color: OFF_WHITE,
-      fontFamily: POPPINS_MEDIUM
-    }
+      fontFamily: POPPINS_MEDIUM,
+    },
   })
 
   constructor (props) {
     super(props)
 
-    this.handleStartClick = this.handleStartClick.bind(this)
-    this.handleStopClick = this.handleStopClick.bind(this)
-    this.handleResetClick = this.handleResetClick.bind(this)
-    this.handleRecordClick = this.handleRecordClick.bind(this)
-
     this.state = {
-      secondsElapsed: 0,
-      stopTimer: false
+      startTime: 0,
+      displayStart: 'START',
+      endTime: 0,
+      displayEnd: 'END',
     }
-
-    this.incrementer = null
   }
 
   handleStartClick () {
-    this.incrementer = setInterval(() =>
-        this.setState({
-          secondsElapsed: this.state.secondsElapsed + 1
-        })
-      , 1000)
-    this.setState({stopTimer: false})
+    let timeMs = moment()
+    let displayStart = timeMs.format('h:mm:ss a')
+    this.setState({startTime: timeMs, displayStart: displayStart})
   }
 
   handleStopClick () {
-    clearInterval(this.incrementer)
-    this.setState({stopTimer: true})
-  }
-
-  handleResetClick () {
-    this.setState({secondsElapsed: 0})
+    let timeMs = moment()
+    let displayEnd = timeMs.format('h:mm:ss a')
+    this.setState({endTime: timeMs, displayEnd: displayEnd})
   }
 
   handleRecordClick () {
-    this.props.saveTime(`${Math.floor(this.state.secondsElapsed / 60)}`)
-  }
-
-  formatSeconds (sec) {
-    return Math.floor(sec / 60) + ':' + ('0' + sec % 60).slice(-2)
+    let duration = this.state.endTime.diff(this.state.startTime)
+    this.props.navigation.navigate('Create', {duration: duration})
   }
 
   render () {
-    const startOrStopButton = this.state.secondsElapsed === 0 || this.state.stopTimer ?
-      <Button title={'START'} onPress={this.handleStartClick}/>
-      : <Button title={'STOP'} onPress={this.handleStopClick}/>
-
-    const recordButton = this.state.secondsElapsed > 0 && this.state.stopTimer ?
-      <Button title={'RECORD?'} onPress={this.handleRecordClick}/> : null
-
     return (
-      <View>
-        <Text>{this.formatSeconds(this.state.secondsElapsed)}</Text>
-        {startOrStopButton}
-        <Button title={'RESET'} onPress={this.handleResetClick}/>
-        {recordButton}
+      <View style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: BLUE,
+      }}>
+        <Button
+          title={this.state.displayStart}
+          onPress={() => this.handleStartClick()}
+          textStyle={{
+            color: OFF_WHITE, fontWeight: '700', fontFamily: POPPINS_MEDIUM,
+          }}
+          buttonStyle={{
+            backgroundColor: 'transparent',
+            width: 300,
+            height: 45,
+            borderColor: OFF_WHITE,
+            borderWidth: .5,
+            borderRadius: 5,
+            margin: 10,
+          }}
+        />
+        <Button
+          title={this.state.displayEnd}
+          onPress={() => this.handleStopClick()}
+          textStyle={{
+            color: OFF_WHITE, fontWeight: '700',
+            fontFamily: POPPINS_MEDIUM,
+          }}
+          buttonStyle={{
+            backgroundColor: 'transparent',
+            width: 300,
+            height: 45,
+            borderColor: OFF_WHITE,
+            borderWidth: .5,
+            borderRadius: 5,
+            margin: 10,
+          }}
+        />
+        <Text style={{
+          margin: 10,
+          fontSize: 20,
+          color: OFF_WHITE,
+          fontFamily: POPPINS_MEDIUM,
+        }}>
+          {this.state.startTime && this.state.endTime ? moment(
+            this.state.endTime.diff(this.state.startTime)).format('mm:ss') : ''}
+        </Text>
+        <Button
+          title='RECORD'
+          onPress={() => this.handleRecordClick()}
+          textStyle={{color: OFF_WHITE, fontWeight: '700'}}
+          buttonStyle={{
+            backgroundColor: 'transparent',
+            width: 300,
+            height: 45,
+            borderColor: OFF_WHITE,
+            borderWidth: .5,
+            borderRadius: 5,
+          }}
+        />
       </View>
     )
   }
 }
 
-export default connect(null, {saveTime})(Timer)
+export default Timer

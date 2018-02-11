@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Button, FormLabel, Icon } from 'react-native-elements'
 import { POPPINS, POPPINS_MEDIUM } from '../StyleGuide/fonts'
-import style from '../StyleGuide/icon-styles'
+import style from '../StyleGuide/styles'
 import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
 import DatePicker from 'react-native-datepicker'
 import Firebase from '../Firebase/Firebase'
@@ -35,7 +35,7 @@ export default class Create extends Component {
 
     this.state = {
       bristolType: null,
-      duration: null,
+      duration: this.props.navigation.state.params.duration || null,
       comments: null,
       date: moment().format('MM-DD-YYYY')
     }
@@ -76,14 +76,8 @@ export default class Create extends Component {
           title='ADD'
           onPress={() => this.handleSubmit()}
           textStyle={{color: OFF_WHITE, fontWeight: '700'}}
-          buttonStyle={{
-            backgroundColor: 'transparent',
-            width: 300,
-            height: 45,
-            borderColor: OFF_WHITE,
-            borderWidth: .5,
-            borderRadius: 5
-          }}
+          buttonStyle={style.button}
+          containerViewStyle={{flex: 1, alignItems: 'center'}}
         />
       </View>
     )

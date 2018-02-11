@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Image, Text, View } from 'react-native'
 import ActionButton from 'react-native-action-button'
 import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
 import { POPPINS_MEDIUM } from '../StyleGuide/fonts'
 import { Icon } from 'react-native-elements'
-import style from '../StyleGuide/icon-styles'
+import style from '../StyleGuide/styles'
 
 export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -54,10 +53,4 @@ export class Home extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    humanInfo: state.humanInfo
-  }
-}
-
-export default connect(mapStateToProps)(Home)
+export default Home
