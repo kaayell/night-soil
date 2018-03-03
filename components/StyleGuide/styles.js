@@ -12,5 +12,6 @@ export default style = StyleSheet.create({
     borderColor: OFF_WHITE,
     borderWidth: .5,
     borderRadius: 5,
-  }
+  },
+  textStyle: {color: OFF_WHITE, fontSize: 16},
 })

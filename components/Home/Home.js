@@ -5,6 +5,7 @@ import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
 import { POPPINS_MEDIUM } from '../StyleGuide/fonts'
 import { Icon } from 'react-native-elements'
 import style from '../StyleGuide/styles'
+import Charts from '../Charts/Charts'
 
 export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -14,16 +15,16 @@ export class Home extends Component {
       <Image source={require('../../assets/icons/home_grey_24x24.png')}
              style={{tintColor: tintColor}}/>,
     headerStyle: {
-      backgroundColor: BLUE
+      backgroundColor: BLUE,
     },
     headerTitleStyle: {
       color: OFF_WHITE,
-      fontFamily: POPPINS_MEDIUM
+      fontFamily: POPPINS_MEDIUM,
     },
     headerRight:
       <Icon name={'perm-identity'} iconStyle={style.icon} color={'white'}
             onPress={() => {navigation.navigate('Profile')}}
-            underlayColor={BLUE}/>
+            underlayColor={BLUE}/>,
 
   })
 
@@ -32,7 +33,7 @@ export class Home extends Component {
 
     this.state = {
       minutesToDate: 0,
-      moneyToDate: 0
+      moneyToDate: 0,
     }
   }
 
@@ -40,7 +41,7 @@ export class Home extends Component {
     return (
       <View style={{flex: 1}}>
         <View style={{flex: 1}}>
-          <Text>Pooooopin</Text>
+          <Charts/>
         </View>
         <View style={{height: 100}}>
           <ActionButton

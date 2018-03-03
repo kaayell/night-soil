@@ -15,15 +15,16 @@ export default class Create extends Component {
     title: 'Create',
     headerStyle: {
       backgroundColor: BLUE,
-      borderBottomWidth: 0
+      borderBottomWidth: 0,
     },
     headerTitleStyle: {
       color: OFF_WHITE,
-      fontFamily: POPPINS_MEDIUM
+      fontFamily: POPPINS_MEDIUM,
     },
     headerLeft: null,
     headerRight: <Icon name={'clear'} iconStyle={style.icon} color={'white'}
-                       onPress={() => navigation.goBack()} underlayColor={BLUE}/>
+                       onPress={() => navigation.goBack()}
+                       underlayColor={BLUE}/>,
   })
 
   constructor (props) {
@@ -35,9 +36,9 @@ export default class Create extends Component {
 
     this.state = {
       bristolType: null,
-      duration: this.props.navigation.state.params.duration || null,
+      duration: null,
       comments: null,
-      date: moment().format('MM-DD-YYYY')
+      date: moment().format('MM-DD-YYYY'),
     }
   }
 
@@ -59,16 +60,23 @@ export default class Create extends Component {
   render () {
     return (
       <View style={{backgroundColor: BLUE, height: '100%'}}>
-        <BristolTypeSelection setBristolType={this.setBristolType}/>
-        <Input labelText={'Duration'} stateField={'duration'} onTextFieldChange={this.onTextFieldChange}/>
-        <Input labelText={'Comments'} stateField={'comments'} onTextFieldChange={this.onTextFieldChange}/>
-        <FormLabel labelStyle={{color: 'white', fontSize: 16}} fontFamily={POPPINS}>Date</FormLabel>
-        <DatePicker showIcon={false} style={{width: 'auto'}} date={this.state.date}
-                    mode="date" format="MM-DD-YYYY" confirmBtnText="Confirm" cancelBtnText="Cancel"
+        <BristolTypeSelection
+          selectedBristolType={this.state.bristolType}
+          setBristolType={this.setBristolType}/>
+        <Input labelText={'Duration'} stateField={'duration'}
+               onTextFieldChange={this.onTextFieldChange}/>
+        <Input labelText={'Comments'} stateField={'comments'}
+               onTextFieldChange={this.onTextFieldChange}/>
+        <FormLabel labelStyle={{color: 'white', fontSize: 16}}
+                   fontFamily={POPPINS}>Date</FormLabel>
+        <DatePicker showIcon={false} style={{width: 'auto'}}
+                    date={this.state.date}
+                    mode="date" format="MM-DD-YYYY" confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
                     customStyles={{
                       placeholderText: {color: 'white', fontSize: 16},
                       dateText: {color: 'white', fontSize: 16},
-                      dateInput: {borderColor: 'transparent'}
+                      dateInput: {borderColor: 'transparent'},
                     }}
                     onDateChange={(date) => {this.setState({date: date})}}
         />

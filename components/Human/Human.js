@@ -11,32 +11,64 @@ export class Human extends Component {
     title: 'Profile',
     headerStyle: {
       backgroundColor: BLUE,
-      borderBottomWidth: 0
+      borderBottomWidth: 0,
     },
     headerTitleStyle: {
       color: OFF_WHITE,
-      fontFamily: POPPINS_MEDIUM
+      fontFamily: POPPINS_MEDIUM,
     },
     headerLeft: null,
     headerRight: <Icon name={'clear'} iconStyle={style.icon} color={'white'}
-                       onPress={() => navigation.goBack()} underlayColor={BLUE}/>
+                       onPress={() => navigation.goBack()}
+                       underlayColor={BLUE}/>,
   })
 
   componentWillMount () {
     let user = Firebase.getAuth().currentUser
     this.setState({user})
+
+    Firebase.getUserDetailsRef().once('value').then((snapshot) => {
+      let salary = snapshot.val() && snapshot.val().salary
+      this.setState({salary})
+    })
+  }
+
+  updateSalary (text) {
+    if (!text) return;
+    Firebase.getUserDetailsRef().set({
+      salary: text.valueOf()
+    })
   }
 
   render () {
-    let {user} = this.state
+    let {user, salary} = this.state
     user = user || {}
+    salary = salary || 0
+
     return (
       <View style={{flex: 1, backgroundColor: BLUE, height: '100%'}}>
-        <FormLabel labelStyle={{color: 'white', fontSize: 16}} fontFamily={POPPINS}>Name</FormLabel>
-        <FormInput disabled value={`${user.displayName}`}/>
-        <FormLabel labelStyle={{color: 'white', fontSize: 16}} fontFamily={POPPINS}>Email</FormLabel>
-        <FormInput disabled value={user.email}/>
-        <FormLabel labelStyle={{color: 'white', fontSize: 16}} fontFamily={POPPINS}>Hourly Rate</FormLabel>
+        <FormLabel labelStyle={style.textStyle}
+                   fontFamily={POPPINS}>Name</FormLabel>
+        <FormInput editable={false} value={`${user.displayName}`}
+                   labelStyle={style.textStyle}
+                   inputStyle={style.textStyle}
+        />
+
+        <FormLabel labelStyle={style.textStyle}
+                   inputStyle={style.textStyle}
+                   fontFamily={POPPINS}>Email
+        </FormLabel>
+        <FormInput editable={false} value={user.email}
+                   labelStyle={style.textStyle}
+                   inputStyle={style.textStyle}/>
+
+        <FormLabel labelStyle={style.textStyle}
+                   fontFamily={POPPINS}>Hourly Rate</FormLabel>
+        <FormInput defaultValue={`${salary}`}
+                   labelStyle={style.textStyle}
+                   inputStyle={style.textStyle}
+                   keyboardType={'numeric'}
+                   onChangeText={(text) => this.updateSalary(text)}/>
       </View>
     )
   }

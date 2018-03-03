@@ -7,6 +7,7 @@
     "expo": "^22.0.2",
     "firebase": "^4.9.1",
     "jest-expo": "^25.1.0",
+    "lodash": "^4.17.5",
     "moment": "^2.20.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
@@ -15,6 +16,8 @@
     "react-native-datepicker": "^1.6.0",
     "react-native-elements": "^0.18.5",
     "react-native-scripts": "1.7.0",
+    "react-native-svg": "^6.2.2",
+    "react-native-svg-charts": "^3.0.1",
     "react-native-vector-icons": "^4.4.2",
     "react-navigation": "^1.0.0-beta.19",
     "react-scripts": "1.0.16"

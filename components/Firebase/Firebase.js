@@ -10,9 +10,19 @@ export default class Firebase {
     return firebase.auth()
   }
 
+  static getUserDetailsRef() {
+    let uid = firebase.auth().currentUser.uid
+    return firebase.database().ref(`/user/details/${uid}`)
+  }
+
   static savePoop(poopDetails) {
     let uid = firebase.auth().currentUser.uid
     firebase.database().ref(`/poop/${uid}`).push().set(poopDetails)
+  }
+
+  static getPoopsRef(){
+    let uid = firebase.auth().currentUser.uid
+    return firebase.database().ref(`/poop/${uid}`)
   }
 
   static async loginWithGoogle () {
