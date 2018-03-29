@@ -1,7 +1,7 @@
 import React from 'react'
-import { PieChart } from 'react-native-svg-charts'
+import {PieChart} from 'react-native-svg-charts'
 import _ from 'lodash'
-import { Circle, G, Line, Text } from 'react-native-svg'
+import {Circle, G, Line, Text} from 'react-native-svg'
 
 const BRISTOL_COLORS = {
   '1': '#d7ccc8',
@@ -21,7 +21,7 @@ export const BristolPieChart = (props) => {
       color: BRISTOL_COLORS[groupKey],
       key: `${Math.random()}`,
     }
-  })
+  });
 
   return <PieChart
     style={{height: 200, paddingTop: 20}}

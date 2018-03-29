@@ -22,6 +22,7 @@ export const Input = (props) => {
           fontSize: 16,
           paddingLeft: 10
         }}
+        underlineColorAndroid='rgba(0,0,0,0)'
       />
     </View>
   )

@@ -6,20 +6,6 @@ import { Button } from 'react-native-elements'
 import moment from 'moment'
 
 export class Timer extends Component {
-  static navigationOptions = ({navigation}) => ({
-    title: 'Timer',
-    tabBarIcon: ({tintColor}) =>
-      <Image source={require('../../assets/icons/timer_grey_24x24.png')}
-             style={{tintColor: tintColor}}/>,
-    headerStyle: {
-      backgroundColor: BLUE,
-    },
-    headerTitleStyle: {
-      color: OFF_WHITE,
-      fontFamily: POPPINS_MEDIUM,
-    },
-  })
-
   constructor (props) {
     super(props)
 

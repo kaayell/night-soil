@@ -1,33 +1,19 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { Button, FormLabel, Icon } from 'react-native-elements'
-import { POPPINS, POPPINS_MEDIUM } from '../StyleGuide/fonts'
+import React, {Component} from 'react'
+import {View} from 'react-native'
+import {Button, FormLabel} from 'react-native-elements'
+import {POPPINS} from '../StyleGuide/fonts'
 import style from '../StyleGuide/styles'
-import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
+import {BLUE, OFF_WHITE} from '../StyleGuide/colors'
 import DatePicker from 'react-native-datepicker'
 import Firebase from '../Firebase/Firebase'
 import moment from 'moment'
-import { BristolTypeSelection } from './BristolTypeSelection'
-import { Input } from './Input'
+import {BristolTypeSelection} from './BristolTypeSelection'
+import {Input} from './Input'
+import {StatusBar} from "react-native";
+import {SafeAreaView} from "react-navigation";
 
 export default class Create extends Component {
-  static navigationOptions = ({navigation}) => ({
-    title: 'Create',
-    headerStyle: {
-      backgroundColor: BLUE,
-      borderBottomWidth: 0,
-    },
-    headerTitleStyle: {
-      color: OFF_WHITE,
-      fontFamily: POPPINS_MEDIUM,
-    },
-    headerLeft: null,
-    headerRight: <Icon name={'clear'} iconStyle={style.icon} color={'white'}
-                       onPress={() => navigation.goBack()}
-                       underlayColor={BLUE}/>,
-  })
-
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -35,59 +21,68 @@ export default class Create extends Component {
     this.onTextFieldChange = this.onTextFieldChange.bind(this)
 
     this.state = {
-      bristolType: null,
+      bristolType: 1,
       duration: null,
       comments: null,
       date: moment().format('MM-DD-YYYY'),
     }
   }
 
-  handleSubmit () {
+  handleSubmit() {
     Firebase.savePoop(this.state)
     this.props.navigation.goBack()
   }
 
-  setBristolType (bristolType) {
+  setBristolType(bristolType) {
     this.setState({bristolType})
   }
 
-  onTextFieldChange (field, value) {
+  onTextFieldChange(field, value) {
     const obj = {}
     obj[field] = value === '' ? null : value
     this.setState(obj)
   }
 
-  render () {
+  render() {
     return (
-      <View style={{backgroundColor: BLUE, height: '100%'}}>
-        <BristolTypeSelection
-          selectedBristolType={this.state.bristolType}
-          setBristolType={this.setBristolType}/>
-        <Input labelText={'Duration'} stateField={'duration'}
-               onTextFieldChange={this.onTextFieldChange}/>
-        <Input labelText={'Comments'} stateField={'comments'}
-               onTextFieldChange={this.onTextFieldChange}/>
-        <FormLabel labelStyle={{color: 'white', fontSize: 16}}
-                   fontFamily={POPPINS}>Date</FormLabel>
-        <DatePicker showIcon={false} style={{width: 'auto'}}
-                    date={this.state.date}
-                    mode="date" format="MM-DD-YYYY" confirmBtnText="Confirm"
-                    cancelBtnText="Cancel"
-                    customStyles={{
-                      placeholderText: {color: 'white', fontSize: 16},
-                      dateText: {color: 'white', fontSize: 16},
-                      dateInput: {borderColor: 'transparent'},
-                    }}
-                    onDateChange={(date) => {this.setState({date: date})}}
-        />
-        <Button
-          title='ADD'
-          onPress={() => this.handleSubmit()}
-          textStyle={{color: OFF_WHITE, fontWeight: '700'}}
-          buttonStyle={style.button}
-          containerViewStyle={{flex: 1, alignItems: 'center'}}
-        />
-      </View>
+        <View style={{backgroundColor: BLUE, height: '100%', paddingTop: StatusBar.currentHeight}}>
+          <BristolTypeSelection
+            selectedBristolType={this.state.bristolType}
+            setBristolType={this.setBristolType}/>
+          <Input labelText={'Duration'} stateField={'duration'}
+                 onTextFieldChange={this.onTextFieldChange}/>
+          <Input labelText={'Comments'} stateField={'comments'}
+                 onTextFieldChange={this.onTextFieldChange}/>
+          <FormLabel labelStyle={{color: 'white', fontSize: 16}}
+                     fontFamily={POPPINS}>Date</FormLabel>
+          <DatePicker showIcon={false} style={{width: 'auto'}}
+                      date={this.state.date}
+                      mode="date" format="MM-DD-YYYY" confirmBtnText="Confirm"
+                      cancelBtnText="Cancel"
+                      customStyles={{
+                        placeholderText: {color: 'white', fontSize: 16},
+                        dateText: {color: 'white', fontSize: 16},
+                        dateInput: {borderColor: 'transparent'},
+                      }}
+                      onDateChange={(date) => {
+                        this.setState({date: date})
+                      }}
+          />
+          <Button
+            title='ADD'
+            onPress={() => this.handleSubmit()}
+            textStyle={{color: OFF_WHITE, fontWeight: '700'}}
+            buttonStyle={style.button}
+            containerViewStyle={{flex: 1, alignItems: 'center'}}
+          />
+          <Button
+            title='CANCEL'
+            onPress={() => this.props.navigation.goBack()}
+            textStyle={{color: OFF_WHITE, fontWeight: '700'}}
+            buttonStyle={style.button}
+            containerViewStyle={{flex: 1, alignItems: 'center'}}
+          />
+        </View>
     )
   }
 }
