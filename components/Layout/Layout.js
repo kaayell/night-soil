@@ -18,6 +18,6 @@ export const Layout = StackNavigator(
   },
   {
     mode: 'modal',
-    headerMode: 'none',
+    headerMode: 'none'
   }
 );

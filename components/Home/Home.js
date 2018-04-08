@@ -9,8 +9,11 @@ import Charts from '../Charts/Charts'
 
 export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
-    title: <Image source={require('../../assets/poop.png')}
-                  style={{width: 35, height: 35}}/>,
+    headerTitle: (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <Image source={require('../../assets/poop.png')}
+               style={{width: 35, height: 35}}/>
+      </View>),
     headerStyle: {
       backgroundColor: BLUE,
     },

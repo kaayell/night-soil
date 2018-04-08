@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {View} from 'react-native'
-import {Button, FormLabel} from 'react-native-elements'
+import {StatusBar, View, KeyboardAvoidingView, TouchableOpacity} from 'react-native'
+import {Button, FormLabel, Icon} from 'react-native-elements'
 import {POPPINS} from '../StyleGuide/fonts'
 import style from '../StyleGuide/styles'
 import {BLUE, OFF_WHITE} from '../StyleGuide/colors'
@@ -9,10 +9,10 @@ import Firebase from '../Firebase/Firebase'
 import moment from 'moment'
 import {BristolTypeSelection} from './BristolTypeSelection'
 import {Input} from './Input'
-import {StatusBar} from "react-native";
-import {SafeAreaView} from "react-navigation";
+import {Platform} from "react-native";
 
 export default class Create extends Component {
+
   constructor(props) {
     super(props)
 
@@ -44,8 +44,19 @@ export default class Create extends Component {
   }
 
   render() {
+    const paddingTop = Platform.OS === "ios" ? (parseInt(Platform.Version, 10) > 10 ? 35 : 20) : StatusBar.currentHeight + 10;
     return (
-        <View style={{backgroundColor: BLUE, height: '100%', paddingTop: StatusBar.currentHeight}}>
+      <View style={{flex: 1, backgroundColor: BLUE, height: "100%", paddingTop}}>
+        <TouchableOpacity style={{
+          flexDirection: "row",
+          height: "5%",
+          justifyContent: 'flex-end',
+          paddingRight: 15
+        }}
+              onPress={() => this.props.navigation.goBack()}>
+          <Icon name={"close"} color={OFF_WHITE}/>
+        </TouchableOpacity>
+        <View style={{backgroundColor: BLUE, height: '90%'}}>
           <BristolTypeSelection
             selectedBristolType={this.state.bristolType}
             setBristolType={this.setBristolType}/>
@@ -75,14 +86,8 @@ export default class Create extends Component {
             buttonStyle={style.button}
             containerViewStyle={{flex: 1, alignItems: 'center'}}
           />
-          <Button
-            title='CANCEL'
-            onPress={() => this.props.navigation.goBack()}
-            textStyle={{color: OFF_WHITE, fontWeight: '700'}}
-            buttonStyle={style.button}
-            containerViewStyle={{flex: 1, alignItems: 'center'}}
-          />
         </View>
+      </View>
     )
   }
 }
