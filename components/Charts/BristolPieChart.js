@@ -14,7 +14,7 @@ const BRISTOL_COLORS = {
 }
 
 export const BristolPieChart = (props) => {
-  let grouped = _.groupBy(props.poopData, 'bristolType')
+  let grouped = _.groupBy(props.poopData, 'poopRating')
   let pieData = _.map(grouped, (groupValue, groupKey) => {
     return {
       value: groupValue.length,

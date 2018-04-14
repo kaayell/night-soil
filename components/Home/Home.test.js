@@ -9,13 +9,4 @@ describe('Home', () => {
     expect(component.find('ActionButton').length).toEqual(1)
   })
 
-  it('should navigate to create on press of action button', () => {
-    let mockNavigation = {
-      navigate: jest.fn()
-    }
-    let component = shallow(<Home navigation={mockNavigation}/>)
-    component.find('ActionButton').simulate('press')
-    expect(mockNavigation.navigate).toHaveBeenCalledWith('Create')
-  })
-
 })

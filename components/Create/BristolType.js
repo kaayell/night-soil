@@ -29,6 +29,6 @@ export const BristolType = (props) => {
       }
       onPress={() => {
         console.log(props.type)
-        props.setBristolType(props.type)
+        props.setPoopRating(props.type)
       }}/>)
 }

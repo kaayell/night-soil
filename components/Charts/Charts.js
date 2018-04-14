@@ -1,17 +1,9 @@
 import React, { Component } from 'react'
 import Firebase from '../Firebase/Firebase'
 import { View } from 'react-native'
-import { Defs, LinearGradient, Stop } from 'react-native-svg'
 import BristolPieChart from './BristolPieChart'
-
-const Gradient = () => (
-  <Defs key={'gradient'}>
-    <LinearGradient id={'gradient'} x1={'0'} y={'0%'} x2={'100%'} y2={'0%'}>
-      <Stop offset={'0%'} stopColor={'rgb(134, 65, 244)'}/>
-      <Stop offset={'100%'} stopColor={'rgb(66, 194, 244)'}/>
-    </LinearGradient>
-  </Defs>
-)
+import BristolLineChart from './BristolLineChart'
+import _ from 'lodash'
 
 export class Charts extends Component {
   constructor (props) {
@@ -36,22 +28,12 @@ export class Charts extends Component {
   }
 
   render () {
+    if (_.isEmpty(this.state.poopData)) return null
+
     return (
       <View style={{flex: 1}}>
         <BristolPieChart poopData={this.state.poopData}/>
-        {/*<LineChart*/}
-          {/*style={{height: 200}}*/}
-          {/*data={data}*/}
-          {/*xAccessor={}*/}
-          {/*yAccessor={}*/}
-          {/*contentInset={{top: 20, bottom: 20}}*/}
-          {/*svg={{*/}
-            {/*strokeWidth: 2,*/}
-            {/*stroke: 'url(#gradient)',*/}
-          {/*}}*/}
-          {/*extras={[Gradient]}*/}
-          {/*showGrid={false}*/}
-        {/*/>*/}
+        <BristolLineChart poopData={this.state.poopData}/>
       </View>
     )
   }

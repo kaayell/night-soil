@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
-import {Image, Text, View} from 'react-native'
+import React, { Component } from 'react'
+import { Image, Text, View } from 'react-native'
 import ActionButton from 'react-native-action-button'
-import {BLUE, OFF_WHITE} from '../StyleGuide/colors'
-import {POPPINS_MEDIUM} from '../StyleGuide/fonts'
-import {Icon} from 'react-native-elements'
+import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
+import { POPPINS_MEDIUM } from '../StyleGuide/fonts'
+import { Icon } from 'react-native-elements'
 import style from '../StyleGuide/styles'
 import Charts from '../Charts/Charts'
 
@@ -32,7 +32,7 @@ export class Home extends Component {
 
   })
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -41,7 +41,7 @@ export class Home extends Component {
     }
   }
 
-  render() {
+  render () {
     return (
       <View style={{flex: 1}}>
         <View style={{flex: 1}}>
@@ -52,13 +52,15 @@ export class Home extends Component {
           flex: 1,
           backgroundColor: 'transparent',
         }}>
-          <ActionButton position="right" buttonColor="rgb(154, 192, 205)">
-            <ActionButton.Item buttonColor={BLUE} title="Record Poop"
-                               onPress={() => this.props.navigation.navigate('Create')}>
+          <ActionButton position="center" buttonColor="rgb(154, 192, 205)">
+            <ActionButton.Item
+              buttonColor={BLUE} title="Record Poop"
+              onPress={() => this.props.navigation.navigate('Create')}>
               <Icon name="add"/>
             </ActionButton.Item>
-            <ActionButton.Item buttonColor={BLUE} title="Time Poop"
-                               onPress={() => this.props.navigation.navigate('Timer')}>
+            <ActionButton.Item
+              buttonColor={BLUE} title="Time Poop"
+              onPress={() => this.props.navigation.navigate('Timer')}>
               <Icon name="hourglass-empty"/>
             </ActionButton.Item>
           </ActionButton>

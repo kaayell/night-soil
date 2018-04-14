@@ -16,8 +16,12 @@ export default class Firebase {
   }
 
   static savePoop(poopDetails) {
-    let uid = firebase.auth().currentUser.uid
-    firebase.database().ref(`/poop/${uid}`).push().set(poopDetails)
+    let currentUser = firebase.auth().currentUser
+    const poopDetailsWithSalary = {
+      ...poopDetails,
+      salary: currentUser.salary
+    }
+    firebase.database().ref(`/poop/${currentUser.uid}`).push().set(poopDetailsWithSalary)
   }
 
   static getPoopsRef(){

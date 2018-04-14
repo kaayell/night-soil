@@ -1,6 +1,6 @@
 import React from 'react'
-import { shallow } from 'enzyme'
-import { FormInput, FormLabel } from 'react-native-elements'
+import {shallow} from 'enzyme'
+import {FormInput, FormLabel} from 'react-native-elements'
 import Human from './Human'
 import Firebase from '../Firebase/Firebase'
 
@@ -9,6 +9,18 @@ describe('Human', () => {
 
   beforeEach(() => {
     Firebase.getAuth = jest.fn().mockReturnValue({user: {hi: "hi"}})
+    Firebase.getUserDetailsRef = () => {
+      return {
+        once: (val) => {
+          return {
+            then: () => {
+
+            }
+          }
+        }
+      }
+    }
+
     wrapper = shallow(<Human/>)
   })
 
