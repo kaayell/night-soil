@@ -14,7 +14,7 @@ const Gradient = () => (
   </Defs>
 )
 
-export const BristolLineChart = ({poopData}) => {
+export const PoopLineChart = ({poopData}) => {
 
   let dateToCount = _.flatMap(_.groupBy(poopData, 'date'), (groupedData) => {
     return {
@@ -59,4 +59,4 @@ export const BristolLineChart = ({poopData}) => {
   </View>
 }
 
-export default BristolLineChart
+export default PoopLineChart

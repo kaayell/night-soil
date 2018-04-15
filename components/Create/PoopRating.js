@@ -1,10 +1,11 @@
 import React from 'react'
-import { FormLabel, Rating } from 'react-native-elements'
+import { FormLabel } from 'react-native-elements'
 import { View } from 'react-native'
 import { POPPINS } from '../StyleGuide/fonts'
+import { Rating } from 'react-native-ratings'
 
 export const PoopRating = ({selected, onRatingChange}) => {
-  const POOP = require('../../assets/poop2.png')
+  const POOP = require('../../assets/poop-rating.png')
 
   const labelText = [
     'Kill Me',

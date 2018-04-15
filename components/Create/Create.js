@@ -9,8 +9,9 @@ import Firebase from '../Firebase/Firebase'
 import moment from 'moment'
 import { Input } from './Input'
 import PoopRating from './PoopRating'
+import Duration from './Duration'
 
-let textStyle = {color: OFF_WHITE, fontWeight: '700', fontFamily: POPPINS_MEDIUM,};
+let textStyle = {color: OFF_WHITE, fontWeight: '700', fontFamily: POPPINS_MEDIUM,}
 let buttonStyle = {
   backgroundColor: 'transparent',
   width: 300,
@@ -19,11 +20,11 @@ let buttonStyle = {
   borderWidth: .5,
   borderRadius: 5,
   margin: 10,
-};
+}
 
 export default class Create extends Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -39,50 +40,54 @@ export default class Create extends Component {
     }
   }
 
-  handleSubmit() {
-    Firebase.savePoop(this.state)
+  handleSubmit () {
+    Firebase.getUserDetailsRef().once('value').then((snapshot) => {
+      let salary = snapshot.val() && snapshot.val().salary
+      Firebase.savePoop({
+        ...this.state,
+        salary
+      })
+    })
     this.props.navigation.goBack()
   }
 
-  setPoopRating(poopRating) {
+  setPoopRating (poopRating) {
     this.setState({poopRating})
   }
 
-  onTextFieldChange(field, value) {
+  onTextFieldChange (field, value) {
     const obj = {}
     obj[field] = value === '' ? null : value
     this.setState(obj)
   }
 
-  onWorkStatusChange() {
+  onWorkStatusChange () {
     this.setState({atWork: !this.state.atWork})
   }
 
-  render() {
-    const paddingTop = Platform.OS === "ios" ? (parseInt(Platform.Version, 10) > 10 ? 35 : 20) : StatusBar.currentHeight + 10;
+  render () {
+    const paddingTop = Platform.OS === 'ios' ? (parseInt(Platform.Version, 10) > 10 ? 35 : 20) : StatusBar.currentHeight + 10
 
     const atWorkBackgroundColor = this.state.atWork ? OFF_WHITE : 'transparent'
     const atWorkFontColor = this.state.atWork ? BLUE : OFF_WHITE
 
-
     return (
-      <View style={{flex: 1, backgroundColor: BLUE, height: "100%", paddingTop}}>
+      <View style={{flex: 1, backgroundColor: BLUE, height: '100%', paddingTop}}>
         <TouchableOpacity style={{
-          flexDirection: "row",
-          height: "5%",
+          flexDirection: 'row',
+          height: '5%',
           justifyContent: 'flex-end',
           paddingRight: 15
         }}
                           onPress={() => this.props.navigation.goBack()}>
-          <Icon name={"close"} color={OFF_WHITE}/>
+          <Icon name={'close'} color={OFF_WHITE}/>
         </TouchableOpacity>
         <View style={{backgroundColor: BLUE, height: '90%'}}>
           <FormLabel labelStyle={{color: 'white', fontSize: 16}}
                      fontFamily={POPPINS}>Rating</FormLabel>
           <PoopRating selected={this.state.poopRating}
                       onRatingChange={this.setPoopRating}/>
-          <Input labelText={'Duration'} stateField={'duration'}
-                 onTextFieldChange={this.onTextFieldChange}/>
+          <Duration onTextFieldChange={this.onTextFieldChange}/>
           <Input labelText={'Comments'} stateField={'comments'}
                  onTextFieldChange={this.onTextFieldChange}/>
           <FormLabel labelStyle={{color: 'white', fontSize: 16}}

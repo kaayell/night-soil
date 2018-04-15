@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Firebase from '../Firebase/Firebase'
 import { View } from 'react-native'
-import BristolPieChart from './BristolPieChart'
-import BristolLineChart from './BristolLineChart'
 import _ from 'lodash'
+import PoopLineChart from './PoopLineChart'
+import RatingPieChart from './RatingPieChart'
 
 export class Charts extends Component {
   constructor (props) {
@@ -32,8 +32,8 @@ export class Charts extends Component {
 
     return (
       <View style={{flex: 1}}>
-        <BristolPieChart poopData={this.state.poopData}/>
-        <BristolLineChart poopData={this.state.poopData}/>
+        <RatingPieChart poopData={this.state.poopData}/>
+        {/*<PoopLineChart poopData={this.state.poopData}/>*/}
       </View>
     )
   }

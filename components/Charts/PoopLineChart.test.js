@@ -1,8 +1,8 @@
-import BristolLineChart from "./BristolLineChart";
+import BristolLineChart from "./PoopLineChart";
 import React from "react";
 import {shallow} from "enzyme";
 
-describe('BristolLineChart', () => {
+describe('PoopLineChart', () => {
   let component;
   const poopData = [
     {date: "04-08-2018"},
