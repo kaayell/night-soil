@@ -54,12 +54,12 @@ export class Home extends Component {
         }}>
           <ActionButton position="center" buttonColor="rgb(154, 192, 205)">
             <ActionButton.Item
-              buttonColor={BLUE} title="Record Poop"
+              buttonColor={BLUE}
               onPress={() => this.props.navigation.navigate('Create')}>
               <Icon name="add"/>
             </ActionButton.Item>
             <ActionButton.Item
-              buttonColor={BLUE} title="Time Poop"
+              buttonColor={BLUE}
               onPress={() => this.props.navigation.navigate('Timer')}>
               <Icon name="hourglass-empty"/>
             </ActionButton.Item>

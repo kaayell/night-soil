@@ -3,7 +3,7 @@ import * as firebase from 'firebase'
 
 describe("Firebase", () => {
 
-  it('should save poop data with salary', () => {
+  it('should save poop data', () => {
     const mockSet = jest.fn()
     firebase.auth = jest.fn().mockReturnValue(
       {
@@ -27,7 +27,7 @@ describe("Firebase", () => {
     Firebase.savePoop({hi: "yo"})
 
     expect(firebase.auth).toHaveBeenCalled()
-    expect(mockSet).toHaveBeenCalledWith({hi: "yo", salary: 20.0})
+    expect(mockSet).toHaveBeenCalledWith({hi: "yo"})
   });
 
 });

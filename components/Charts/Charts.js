@@ -4,6 +4,7 @@ import { View } from 'react-native'
 import _ from 'lodash'
 import PoopLineChart from './PoopLineChart'
 import RatingPieChart from './RatingPieChart'
+import Summary from './Summary'
 
 export class Charts extends Component {
   constructor (props) {
@@ -31,9 +32,10 @@ export class Charts extends Component {
     if (_.isEmpty(this.state.poopData)) return null
 
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, alignItems: 'center', paddingTop: 20}}>
+        <Summary poopData={this.state.poopData}/>
         <RatingPieChart poopData={this.state.poopData}/>
-        {/*<PoopLineChart poopData={this.state.poopData}/>*/}
+        <PoopLineChart poopData={this.state.poopData}/>
       </View>
     )
   }

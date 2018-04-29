@@ -34,7 +34,7 @@ export class Human extends Component {
   }
 
   updateSalary (text) {
-    if (!text) return;
+    if (!text) return
     Firebase.getUserDetailsRef().set({
       salary: text.valueOf()
     })
@@ -46,27 +46,15 @@ export class Human extends Component {
     salary = salary || 0
 
     return (
-      <View style={{flex: 1, backgroundColor: BLUE, height: '100%'}}>
-        <FormLabel labelStyle={style.textStyle}
-                   fontFamily={POPPINS}>Name</FormLabel>
-        <FormInput editable={false} value={`${user.displayName}`}
-                   labelStyle={style.textStyle}
-                   inputStyle={style.textStyle}
-        />
+      <View style={{flex: 1, alignItems: 'center', backgroundColor: BLUE, height: '100%'}}>
+        <FormLabel labelStyle={{color: OFF_WHITE, fontSize: 20, fontFamily: POPPINS}} fontFamily={POPPINS}>{user.displayName}</FormLabel>
+        <FormLabel labelStyle={{color: OFF_WHITE, fontSize: 16, fontFamily: POPPINS, paddingBottom: 30}} fontFamily={POPPINS}>{user.email}</FormLabel>
 
         <FormLabel labelStyle={style.textStyle}
-                   inputStyle={style.textStyle}
-                   fontFamily={POPPINS}>Email
-        </FormLabel>
-        <FormInput editable={false} value={user.email}
-                   labelStyle={style.textStyle}
-                   inputStyle={style.textStyle}/>
-
-        <FormLabel labelStyle={style.textStyle}
-                   fontFamily={POPPINS}>Hourly Rate</FormLabel>
+                   fontFamily={POPPINS}>HOURLY RATE</FormLabel>
         <FormInput defaultValue={`${salary}`}
                    labelStyle={style.textStyle}
-                   inputStyle={style.textStyle}
+                   inputStyle={{width: '50%', textAlign: 'center', color: OFF_WHITE, fontSize: 40}}
                    keyboardType={'numeric'}
                    onChangeText={(text) => this.updateSalary(text)}/>
       </View>

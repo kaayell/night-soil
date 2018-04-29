@@ -1,7 +1,9 @@
 import React from 'react'
-import {PieChart} from 'react-native-svg-charts'
+import { PieChart } from 'react-native-svg-charts'
+import { Text } from 'react-native-svg'
+import { View } from 'react-native'
+import style from '../StyleGuide/styles'
 import _ from 'lodash'
-import {Circle, G, Line, Text} from 'react-native-svg'
 
 const RATING_COLORS = {
   '1': '#d7ccc8',
@@ -14,7 +16,6 @@ const RATING_COLORS = {
 export const RatingPieChart = (props) => {
   let grouped = _.groupBy(props.poopData, 'poopRating')
   let pieData = _.map(grouped, (groupValue, groupKey) => {
-    console.log(RATING_COLORS[groupKey])
     return {
       value: groupValue.length,
       svg: {
@@ -23,15 +24,41 @@ export const RatingPieChart = (props) => {
       },
       key: `${Math.random()}`,
     }
-  });
+  })
 
-  return <PieChart
-    style={{height: 200, paddingTop: 20}}
-    data={pieData}
-    innerRadius={5}
-    outerRadius={55}
-    labelRadius={80}
-  />
+  const Labels = ({slices, height, width}) => {
+    return slices.map((slice, index) => {
+      const {labelCentroid, pieCentroid, data} = slice
+      return (
+        <Text
+          key={index}
+          x={pieCentroid[0]}
+          y={pieCentroid[1]}
+          fill={'white'}
+          textAnchor={'middle'}
+          alignmentBaseline={'middle'}
+          fontSize={24}
+          stroke={'black'}
+          strokeWidth={0.2}
+        >
+          {data.amount}
+        </Text>
+      )
+    })
+  }
+
+  return <View
+    style={style.cardStyle}>
+    <PieChart
+      style={{height: 150}}
+      data={pieData}
+      spacing={0}
+      innerRadius={10}
+      outerRadius={'95%'}
+    >
+      <Labels/>
+    </PieChart>
+  </View>
 }
 
 export default RatingPieChart

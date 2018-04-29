@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { OFF_WHITE } from './colors'
+import { BLUE, OFF_WHITE } from './colors'
 
 export default style = StyleSheet.create({
   icon: {
@@ -14,4 +14,15 @@ export default style = StyleSheet.create({
     borderRadius: 5,
   },
   textStyle: {color: OFF_WHITE, fontSize: 16},
+  cardStyle: {
+    marginTop: 20,
+    justifyContent: 'center',
+    width: 300,
+    height: 200,
+    backgroundColor: 'white',
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    shadowColor: BLUE,
+    shadowOffset: { height: 0, width: 0 },
+  }
 })

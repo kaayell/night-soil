@@ -1,8 +1,8 @@
 import React from 'react'
-import { FormLabel } from 'react-native-elements'
+import { FormLabel, Rating } from 'react-native-elements'
 import { View } from 'react-native'
 import { POPPINS } from '../StyleGuide/fonts'
-import { Rating } from 'react-native-ratings'
+import { Stars } from 'react-native-stars-rating'
 
 export const PoopRating = ({selected, onRatingChange}) => {
   const POOP = require('../../assets/poop-rating.png')
@@ -20,14 +20,13 @@ export const PoopRating = ({selected, onRatingChange}) => {
     >
       {labelText[selected - 1]}
     </FormLabel>
-    <Rating
-      type={'custom'}
-      ratingImage={POOP}
-      ratingColor={'rgb(101,67,33)'}
-      ratingBackgroundColor={'rgba(101,67,33, .5)'}
-      ratingCount={5}
-      imageSize={50}
-      onFinishRating={onRatingChange}
+    <Stars
+      isActive={true}
+      rateMax={5}
+      isHalfStarEnabled={false}
+      onStarPress={onRatingChange}
+      rate={3}
+      size={60}
       style={{flex: 1, alignItems: 'center'}}
     />
   </View>
