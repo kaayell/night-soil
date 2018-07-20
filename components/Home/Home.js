@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { Image, Text, View } from 'react-native'
+import React, {Component} from 'react'
+import {Image, View} from 'react-native'
 import ActionButton from 'react-native-action-button'
-import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
-import { POPPINS_MEDIUM } from '../StyleGuide/fonts'
-import { Icon } from 'react-native-elements'
+import {BLUE, OFF_WHITE} from '../StyleGuide/colors'
+import {POPPINS_MEDIUM} from '../StyleGuide/fonts'
+import {Icon} from 'react-native-elements'
 import style from '../StyleGuide/styles'
 import Charts from '../Charts/Charts'
 
@@ -20,7 +20,8 @@ export class Home extends Component {
     headerTitleStyle: {
       color: OFF_WHITE,
       fontFamily: POPPINS_MEDIUM,
-      alignSelf: 'center'
+      alignSelf: 'center',
+      textAlign: 'center'
     },
     headerRight:
       <Icon name={'perm-identity'} iconStyle={style.icon} color={'white'}
@@ -32,39 +33,32 @@ export class Home extends Component {
 
   })
 
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      minutesToDate: 0,
-      moneyToDate: 0,
-    }
+  renderActionButton() {
+    return (
+      <ActionButton position="right" buttonColor="rgb(154, 192, 205)">
+        <ActionButton.Item
+          buttonColor={BLUE}
+          onPress={() => this.props.navigation.navigate('Create')}>
+          <Icon name="add"/>
+        </ActionButton.Item>
+        <ActionButton.Item
+          buttonColor={BLUE}
+          onPress={() => this.props.navigation.navigate('Timer')}>
+          <Icon name="hourglass-empty"/>
+        </ActionButton.Item>
+      </ActionButton>
+    );
   }
 
-  render () {
+  renderCharts() {
+    return <Charts/>;
+  }
+
+  render() {
     return (
       <View style={{flex: 1}}>
-        <View style={{flex: 1}}>
-          <Charts/>
-        </View>
-        <View style={{
-          height: 100,
-          flex: 1,
-          backgroundColor: 'transparent',
-        }}>
-          <ActionButton position="center" buttonColor="rgb(154, 192, 205)">
-            <ActionButton.Item
-              buttonColor={BLUE}
-              onPress={() => this.props.navigation.navigate('Create')}>
-              <Icon name="add"/>
-            </ActionButton.Item>
-            <ActionButton.Item
-              buttonColor={BLUE}
-              onPress={() => this.props.navigation.navigate('Timer')}>
-              <Icon name="hourglass-empty"/>
-            </ActionButton.Item>
-          </ActionButton>
-        </View>
+        <Charts/>
+        {this.renderActionButton()}
       </View>)
   }
 }

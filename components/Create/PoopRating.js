@@ -1,12 +1,10 @@
 import React from 'react'
-import { FormLabel, Rating } from 'react-native-elements'
-import { View } from 'react-native'
-import { POPPINS } from '../StyleGuide/fonts'
-import { Stars } from 'react-native-stars-rating'
+import {FormLabel} from 'react-native-elements'
+import {View} from 'react-native'
+import {POPPINS} from '../StyleGuide/fonts'
+import StarRating from "react-native-star-rating";
 
 export const PoopRating = ({selected, onRatingChange}) => {
-  const POOP = require('../../assets/poop-rating.png')
-
   const labelText = [
     'Kill Me',
     'Shouldn\'t have had spicy wings',
@@ -20,17 +18,15 @@ export const PoopRating = ({selected, onRatingChange}) => {
     >
       {labelText[selected - 1]}
     </FormLabel>
-    <Stars
-      isActive={true}
-      rateMax={5}
-      isHalfStarEnabled={false}
-      onStarPress={onRatingChange}
-      rate={3}
-      size={60}
-      style={{flex: 1, alignItems: 'center'}}
+    <StarRating
+      maxStars={5}
+      disabled={false}
+      rating={selected}
+      fullStarColor={"FFCC00"}
+      selectedStar={onRatingChange}
+      containerStyle={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
     />
   </View>
-
 }
 
 export default PoopRating
