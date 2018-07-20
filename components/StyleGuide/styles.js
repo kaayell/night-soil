@@ -17,7 +17,7 @@ export default style = StyleSheet.create({
   cardStyle: {
     marginTop: 20,
     justifyContent: 'center',
-    width: 300,
+    width: "95%",
     height: 200,
     backgroundColor: 'white',
     shadowOpacity: 0.5,
