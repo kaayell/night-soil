@@ -50,10 +50,6 @@ export class Home extends Component {
     );
   }
 
-  renderCharts() {
-    return <Charts/>;
-  }
-
   render() {
     return (
       <View style={{flex: 1}}>

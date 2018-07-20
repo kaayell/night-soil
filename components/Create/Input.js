@@ -13,8 +13,7 @@ export const Input = (props) => {
         backgroundColor: 'transparent',
         borderColor: OFF_WHITE,
         borderWidth: 1,
-        borderRadius: 10,
-        margin: 10
+        borderRadius: 10
       }}
       labelStyle={{
         color: OFF_WHITE,

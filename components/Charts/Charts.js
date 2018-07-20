@@ -32,7 +32,7 @@ export class Charts extends Component {
     if (_.isEmpty(this.state.poopData)) return null
 
     return (
-      <ScrollView style={{flex: 1, paddingTop: 20}}
+      <ScrollView style={{flex: 1, paddingTop: 20, marginBottom: 20}}
                   contentContainerStyle={{alignItems: 'center'}}>
         <Summary poopData={this.state.poopData}/>
         <RatingPieChart poopData={this.state.poopData}/>

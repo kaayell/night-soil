@@ -13,6 +13,8 @@ let textStyle = {color: OFF_WHITE, fontWeight: '700', fontSize: 20, fontFamily: 
 let buttonStyle = {
   backgroundColor: 'transparent',
   width: "100%",
+  justifyContent: 'center',
+  alignItems: 'center',
   height: 45,
   borderColor: OFF_WHITE,
   borderWidth: 1,
@@ -64,61 +66,86 @@ export default class Create extends Component {
 
   render() {
     const paddingTop = Platform.OS === 'ios' ? (parseInt(Platform.Version, 10) > 10 ? 35 : 20) : StatusBar.currentHeight + 10
-
-    const atWorkBackgroundColor = this.state.atWork ? OFF_WHITE : 'transparent'
-    const atWorkFontColor = this.state.atWork ? BLUE : OFF_WHITE
-
     return (
-      <View style={{flex: 1, backgroundColor: BLUE, height: '100%', paddingTop}}>
-        <TouchableOpacity style={{
-          flexDirection: 'row',
-          height: '5%',
-          justifyContent: 'flex-end',
-          paddingRight: 15
-        }}
+      <View style={{flex: 1, backgroundColor: BLUE, paddingTop, height: "100%"}}>
+        <TouchableOpacity style={{flexDirection: 'row', height: '5%', justifyContent: 'flex-end', paddingRight: 15}}
                           onPress={() => this.props.navigation.goBack()}>
           <Icon name={'close'} color={OFF_WHITE}/>
         </TouchableOpacity>
-        <View style={{backgroundColor: BLUE, height: '90%'}}>
-          <PoopRating selected={this.state.poopRating}
-                      onRatingChange={this.setPoopRating}/>
-          <Input labelText={'Duration In Minutes'} stateField={'durationMinutes'}
-                 onTextFieldChange={this.onTextFieldChange} keyboardType={"numeric"}/>
-          <Input labelText={'Comments'} stateField={'comments'}
-                 onTextFieldChange={this.onTextFieldChange} keyboardType={"default"}/>
-          <DatePicker showIcon={false}
-                      style={{
-                        width: '93%',
-                        borderColor: OFF_WHITE,
-                        marginLeft: 15,
-                        paddingTop: 10
-                      }}
-                      date={this.state.date}
-                      mode="date" format="MM-DD-YYYY" confirmBtnText="Confirm"
-                      cancelBtnText="Cancel"
-                      customStyles={{
-                        placeholderText: {color: 'white', fontSize: 20},
-                        dateText: {color: 'white', fontSize: 20},
-                        dateInput: {borderColor: OFF_WHITE, borderWidth: 1, borderRadius: 10},
-                      }}
-                      onDateChange={(date) => {
-                        this.setState({date: date})
-                      }}
-          />
-          <Button title={'I\'m at work'} onPress={() => this.onWorkStatusChange()}
-                  textStyle={{...textStyle, color: atWorkFontColor}}
-                  buttonStyle={{...buttonStyle, backgroundColor: atWorkBackgroundColor}}
-                  containerViewStyle={{flex: 1, alignItems: 'center', paddingTop: 20}}
-          />
+
+        <View style={{flex: 2, flexDirection: 'column', justifyContent: 'space-evenly'}}>
+          {this.renderRating()}
+          {this.renderDuration()}
+          {this.renderComments()}
+          {this.renderDate()}
+          {this.renderWorkToggle()}
+        </View>
+        <View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 30}}>
           <Button
             title='ADD'
             onPress={() => this.handleSubmit()}
             textStyle={{color: OFF_WHITE, fontWeight: '700', fontSize: 20}}
-            buttonStyle={buttonStyle}
-            containerViewStyle={{flex: 1, alignItems: 'center'}}
+            buttonStyle={{
+              backgroundColor: 'transparent',
+              borderColor: OFF_WHITE,
+              borderWidth: 1,
+              borderRadius: 10,
+            }}
           />
         </View>
       </View>
     )
+  }
+
+  renderWorkToggle() {
+    const atWorkBackgroundColor = this.state.atWork ? OFF_WHITE : 'transparent'
+    const atWorkFontColor = this.state.atWork ? BLUE : OFF_WHITE
+
+    return <Button title={"I'm at work"}
+                   onPress={() => this.onWorkStatusChange()}
+                   textStyle={{...textStyle, color: atWorkFontColor, textAlign: 'center'}}
+                   buttonStyle={{
+                     borderColor: OFF_WHITE,
+                     borderWidth: 1,
+                     borderRadius: 10,
+                     backgroundColor: atWorkBackgroundColor
+                   }}
+    />;
+  }
+
+  renderDate() {
+    return <DatePicker showIcon={false}
+                       style={{
+                         width: "90%",
+                         borderColor: OFF_WHITE,
+                         marginLeft: 15
+                       }}
+                       date={this.state.date}
+                       mode="date" format="MM-DD-YYYY" confirmBtnText="Confirm"
+                       cancelBtnText="Cancel"
+                       customStyles={{
+                         placeholderText: {color: 'white', fontSize: 20},
+                         dateText: {color: 'white', fontSize: 20},
+                         dateInput: {borderColor: OFF_WHITE, borderWidth: 1, borderRadius: 10},
+                       }}
+                       onDateChange={(date) => {
+                         this.setState({date: date})
+                       }}
+    />;
+  }
+
+  renderComments() {
+    return <Input labelText={'Comments'} stateField={'comments'}
+                  onTextFieldChange={this.onTextFieldChange} keyboardType={"default"}/>;
+  }
+
+  renderDuration() {
+    return <Input labelText={'Duration In Minutes'} stateField={'durationMinutes'}
+                  onTextFieldChange={this.onTextFieldChange} keyboardType={"numeric"}/>;
+  }
+
+  renderRating() {
+    return <PoopRating selected={this.state.poopRating}
+                       onRatingChange={this.setPoopRating}/>;
   }
 }
