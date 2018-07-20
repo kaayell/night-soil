@@ -1,13 +1,16 @@
 {
   "expo": {
     "name": "Night Soil",
-    "icon": "./assets/poop.png",
+    "icon": "./assets/launcher_icon.png",
     "sdkVersion": "26.0.0",
     "ios": {
       "bundleIdentifier": "com.kaayell.nightsoil"
     },
     "android": {
       "package": "com.kaayell.nightsoil"
+    },
+    "splash": {
+      "image": "./assets/splash.png"
     }
   }
 }

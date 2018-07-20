@@ -5,6 +5,7 @@ import _ from 'lodash'
 import PoopLineChart from './PoopLineChart'
 import RatingPieChart from './RatingPieChart'
 import Summary from './Summary'
+import {PoopBarGraph} from "./PoopBarGraph";
 
 export class Charts extends Component {
   constructor(props) {
@@ -37,6 +38,7 @@ export class Charts extends Component {
         <Summary poopData={this.state.poopData}/>
         <RatingPieChart poopData={this.state.poopData}/>
         <PoopLineChart poopData={this.state.poopData}/>
+        {/*<PoopBarGraph poopData={this.state.poopData}/>*/}
       </ScrollView>
     )
   }

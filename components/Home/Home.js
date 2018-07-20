@@ -33,28 +33,12 @@ export class Home extends Component {
 
   })
 
-  renderActionButton() {
-    return (
-      <ActionButton position="right" buttonColor="rgb(154, 192, 205)">
-        <ActionButton.Item
-          buttonColor={BLUE}
-          onPress={() => this.props.navigation.navigate('Create')}>
-          <Icon name="add"/>
-        </ActionButton.Item>
-        <ActionButton.Item
-          buttonColor={BLUE}
-          onPress={() => this.props.navigation.navigate('Timer')}>
-          <Icon name="hourglass-empty"/>
-        </ActionButton.Item>
-      </ActionButton>
-    );
-  }
-
   render() {
     return (
       <View style={{flex: 1}}>
         <Charts/>
-        {this.renderActionButton()}
+        <ActionButton position="right" buttonColor="rgb(154, 192, 205)"
+                      onPress={() => this.props.navigation.navigate('Create')}/>
       </View>)
   }
 }
