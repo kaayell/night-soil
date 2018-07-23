@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Firebase from '../Firebase/Firebase'
-import {ScrollView, View} from 'react-native'
+import {ScrollView} from 'react-native'
 import _ from 'lodash'
 import PoopLineChart from './PoopLineChart'
 import RatingPieChart from './RatingPieChart'
@@ -33,12 +33,12 @@ export class Charts extends Component {
     if (_.isEmpty(this.state.poopData)) return null
 
     return (
-      <ScrollView style={{flex: 1, paddingTop: 20, marginBottom: 20}}
-                  contentContainerStyle={{alignItems: 'center'}}>
+      <ScrollView style={{flex: 1, paddingTop: 10, paddingBottom: 40}}
+                  contentContainerStyle={{alignItems: 'center', paddingBottom: 60}}>
         <Summary poopData={this.state.poopData}/>
-        <RatingPieChart poopData={this.state.poopData}/>
+        <RatingPieChart navigation={this.props.navigation} poopData={this.state.poopData}/>
         <PoopLineChart poopData={this.state.poopData}/>
-        {/*<PoopBarGraph poopData={this.state.poopData}/>*/}
+        <PoopBarGraph poopData={this.state.poopData}/>
       </ScrollView>
     )
   }

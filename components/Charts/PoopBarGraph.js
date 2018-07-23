@@ -1,7 +1,8 @@
-import moment from "moment/moment";
-import _ from "lodash";
-import {BarChart, Grid} from "react-native-svg-charts";
 import React from "react";
+import {BarChart, Grid} from "react-native-svg-charts";
+import _ from "lodash";
+import style from "../StyleGuide/styles";
+import {Text, View} from "react-native";
 
 export const PoopBarGraph = ({poopData}) => {
 
@@ -14,18 +15,18 @@ export const PoopBarGraph = ({poopData}) => {
 
   const fill = 'rgb(134, 65, 244)'
 
-  let countOfPoops = _.flatMap(dateToCount, (data) => {return data.count})
-  console.log(countOfPoops)
-  let dateOfPoops = _.flatMap(dateToCount, (data) => {return moment(data.date, 'MM-DD-YYYY')})
+  let countOfPoops = _.flatMap(dateToCount, (data) => {
+    return data.count
+  })
 
-  return <BarChart
-    style={{ height: 200 }}
-    data={ countOfPoops }
-    svg={{ fill }}
-    contentInset={{ top: 30, bottom: 30 }}
-  >
-    <Grid/>
-  </BarChart>
+  return <View style={style.cardStyle}>
+    <BarChart
+      style={{height: 200, width: "100%"}}
+      data={countOfPoops}
+      svg={{fill}}
+      contentInset={{top: 30, bottom: 30}}
+    />
+  </View>
 }
 
 export default PoopBarGraph

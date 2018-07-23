@@ -10,7 +10,7 @@ import Charts from '../Charts/Charts'
 export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
     headerTitle: (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{flex: 1, alignSelf: 'center', alignItems: 'center', justifyContent: 'center'}}>
         <Image source={require('../../assets/poop.png')}
                style={{width: 35, height: 35}}/>
       </View>),
@@ -36,7 +36,7 @@ export class Home extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Charts/>
+        <Charts navigation={this.props.navigation}/>
         <ActionButton position="right" buttonColor="rgb(154, 192, 205)"
                       onPress={() => this.props.navigation.navigate('Create')}/>
       </View>)

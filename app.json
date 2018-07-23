@@ -4,13 +4,18 @@
     "icon": "./assets/launcher_icon.png",
     "sdkVersion": "26.0.0",
     "ios": {
-      "bundleIdentifier": "com.kaayell.nightsoil"
+      "bundleIdentifier": "com.kaayell.nightsoil",
+      "buildNumber": 1
     },
     "android": {
-      "package": "com.kaayell.nightsoil"
+      "package": "com.kaayell.nightsoil",
+      "versionCode": 1
     },
     "splash": {
-      "image": "./assets/splash.png"
-    }
+      "image": "./assets/splash.png",
+      "backgroundColor": "#9AC0CD",
+      "resizeMode": "cover"
+    },
+    "primaryColor": "#9AC0CD"
   }
 }
