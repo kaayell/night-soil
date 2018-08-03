@@ -3,6 +3,7 @@ import {FormLabel} from 'react-native-elements'
 import {View} from 'react-native'
 import {POPPINS} from '../StyleGuide/fonts'
 import StarRating from "react-native-star-rating";
+import {OFF_WHITE} from "../StyleGuide/colors";
 
 export const PoopRating = ({selected, onRatingChange}) => {
   const labelText = [
@@ -13,7 +14,7 @@ export const PoopRating = ({selected, onRatingChange}) => {
     'Did I even poop?']
   return <View>
     <FormLabel
-      labelStyle={{color: 'white', fontSize: 20, textAlign: 'center', paddingBottom: 5}}
+      labelStyle={{color: OFF_WHITE, fontSize: 15, textAlign: 'center', paddingBottom: 5}}
       fontFamily={POPPINS}
     >
       {labelText[selected - 1]}

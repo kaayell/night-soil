@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Platform, StatusBar, TouchableOpacity, View} from 'react-native'
-import {Button, Icon} from 'react-native-elements'
-import {POPPINS_MEDIUM} from '../StyleGuide/fonts'
+import {Button, FormLabel, Icon} from 'react-native-elements'
+import {POPPINS, POPPINS_MEDIUM} from '../StyleGuide/fonts'
 import {BLUE, OFF_WHITE} from '../StyleGuide/colors'
 import DatePicker from 'react-native-datepicker'
 import Firebase from '../Firebase/Firebase'
@@ -9,17 +9,7 @@ import moment from 'moment'
 import {Input} from './Input'
 import PoopRating from './PoopRating'
 
-let textStyle = {color: OFF_WHITE, fontWeight: '700', fontSize: 20, fontFamily: POPPINS_MEDIUM,}
-let buttonStyle = {
-  backgroundColor: 'transparent',
-  width: "100%",
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: 45,
-  borderColor: OFF_WHITE,
-  borderWidth: 1,
-  borderRadius: 10,
-}
+let textStyle = {color: OFF_WHITE, fontWeight: '700', fontSize: 15, fontFamily: POPPINS_MEDIUM,}
 
 export default class Create extends Component {
 
@@ -47,7 +37,7 @@ export default class Create extends Component {
         salary
       })
     })
-    this.props.navigation.goBack()
+    this.props.closeModal()
   }
 
   setPoopRating(poopRating) {
@@ -65,36 +55,34 @@ export default class Create extends Component {
   }
 
   render() {
-    const paddingTop = Platform.OS === 'ios' ? (parseInt(Platform.Version, 10) > 10 ? 35 : 20) : StatusBar.currentHeight + 10
     return (
-      <View style={{flex: 1, backgroundColor: BLUE, paddingTop, height: "100%"}}>
-        <TouchableOpacity style={{flexDirection: 'row', height: '5%', justifyContent: 'flex-end', paddingRight: 15}}
-                          onPress={() => this.props.navigation.goBack()}>
-          <Icon name={'close'} color={OFF_WHITE}/>
-        </TouchableOpacity>
-
-        <View style={{flex: 2, flexDirection: 'column', justifyContent: 'space-evenly'}}>
-          {this.renderRating()}
+      <View style={{backgroundColor: BLUE, height: 400}}>
+        {this.renderRating()}
+        <View style={{flex: 1, flexDirection: 'column'}}>
           {this.renderDuration()}
-          {this.renderComments()}
           {this.renderDate()}
-          {this.renderWorkToggle()}
         </View>
-        <View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 30}}>
-          <Button
-            title='ADD'
-            onPress={() => this.handleSubmit()}
-            textStyle={{color: OFF_WHITE, fontWeight: '700', fontSize: 20}}
-            buttonStyle={{
-              backgroundColor: 'transparent',
-              borderColor: OFF_WHITE,
-              borderWidth: 1,
-              borderRadius: 10,
-            }}
-          />
+        <View style={{flex: 1}}>
+          {this.renderWorkToggle()}
+          {this.renderAddButton()}
         </View>
       </View>
     )
+  }
+
+  renderAddButton() {
+    return <Button
+      title='ADD'
+      onPress={() => this.handleSubmit()}
+      textStyle={{color: OFF_WHITE, fontWeight: '700', fontSize: 15}}
+      buttonStyle={{
+        marginTop: 5,
+        backgroundColor: 'transparent',
+        borderColor: OFF_WHITE,
+        borderWidth: 1,
+        borderRadius: 10,
+      }}
+    />;
   }
 
   renderWorkToggle() {
@@ -105,6 +93,7 @@ export default class Create extends Component {
                    onPress={() => this.onWorkStatusChange()}
                    textStyle={{...textStyle, color: atWorkFontColor, textAlign: 'center'}}
                    buttonStyle={{
+                     marginTop: 5,
                      borderColor: OFF_WHITE,
                      borderWidth: 1,
                      borderRadius: 10,
@@ -114,29 +103,37 @@ export default class Create extends Component {
   }
 
   renderDate() {
-    return <DatePicker showIcon={false}
-                       style={{
-                         width: "90%",
-                         borderColor: OFF_WHITE,
-                         marginLeft: 15
-                       }}
-                       date={this.state.date}
-                       mode="date" format="MM-DD-YYYY" confirmBtnText="Confirm"
-                       cancelBtnText="Cancel"
-                       customStyles={{
-                         placeholderText: {color: 'white', fontSize: 20},
-                         dateText: {color: 'white', fontSize: 20},
-                         dateInput: {borderColor: OFF_WHITE, borderWidth: 1, borderRadius: 10},
-                       }}
-                       onDateChange={(date) => {
-                         this.setState({date: date})
-                       }}
-    />;
-  }
-
-  renderComments() {
-    return <Input labelText={'Comments'} stateField={'comments'}
-                  onTextFieldChange={this.onTextFieldChange} keyboardType={"default"}/>;
+    return <View>
+      <FormLabel fontFamily={POPPINS}
+                 labelStyle={{
+                   color: OFF_WHITE,
+                   fontSize: 15
+                 }}>Date</FormLabel>
+      <DatePicker showIcon={false}
+                  style={{
+                    width: "91%",
+                    borderColor: OFF_WHITE,
+                    marginLeft: 15
+                  }}
+                  date={this.state.date}
+                  mode="date" format="MM-DD-YYYY" confirmBtnText="Confirm"
+                  cancelBtnText="Cancel"
+                  customStyles={{
+                    placeholderText: {color: OFF_WHITE, fontSize: 15},
+                    dateText: {color: OFF_WHITE, fontSize: 15},
+                    dateInput: {
+                      borderColor: OFF_WHITE,
+                      borderWidth: 1,
+                      borderTopColor: 'transparent',
+                      borderRightColor: 'transparent',
+                      borderLeftColor: 'transparent'
+                    }
+                  }}
+                  onDateChange={(date) => {
+                    this.setState({date: date})
+                  }}
+      />
+    </View>;
   }
 
   renderDuration() {

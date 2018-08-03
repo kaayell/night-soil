@@ -6,6 +6,8 @@ import {POPPINS_MEDIUM} from '../StyleGuide/fonts'
 import {Icon} from 'react-native-elements'
 import style from '../StyleGuide/styles'
 import ChartsSummary from '../ChartSummary/ChartsSummary'
+import Create from "../Create/Create";
+import Modal from "react-native-modal";
 
 export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -31,12 +33,22 @@ export class Home extends Component {
 
   })
 
+  state = {
+    modalVisible: false
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
         <ChartsSummary navigation={this.props.navigation}/>
+        <Modal isVisible={this.state.modalVisible}
+               style={{margin: 0, justifyContent: "flex-end"}}
+               onBackdropPress={() => this.setState({modalVisible: false})}
+        >
+          <Create closeModal={() => {this.setState({modalVisible: false})}}/>
+        </Modal>
         <ActionButton position="right" buttonColor="rgb(154, 192, 205)"
-                      onPress={() => this.props.navigation.navigate('Create')}/>
+                      onPress={() => this.setState({modalVisible: true})}/>
       </View>)
   }
 }
