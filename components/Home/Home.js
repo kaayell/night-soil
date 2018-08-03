@@ -5,12 +5,12 @@ import {BLUE, OFF_WHITE} from '../StyleGuide/colors'
 import {POPPINS_MEDIUM} from '../StyleGuide/fonts'
 import {Icon} from 'react-native-elements'
 import style from '../StyleGuide/styles'
-import Charts from '../Charts/Charts'
+import ChartsSummary from '../ChartSummary/ChartsSummary'
 
 export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
     headerTitle: (
-      <View style={{flex: 1, alignSelf: 'center', alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{paddingLeft: 10}}>
         <Image source={require('../../assets/poop.png')}
                style={{width: 35, height: 35}}/>
       </View>),
@@ -19,9 +19,7 @@ export class Home extends Component {
     },
     headerTitleStyle: {
       color: OFF_WHITE,
-      fontFamily: POPPINS_MEDIUM,
-      alignSelf: 'center',
-      textAlign: 'center'
+      fontFamily: POPPINS_MEDIUM
     },
     headerRight:
       <Icon name={'perm-identity'} iconStyle={style.icon} color={'white'}
@@ -36,7 +34,7 @@ export class Home extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Charts navigation={this.props.navigation}/>
+        <ChartsSummary navigation={this.props.navigation}/>
         <ActionButton position="right" buttonColor="rgb(154, 192, 205)"
                       onPress={() => this.props.navigation.navigate('Create')}/>
       </View>)

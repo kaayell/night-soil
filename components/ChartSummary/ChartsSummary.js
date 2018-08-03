@@ -7,14 +7,12 @@ import RatingPieChart from './RatingPieChart'
 import Summary from './Summary'
 import {PoopBarGraph} from "./PoopBarGraph";
 
-export class Charts extends Component {
+export class ChartsSummary extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      poopData: [],
-      pieChartData: [],
-      lineChartData: [],
+      poopData: []
     }
   }
 
@@ -35,14 +33,14 @@ export class Charts extends Component {
     return (
       <ScrollView style={{flex: 1, paddingTop: 10, paddingBottom: 40}}
                   contentContainerStyle={{alignItems: 'center', paddingBottom: 60}}>
-        <Summary poopData={this.state.poopData}/>
+        <Summary navigation={this.props.navigation} poopData={this.state.poopData}/>
         <RatingPieChart navigation={this.props.navigation} poopData={this.state.poopData}/>
-        <PoopLineChart poopData={this.state.poopData}/>
-        <PoopBarGraph poopData={this.state.poopData}/>
+        <PoopLineChart navigation={this.props.navigation} poopData={this.state.poopData}/>
+        <PoopBarGraph navigation={this.props.navigation} poopData={this.state.poopData}/>
       </ScrollView>
     )
   }
 
 }
 
-export default Charts
+export default ChartsSummary
