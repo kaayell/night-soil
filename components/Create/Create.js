@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {Platform, StatusBar, TouchableOpacity, View} from 'react-native'
-import {Button, FormLabel, Icon} from 'react-native-elements'
+import {View} from 'react-native'
+import {Button, FormLabel} from 'react-native-elements'
 import {POPPINS, POPPINS_MEDIUM} from '../StyleGuide/fonts'
 import {BLUE, OFF_WHITE} from '../StyleGuide/colors'
 import DatePicker from 'react-native-datepicker'
