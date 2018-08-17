@@ -58,7 +58,7 @@ export class Human extends Component {
 
         <FormLabel labelStyle={style.textStyle}
                    fontFamily={POPPINS}>HOURLY RATE</FormLabel>
-        <FormInput defaultValue={`${salary.toFixed(2)}`}
+        <FormInput defaultValue={`${salary}`}
                    labelStyle={style.textStyle}
                    inputStyle={{width: '50%', textAlign: 'center', color: OFF_WHITE, fontSize: 40}}
                    keyboardType={'numeric'}

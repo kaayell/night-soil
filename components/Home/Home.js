@@ -8,6 +8,7 @@ import style from '../StyleGuide/styles'
 import ChartsSummary from '../ChartSummary/ChartsSummary'
 import Create from "../Create/Create";
 import Modal from "react-native-modal";
+import Timer from "../Timer/Timer";
 
 export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -34,21 +35,55 @@ export class Home extends Component {
   })
 
   state = {
-    modalVisible: false
+    createModalVisible: false,
+    timerModalVisible: false,
+    durationMinutes: 0
+  }
+
+  renderActionButton() {
+    return (
+      <ActionButton position="right" buttonColor="rgb(154, 192, 205)">
+        <ActionButton.Item
+          buttonColor={BLUE}
+          onPress={() => this.setState({createModalVisible: true})}>
+          <Icon name="add"/>
+        </ActionButton.Item>
+        <ActionButton.Item
+          buttonColor={BLUE}
+          onPress={() => this.setState({timerModalVisible: true})}>
+          <Icon name="hourglass-empty"/>
+        </ActionButton.Item>
+      </ActionButton>
+    );
   }
 
   render() {
     return (
       <View style={{flex: 1}}>
         <ChartsSummary navigation={this.props.navigation}/>
-        <Modal isVisible={this.state.modalVisible}
+        <Modal isVisible={this.state.createModalVisible}
                style={{margin: 0, justifyContent: "flex-end"}}
-               onBackdropPress={() => this.setState({modalVisible: false})}
+               onBackdropPress={() => this.setState({createModalVisible: false})}
         >
-          <Create closeModal={() => {this.setState({modalVisible: false})}}/>
+          <Create
+            closeModal={() => {
+              this.setState({createModalVisible: false, durationMinutes: 0})
+            }}
+            durationMinutes={this.state.durationMinutes}/>
         </Modal>
-        <ActionButton position="right" buttonColor="rgb(154, 192, 205)"
-                      onPress={() => this.setState({modalVisible: true})}/>
+        <Modal isVisible={this.state.timerModalVisible}
+               style={{margin: 0, justifyContent: "flex-end"}}
+               onBackdropPress={() => this.setState({timerModalVisible: false})}
+        >
+          <Timer
+            recordClicked={(durationMinutes) => {
+              this.setState({durationMinutes, timerModalVisible: false})
+            }}
+            closeModal={() => {
+              this.setState({})
+            }}/>
+        </Modal>
+        {this.renderActionButton()}
       </View>)
   }
 }

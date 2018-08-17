@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
-import {Image, Platform, StatusBar, Text, TouchableOpacity, View} from 'react-native'
+import {Platform, StatusBar, Text, View} from 'react-native'
 import {BLUE, OFF_WHITE} from '../StyleGuide/colors'
 import {POPPINS_MEDIUM} from '../StyleGuide/fonts'
-import {Button, Icon} from 'react-native-elements'
+import {Button} from 'react-native-elements'
 import moment from 'moment'
 
-const paddingTop = Platform.OS === "ios" ? (parseInt(Platform.Version, 10) > 10 ? 35 : 20) : StatusBar.currentHeight + 10;
 let textStyle = {color: OFF_WHITE, fontWeight: '700', fontFamily: POPPINS_MEDIUM,};
 let buttonStyle = {backgroundColor: 'transparent', width: 300, height: 45, borderColor: OFF_WHITE, borderWidth: .5, borderRadius: 5, margin: 10,};
 
@@ -34,20 +33,13 @@ export class Timer extends Component {
   }
 
   handleRecordClick() {
-    let duration = this.state.endTime.diff(this.state.startTime)
-    this.props.navigation.navigate('Create', {duration: duration})
+    let duration = moment.duration(this.state.endTime.diff(this.state.startTime)).asMinutes()
+    this.props.recordClicked(duration)
   }
 
   render() {
-    const closeModalButton = <TouchableOpacity
-      style={{flexDirection: "row", height: "5%", justifyContent: 'flex-end', paddingRight: 15}}
-      onPress={() => this.props.navigation.goBack()}>
-      <Icon name={"close"} color={OFF_WHITE}/>
-    </TouchableOpacity>
-
     return (
-      <View style={{flex: 1, backgroundColor: BLUE, height: "100%", paddingTop}}>
-        {closeModalButton}
+      <View style={{backgroundColor: BLUE, height: 400}}>
         <View style={{
           flex: 1,
           justifyContent: 'center',

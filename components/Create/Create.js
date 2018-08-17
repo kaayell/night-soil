@@ -20,12 +20,17 @@ export default class Create extends Component {
 
     this.state = {
       poopRating: 3,
-      durationMinutes: null,
+      durationMinutes: 0,
       comments: null,
       date: moment().format('MM-DD-YYYY'),
       atWork: false,
       errors: false
     }
+  }
+
+
+  componentWillMount(){
+    this.setState({durationMinutes: this.props.durationMinutes})
   }
 
   handleSubmit() {
@@ -75,7 +80,6 @@ export default class Create extends Component {
                     placeholderText: {color: OFF_WHITE, fontSize: 15},
                     dateText: {color: OFF_WHITE, fontSize: 15},
                     dateInput: {
-                      borderColor: OFF_WHITE,
                       borderWidth: 1,
                       borderTopColor: 'transparent',
                       borderRightColor: 'transparent',
@@ -117,6 +121,7 @@ export default class Create extends Component {
           Duration In Minutes
         </FormLabel>
         <FormInput
+          defaultValue={Math.round(this.state.durationMinutes).toString()}
           onChangeText={(text) =>
             this.setState({durationMinutes: text})
           }

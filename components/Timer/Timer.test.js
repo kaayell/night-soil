@@ -4,8 +4,8 @@ import Timer from './Timer'
 
 describe('Timer', function () {
 
-  it('should render buttons', () => {
-    let component = shallow(<Timer />)
-    expect(component.find('Button').length).toBe(3)
+  it('should render', () => {
+    let wrapper = shallow(<Timer />)
+    expect(wrapper).toMatchSnapshot()
   })
 })
