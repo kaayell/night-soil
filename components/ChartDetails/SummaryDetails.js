@@ -30,11 +30,11 @@ class SummaryDetails extends Component {
   render() {
     const howMuchMade = _.sum(_.flatMap(this.state.poopData, (poop) => {
       return poop.atWork && ((poop.salary / 60) * parseInt(poop.durationMinutes))
-    }))
+    })) || 0
 
     const averageTime = _.mean(_.flatMap(this.state.poopData, (poop) => {
       return parseInt(poop.durationMinutes)
-    }))
+    })) || 0
 
     const paddingTop = Platform.OS === 'ios' ? (parseInt(Platform.Version, 10) > 10 ? 35 : 20) : StatusBar.currentHeight + 10
     return (

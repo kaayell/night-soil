@@ -16,7 +16,7 @@ export const pieData = (poopData) => {
       svg: {
         fill: RATING_COLORS[groupKey]
       },
-      key: `${Math.random()}`,
+      key: RATING_COLORS[groupKey],
     }
   })
 }

@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ByRatingDetails should render 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FAFAFA",
+      "flex": 1,
+      "height": "100%",
+      "paddingTop": 20,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    style={
+      Object {
+        "flexDirection": "row",
+        "height": "5%",
+        "justifyContent": "flex-end",
+        "paddingRight": 15,
+      }
+    }
+  >
+    <Icon
+      color="#9AC0CD"
+      name="close"
+      raised={false}
+      reverse={false}
+      reverseColor="white"
+      size={24}
+      underlayColor="white"
+    />
+  </TouchableOpacity>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <PieChart
+      data={Array []}
+      height={100}
+      innerRadius={10}
+      outerRadius="95%"
+      padAngle={0.05}
+      renderDecorator={[Function]}
+      sort={[Function]}
+      spacing={0}
+      style={
+        Object {
+          "height": 300,
+        }
+      }
+      valueAccessor={[Function]}
+      width={100}
+    />
+  </View>
+</View>
+`;

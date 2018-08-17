@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SummaryDetails should render 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FAFAFA",
+      "flex": 1,
+      "height": "100%",
+      "paddingTop": 20,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    style={
+      Object {
+        "flexDirection": "row",
+        "height": "5%",
+        "justifyContent": "flex-end",
+        "paddingRight": 15,
+      }
+    }
+  >
+    <Icon
+      color="#9AC0CD"
+      name="close"
+      raised={false}
+      reverse={false}
+      reverseColor="white"
+      size={24}
+      underlayColor="white"
+    />
+  </TouchableOpacity>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "white",
+        "height": 200,
+        "justifyContent": "center",
+        "marginTop": 20,
+        "shadowColor": "#9AC0CD",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0.5,
+        "shadowRadius": 5,
+        "width": "95%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontFamily": "poppins-regular",
+            }
+          }
+        >
+          MONEY MADE POOPIN
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "green",
+              "fontFamily": "poppins-regular",
+              "fontSize": 40,
+            }
+          }
+        >
+          $
+          0.00
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontFamily": "poppins-regular",
+            }
+          }
+        >
+          POOPS RECORDED
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "green",
+              "fontFamily": "poppins-regular",
+              "fontSize": 40,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontFamily": "poppins-regular",
+            }
+          }
+        >
+          AVERAGE TIME SPENT
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "green",
+              "fontFamily": "poppins-regular",
+              "fontSize": 40,
+            }
+          }
+        >
+          0
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "fontSize": 20,
+              }
+            }
+          >
+            min
+          </Text>
+        </Text>
+      </View>
+    </View>
+  </View>
+  <ScrollView>
+    <List
+      containerStyle={
+        Object {
+          "marginBottom": 20,
+        }
+      }
+    />
+  </ScrollView>
+</View>
+`;

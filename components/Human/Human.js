@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
-import { FormInput, FormLabel, Icon } from 'react-native-elements'
+import {View} from 'react-native'
+import {Button, FormInput, FormLabel, Icon} from 'react-native-elements'
 import { POPPINS, POPPINS_MEDIUM } from '../StyleGuide/fonts'
 import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
 import style from '../StyleGuide/styles'
 import Firebase from '../Firebase/Firebase'
+
+let textStyle = {color: OFF_WHITE, fontWeight: '700', fontSize: 15, fontFamily: POPPINS_MEDIUM,}
 
 export class Human extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -40,6 +42,10 @@ export class Human extends Component {
     })
   }
 
+  signOut = () => {
+    Firebase.getAuth().signOut()
+  }
+
   render () {
     let {user, salary} = this.state
     user = user || {}
@@ -52,11 +58,23 @@ export class Human extends Component {
 
         <FormLabel labelStyle={style.textStyle}
                    fontFamily={POPPINS}>HOURLY RATE</FormLabel>
-        <FormInput defaultValue={`${salary}`}
+        <FormInput defaultValue={`${salary.toFixed(2)}`}
                    labelStyle={style.textStyle}
                    inputStyle={{width: '50%', textAlign: 'center', color: OFF_WHITE, fontSize: 40}}
                    keyboardType={'numeric'}
                    onChangeText={(text) => this.updateSalary(text)}/>
+        <Button title={"SIGN OUT"}
+                onPress={this.signOut}
+                textStyle={{...textStyle, color: OFF_WHITE, textAlign: 'center'}}
+                buttonStyle={{
+                  marginTop: 20,
+                  borderColor: OFF_WHITE,
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  backgroundColor: BLUE,
+                  width: "100%"
+                }}
+        />
       </View>
     )
   }

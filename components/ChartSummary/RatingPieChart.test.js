@@ -1,10 +1,8 @@
-import { shallow } from 'enzyme/build/index'
-import React from 'react'
-import Summary from './Summary'
-import { Text } from 'react-native-elements'
+import React from "react";
+import {shallow} from "enzyme";
+import RatingPieChart from "./RatingPieChart";
 
-describe('Summary', () => {
-  let wrapper
+describe('RatingPieChart', () => {
   const poopData = [
     {
       'atWork': true,
@@ -44,19 +42,9 @@ describe('Summary', () => {
     },
   ]
 
-  beforeEach(() => {
-    wrapper = shallow(<Summary poopData={poopData}/>)
-  })
-
   it('should render', () => {
+    const wrapper = shallow(<RatingPieChart poopData={poopData}/>)
     expect(wrapper).toMatchSnapshot()
   });
 
-  it('should display how much money user made', () => {
-    expect(wrapper.find(Text).at(1).props().children[1]).toEqual("5.65")
-  })
-
-  it('should display the number of poops recorded', () => {
-    expect(wrapper.find(Text).at(3).props().children).toEqual(5)
-  })
-})
+});

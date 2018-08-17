@@ -1,0 +1,170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Create should render a whole lot 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#9AC0CD",
+      "height": 400,
+    }
+  }
+>
+  <PoopRating
+    onRatingChange={[Function]}
+    selected={3}
+  />
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "column",
+      }
+    }
+  >
+    <View>
+      <FormLabel
+        fontFamily="poppins-regular"
+        labelStyle={
+          Object {
+            "color": "#FAFAFA",
+            "fontSize": 15,
+          }
+        }
+      >
+        Duration In Minutes
+      </FormLabel>
+      <FormInput
+        containerStyle={
+          Object {
+            "backgroundColor": "transparent",
+            "borderBottomColor": "#FAFAFA",
+          }
+        }
+        inputStyle={
+          Object {
+            "color": "#FAFAFA",
+            "paddingLeft": 10,
+          }
+        }
+        keyboardType="numeric"
+        normalizeFontSize={true}
+        onChangeText={[Function]}
+        placeholderTextColor="#FAFAFA"
+        underlineColorAndroid="#FAFAFA"
+      />
+    </View>
+    <View>
+      <FormLabel
+        fontFamily="poppins-regular"
+        labelStyle={
+          Object {
+            "color": "#FAFAFA",
+            "fontSize": 15,
+          }
+        }
+      >
+        Date
+      </FormLabel>
+      <DatePicker
+        TouchableComponent={[Function]}
+        allowFontScaling={true}
+        androidMode="default"
+        cancelBtnText="Cancel"
+        confirmBtnText="Confirm"
+        customStyles={
+          Object {
+            "dateInput": Object {
+              "borderColor": "#FAFAFA",
+              "borderLeftColor": "transparent",
+              "borderRightColor": "transparent",
+              "borderTopColor": "transparent",
+              "borderWidth": 1,
+            },
+            "dateText": Object {
+              "color": "#FAFAFA",
+              "fontSize": 15,
+            },
+            "placeholderText": Object {
+              "color": "#FAFAFA",
+              "fontSize": 15,
+            },
+          }
+        }
+        date="08-17-2018"
+        disabled={false}
+        duration={300}
+        format="MM-DD-YYYY"
+        height={259}
+        hideText={false}
+        iconSource={
+          Object {
+            "testUri": "../../react-native-datepicker/date_icon.png",
+          }
+        }
+        modalOnResponderTerminationRequest={[Function]}
+        mode="date"
+        onDateChange={[Function]}
+        placeholder=""
+        showIcon={false}
+        style={
+          Object {
+            "borderColor": "#FAFAFA",
+            "marginLeft": 15,
+            "width": "91%",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <Button
+      buttonStyle={
+        Object {
+          "backgroundColor": "transparent",
+          "borderColor": "#FAFAFA",
+          "borderRadius": 10,
+          "borderWidth": 1,
+          "marginTop": 5,
+        }
+      }
+      onPress={[Function]}
+      textStyle={
+        Object {
+          "color": "#FAFAFA",
+          "fontFamily": "poppins-medium",
+          "fontSize": 15,
+          "fontWeight": "700",
+          "textAlign": "center",
+        }
+      }
+      title="I'm at work"
+    />
+    <Button
+      buttonStyle={
+        Object {
+          "backgroundColor": "transparent",
+          "borderColor": "#FAFAFA",
+          "borderRadius": 10,
+          "borderWidth": 1,
+          "marginTop": 5,
+        }
+      }
+      onPress={[Function]}
+      textStyle={
+        Object {
+          "color": "#FAFAFA",
+          "fontSize": 15,
+          "fontWeight": "700",
+        }
+      }
+      title="ADD"
+    />
+  </View>
+</View>
+`;

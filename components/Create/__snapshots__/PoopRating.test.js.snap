@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PoopRating should render 1`] = `
+<View>
+  <FormLabel
+    fontFamily="poppins-regular"
+    labelStyle={
+      Object {
+        "color": "#FAFAFA",
+        "fontSize": 15,
+        "paddingBottom": 5,
+        "textAlign": "center",
+      }
+    }
+  />
+  <StarRating
+    buttonStyle={Object {}}
+    containerStyle={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+    disabled={false}
+    emptyStar="star-o"
+    emptyStarColor="gray"
+    fullStar="star"
+    fullStarColor="#FFCC00"
+    halfStar="star-half-o"
+    halfStarEnabled={false}
+    iconSet="FontAwesome"
+    maxStars={5}
+    rating={0}
+    reversed={false}
+    selectedStar={[Function]}
+    starSize={40}
+    starStyle={Object {}}
+  />
+</View>
+`;

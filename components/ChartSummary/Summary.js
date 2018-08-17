@@ -8,7 +8,7 @@ import {POPPINS} from '../StyleGuide/fonts'
 export const Summary = ({poopData, navigation}) => {
   const howMuchMade = _.sum(_.flatMap(poopData, (poop) => {
     return poop.atWork && ((poop.salary / 60) * parseInt(poop.durationMinutes))
-  }))
+  })) || 0
   return (
     <TouchableOpacity style={{width: "95%"}} onPress={() => {
       navigation.navigate('SummaryDetails', {'poopData': poopData})

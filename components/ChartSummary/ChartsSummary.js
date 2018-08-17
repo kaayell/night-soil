@@ -4,6 +4,9 @@ import {ScrollView} from 'react-native'
 import _ from 'lodash'
 import RatingPieChart from './RatingPieChart'
 import Summary from './Summary'
+import {BLUE} from "../StyleGuide/colors";
+import {POPPINS} from "../StyleGuide/fonts";
+import {FormLabel} from "react-native-elements";
 
 export class ChartsSummary extends Component {
   constructor(props) {
@@ -26,7 +29,13 @@ export class ChartsSummary extends Component {
   }
 
   render() {
-    if (_.isEmpty(this.state.poopData)) return null
+    if (_.isEmpty(this.state.poopData)) {
+      return (
+        <FormLabel labelStyle={{color: BLUE, fontSize: 15, fontFamily: POPPINS, textAlign: 'center'}} fontFamily={POPPINS}>
+          PLEASE START BY RECORDING A POOP!
+        </FormLabel>
+      )
+    }
 
     return (
       <ScrollView style={{flex: 1, paddingTop: 10, paddingBottom: 40}}

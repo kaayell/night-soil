@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChartsSummary should render if no data 1`] = `
+<FormLabel
+  fontFamily="poppins-regular"
+  labelStyle={
+    Object {
+      "color": "#9AC0CD",
+      "fontFamily": "poppins-regular",
+      "fontSize": 15,
+      "textAlign": "center",
+    }
+  }
+>
+  PLEASE START BY RECORDING A POOP!
+</FormLabel>
+`;
+
+exports[`ChartsSummary should render with data 1`] = `
+<FormLabel
+  fontFamily="poppins-regular"
+  labelStyle={
+    Object {
+      "color": "#9AC0CD",
+      "fontFamily": "poppins-regular",
+      "fontSize": 15,
+      "textAlign": "center",
+    }
+  }
+>
+  PLEASE START BY RECORDING A POOP!
+</FormLabel>
+`;

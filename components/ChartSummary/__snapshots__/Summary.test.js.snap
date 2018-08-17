@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Summary should render 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
+  style={
+    Object {
+      "width": "95%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "white",
+        "height": 200,
+        "justifyContent": "center",
+        "marginTop": 20,
+        "shadowColor": "#9AC0CD",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0.5,
+        "shadowRadius": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <TextElement
+        style={
+          Object {
+            "fontFamily": "poppins-regular",
+          }
+        }
+      >
+        MONEY MADE POOPIN
+      </TextElement>
+      <TextElement
+        style={
+          Object {
+            "color": "green",
+            "fontFamily": "poppins-regular",
+            "fontSize": 40,
+          }
+        }
+      >
+        $
+        5.65
+      </TextElement>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <TextElement
+        style={
+          Object {
+            "fontFamily": "poppins-regular",
+          }
+        }
+      >
+        POOPS RECORDED
+      </TextElement>
+      <TextElement
+        style={
+          Object {
+            "color": "green",
+            "fontFamily": "poppins-regular",
+            "fontSize": 40,
+          }
+        }
+      >
+        5
+      </TextElement>
+    </View>
+  </View>
+</TouchableOpacity>
+`;

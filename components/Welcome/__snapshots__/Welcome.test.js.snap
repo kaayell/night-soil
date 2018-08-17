@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Welcome should render 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#9AC0CD",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../assets/poop-white.png",
+      }
+    }
+    style={
+      Object {
+        "height": 150,
+        "width": 150,
+      }
+    }
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#FAFAFA",
+        "fontFamily": "poppins-regular",
+        "fontSize": 30,
+      }
+    }
+  >
+    NIGHT SOIL
+  </Text>
+  <Button
+    buttonStyle={
+      Object {
+        "backgroundColor": "transparent",
+        "borderColor": "#FAFAFA",
+        "borderRadius": 5,
+        "borderWidth": 0.5,
+        "height": 45,
+        "width": 300,
+      }
+    }
+    onPress={[Function]}
+    textStyle={
+      Object {
+        "color": "#FAFAFA",
+        "fontWeight": "700",
+      }
+    }
+    title="SIGN IN WITH GOOGLE"
+  />
+</View>
+`;

@@ -1,6 +1,6 @@
 import React from 'react'
 import {PieChart} from 'react-native-svg-charts'
-import {Text, TouchableHighlight, TouchableOpacity, View} from 'react-native'
+import {Text, TouchableOpacity, View} from 'react-native'
 import style from '../StyleGuide/styles'
 import {POPPINS} from "../StyleGuide/fonts";
 import {pieData, RATING_COLORS} from "../ChartHelpers/pie_chart_helper";

@@ -1,13 +1,13 @@
-import { shallow } from 'enzyme'
+import {shallow} from 'enzyme'
 import React from 'react'
-import { Welcome } from './Welcome'
+import {Welcome} from './Welcome'
 import Firebase from '../Firebase/Firebase'
 import {Button} from "react-native-elements";
 
 describe('Welcome', () => {
-  it('should render sign in button', () => {
+  it('should render', () => {
     let component = shallow(<Welcome />)
-    expect(component.find(Button).length).toEqual(1)
+    expect(component).toMatchSnapshot()
   })
 
   it('should call firebase on press of button', () => {
