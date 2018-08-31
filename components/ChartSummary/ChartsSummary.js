@@ -7,6 +7,8 @@ import Summary from './Summary'
 import {BLUE} from "../StyleGuide/colors";
 import {POPPINS} from "../StyleGuide/fonts";
 import {FormLabel} from "react-native-elements";
+import PoopBarGraph from "./PoopBarGraph";
+import PoopLineChart from "./PoopLineChart";
 
 export class ChartsSummary extends Component {
   constructor(props) {
@@ -42,6 +44,7 @@ export class ChartsSummary extends Component {
                   contentContainerStyle={{alignItems: 'center', paddingBottom: 60}}>
         <Summary navigation={this.props.navigation} poopData={this.state.poopData}/>
         <RatingPieChart navigation={this.props.navigation} poopData={this.state.poopData}/>
+        <PoopLineChart navigation={this.props.navigation} poopData={this.state.poopData}/>
       </ScrollView>
     )
   }

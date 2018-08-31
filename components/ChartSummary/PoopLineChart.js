@@ -30,7 +30,7 @@ export const PoopLineChart = ({poopData, navigation}) => {
     return data.count
   })
   let dateOfPoops = _.flatMap(dateToCount, (data) => {
-    return {date: moment(data.date, 'MM-DD-YYYY').format("MM-DD-YY")}
+    return moment(data.date, 'MM-DD-YYYY').valueOf()
   })
 
   return (
@@ -55,12 +55,15 @@ export const PoopLineChart = ({poopData, navigation}) => {
               showGrid={false}
             />
             <XAxis
-              style={{marginHorizontal: -10, height: 30}}
               data={dateOfPoops}
-              numberOfTicks={10}
-              xAccessor={({item}) => item.date}
-              contentInset={{left: 10, right: 10}}
+              formatLabel={(value, index) =>{
+                console.log(value)
+                return moment(value).format("MM/DD")
+              }}
+              xAccessor={({item}) => item}
+              contentInset={{top: 20, left: 10, right: 10}}
               svg={{fontSize: 10, fill: 'grey'}}
+              numberOfTicks={5}
             />
           </View>
         </View>
