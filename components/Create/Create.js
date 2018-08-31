@@ -133,6 +133,7 @@ export default class Create extends Component {
             color: OFF_WHITE,
             paddingLeft: 10
           }}
+          returnKeyType={"done"}
           keyboardType={'numeric'}
           placeholderTextColor={OFF_WHITE}
           underlineColorAndroid={color}

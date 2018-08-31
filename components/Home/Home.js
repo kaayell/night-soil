@@ -42,18 +42,8 @@ export class Home extends Component {
 
   renderActionButton() {
     return (
-      <ActionButton position="right" buttonColor="rgb(154, 192, 205)">
-        <ActionButton.Item
-          buttonColor={BLUE}
-          onPress={() => this.setState({createModalVisible: true})}>
-          <Icon name="add"/>
-        </ActionButton.Item>
-        <ActionButton.Item
-          buttonColor={BLUE}
-          onPress={() => this.setState({timerModalVisible: true})}>
-          <Icon name="hourglass-empty"/>
-        </ActionButton.Item>
-      </ActionButton>
+      <ActionButton position="right" buttonColor="rgb(154, 192, 205)"
+                    onPress={() => this.setState({createModalVisible: true})}/>
     );
   }
 
@@ -63,25 +53,12 @@ export class Home extends Component {
         <ChartsSummary navigation={this.props.navigation}/>
         <Modal isVisible={this.state.createModalVisible}
                style={{margin: 0, justifyContent: "flex-end"}}
-               onBackdropPress={() => this.setState({createModalVisible: false})}
-        >
+               onBackdropPress={() => this.setState({createModalVisible: false})}>
           <Create
             closeModal={() => {
               this.setState({createModalVisible: false, durationMinutes: 0})
             }}
             durationMinutes={this.state.durationMinutes}/>
-        </Modal>
-        <Modal isVisible={this.state.timerModalVisible}
-               style={{margin: 0, justifyContent: "flex-end"}}
-               onBackdropPress={() => this.setState({timerModalVisible: false})}
-        >
-          <Timer
-            recordClicked={(durationMinutes) => {
-              this.setState({durationMinutes, timerModalVisible: false})
-            }}
-            closeModal={() => {
-              this.setState({})
-            }}/>
         </Modal>
         {this.renderActionButton()}
       </View>)
