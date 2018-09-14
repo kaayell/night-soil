@@ -1,9 +1,9 @@
 {
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "packagerPort": null,
-  "packagerPid": null,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://4a-5vj.kaayell.night-soil.exp.direct",
+  "packagerNgrokUrl": "https://packager.4a-5vj.kaayell.night-soil.exp.direct",
+  "ngrokPid": 5235,
+  "packagerPort": 19001,
+  "packagerPid": 5201,
   "devToolsPort": 19002
 }

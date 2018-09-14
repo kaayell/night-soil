@@ -14,7 +14,7 @@ export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
     headerTitle: (
       <View style={{paddingLeft: 10}}>
-        <Image source={require('../../assets/poop.png')}
+        <Image source={require('../../assets/triangle.png')}
                style={{width: 35, height: 35}}/>
       </View>),
     headerStyle: {
