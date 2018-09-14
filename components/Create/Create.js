@@ -1,14 +1,13 @@
 import React, {Component} from 'react'
-import {View} from 'react-native'
-import {Button, FormInput, FormLabel} from 'react-native-elements'
-import {POPPINS, POPPINS_MEDIUM} from '../StyleGuide/fonts'
+import {SafeAreaView, View} from 'react-native'
+import {Button, CheckBox, Divider, FormInput, FormLabel} from 'react-native-elements'
+import {POPPINS} from '../StyleGuide/fonts'
 import {BLUE, OFF_WHITE} from '../StyleGuide/colors'
 import DatePicker from 'react-native-datepicker'
 import Firebase from '../Firebase/Firebase'
 import moment from 'moment'
 import PoopRating from './PoopRating'
-
-let textStyle = {color: OFF_WHITE, fontWeight: '700', fontSize: 15, fontFamily: POPPINS_MEDIUM,}
+import Timer from "../Timer/Timer";
 
 export default class Create extends Component {
 
@@ -16,6 +15,7 @@ export default class Create extends Component {
     super(props)
 
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleTimerDone = this.handleTimerDone.bind(this)
     this.setPoopRating = this.setPoopRating.bind(this)
 
     this.state = {
@@ -29,7 +29,7 @@ export default class Create extends Component {
   }
 
 
-  componentWillMount(){
+  componentWillMount() {
     this.setState({durationMinutes: this.props.durationMinutes})
   }
 
@@ -51,6 +51,10 @@ export default class Create extends Component {
     this.props.closeModal()
   }
 
+  handleTimerDone(durationMinutes) {
+    this.setState({durationMinutes})
+  }
+
   setPoopRating(poopRating) {
     this.setState({poopRating})
   }
@@ -65,13 +69,11 @@ export default class Create extends Component {
       <FormLabel fontFamily={POPPINS}
                  labelStyle={{
                    color: OFF_WHITE,
-                   fontSize: 15
+                   fontSize: 12
                  }}>Date</FormLabel>
       <DatePicker showIcon={false}
                   style={{
-                    width: "91%",
                     borderColor: OFF_WHITE,
-                    marginLeft: 15
                   }}
                   date={this.state.date}
                   mode="date" format="MM-DD-YYYY" confirmBtnText="Confirm"
@@ -83,7 +85,8 @@ export default class Create extends Component {
                       borderWidth: 1,
                       borderTopColor: 'transparent',
                       borderRightColor: 'transparent',
-                      borderLeftColor: 'transparent'
+                      borderLeftColor: 'transparent',
+                      borderBottomColor: OFF_WHITE
                     }
                   }}
                   onDateChange={(date) => {
@@ -94,20 +97,15 @@ export default class Create extends Component {
   }
 
   renderWorkToggle() {
-    const atWorkBackgroundColor = this.state.atWork ? OFF_WHITE : 'transparent'
-    const atWorkFontColor = this.state.atWork ? BLUE : OFF_WHITE
-
-    return <Button title={"I'm at work"}
-                   onPress={() => this.setState({atWork: !this.state.atWork})}
-                   textStyle={{...textStyle, color: atWorkFontColor, textAlign: 'center'}}
-                   buttonStyle={{
-                     marginTop: 5,
-                     borderColor: OFF_WHITE,
-                     borderWidth: 1,
-                     borderRadius: 10,
-                     backgroundColor: atWorkBackgroundColor
-                   }}
-    />;
+    return <CheckBox
+      center
+      title='At Work?'
+      checked={this.state.atWork}
+      onPress={() => this.setState({atWork: !this.state.atWork})}
+      containerStyle={{backgroundColor: 'transparent', borderColor: 'transparent'}}
+      textStyle={{fontFamily: POPPINS, color: OFF_WHITE}}
+      checkedColor={OFF_WHITE}
+    />
   }
 
   renderDuration() {
@@ -116,18 +114,18 @@ export default class Create extends Component {
         <FormLabel fontFamily={POPPINS}
                    labelStyle={{
                      color: OFF_WHITE,
-                     fontSize: 15
+                     fontSize: 12
                    }}>
-          Duration In Minutes
+          Time Poopin'
         </FormLabel>
         <FormInput
-          defaultValue={Math.round(this.state.durationMinutes).toString()}
+          value={Math.round(this.state.durationMinutes).toString()}
           onChangeText={(text) =>
             this.setState({durationMinutes: text})
           }
           containerStyle={{
-            backgroundColor: 'transparent',
-            borderBottomColor: color
+            borderBottomColor: color,
+            width: 80
           }}
           inputStyle={{
             color: OFF_WHITE,
@@ -148,7 +146,6 @@ export default class Create extends Component {
       onPress={() => this.handleSubmit()}
       textStyle={{color: OFF_WHITE, fontWeight: '700', fontSize: 15}}
       buttonStyle={{
-        marginTop: 5,
         backgroundColor: 'transparent',
         borderColor: OFF_WHITE,
         borderWidth: 1,
@@ -159,17 +156,34 @@ export default class Create extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor: BLUE, height: 400}}>
-        {this.renderRating()}
-        <View style={{flex: 1, flexDirection: 'column'}}>
-          {this.renderDuration()}
-          {this.renderDate()}
+      <SafeAreaView style={{backgroundColor: BLUE, height: 400, justifyContent: 'center'}}>
+        <View style={{height: 350}}>
+          <View style={{flex: 1, marginTop: 5, marginLeft: 5}}>
+            <Timer onTimerDone={this.handleTimerDone}/>
+          </View>
+
+          <Divider/>
+          <View style={{flex: 1, paddingBottom: 20}}>
+            {this.renderRating()}
+          </View>
+          <View style={{
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'baseline',
+            justifyContent: 'space-evenly',
+            marginBottom: 10
+          }}>
+            {this.renderDuration()}
+            {this.renderDate()}
+          </View>
+          <View style={{flex: 1}}>
+            {this.renderWorkToggle()}
+          </View>
+          <View style={{flex: 1, paddingBottom: 0}}>
+            {this.renderAddButton()}
+          </View>
         </View>
-        <View style={{flex: 1}}>
-          {this.renderWorkToggle()}
-          {this.renderAddButton()}
-        </View>
-      </View>
+      </SafeAreaView>
     )
   }
 }

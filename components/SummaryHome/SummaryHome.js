@@ -9,8 +9,9 @@ import {POPPINS} from "../StyleGuide/fonts";
 import {FormLabel} from "react-native-elements";
 import PoopBarGraph from "./PoopBarGraph";
 import PoopLineChart from "./PoopLineChart";
+import PoopCalendar from "../Calendar/PoopCalendar";
 
-export class ChartsSummary extends Component {
+export class SummaryHome extends Component {
   constructor(props) {
     super(props)
 
@@ -43,6 +44,7 @@ export class ChartsSummary extends Component {
       <ScrollView style={{flex: 1, paddingTop: 10, paddingBottom: 40}}
                   contentContainerStyle={{alignItems: 'center', paddingBottom: 60}}>
         <Summary navigation={this.props.navigation} poopData={this.state.poopData}/>
+        <PoopCalendar navigation={this.props.navigation} poopData={this.state.poopData}/>
         <RatingPieChart navigation={this.props.navigation} poopData={this.state.poopData}/>
         <PoopLineChart navigation={this.props.navigation} poopData={this.state.poopData}/>
       </ScrollView>
@@ -51,4 +53,4 @@ export class ChartsSummary extends Component {
 
 }
 
-export default ChartsSummary
+export default SummaryHome

@@ -5,9 +5,20 @@
     "sdkVersion": "26.0.0",
     "ios": {
       "bundleIdentifier": "com.kaayell.nightsoil",
-      "buildNumber": "1"
+      "buildNumber": "1",
+      "config" : {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.444564626529-3qpgh05pmn2abmadfkt3rioe3mp4n8nv"
+        }
+      }
     },
     "android": {
+      "config": {
+        "googleSignIn": {
+          "apiKey": "AIzaSyC8u0L7N2bZQ6wvdwrb28j5NFOAeVvpe9E",
+          "certificateHash": "1AD6CCB705B63D041CB905C275E4D9E05BAF982B"
+        }
+      },
       "package": "com.kaayell.nightsoil",
       "versionCode": 1
     },

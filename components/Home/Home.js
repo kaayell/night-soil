@@ -5,10 +5,9 @@ import {BLUE, OFF_WHITE} from '../StyleGuide/colors'
 import {POPPINS_MEDIUM} from '../StyleGuide/fonts'
 import {Icon} from 'react-native-elements'
 import style from '../StyleGuide/styles'
-import ChartsSummary from '../ChartSummary/ChartsSummary'
+import SummaryHome from '../SummaryHome/SummaryHome'
 import Create from "../Create/Create";
 import Modal from "react-native-modal";
-import Timer from "../Timer/Timer";
 
 export class Home extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -50,7 +49,7 @@ export class Home extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <ChartsSummary navigation={this.props.navigation}/>
+        <SummaryHome navigation={this.props.navigation}/>
         <Modal isVisible={this.state.createModalVisible}
                style={{margin: 0, justifyContent: "flex-end"}}
                onBackdropPress={() => this.setState({createModalVisible: false})}>

@@ -22,8 +22,6 @@ export const PoopBarGraph = ({poopData, navigation}) => {
 
   const axesSvg = { fontSize: 10, fill: 'grey' };
 
-  console.log(dateToCount)
-
   return (
     <TouchableOpacity style={{width: "95%"}} onPress={() => {
       navigation.navigate('BarGraphDetails')

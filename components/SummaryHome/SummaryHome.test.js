@@ -1,16 +1,16 @@
 import Firebase from "../Firebase/Firebase";
 import React from "react";
 import {shallow} from "enzyme";
-import ChartsSummary from "./ChartsSummary";
+import SummaryHome from "./SummaryHome";
 
-describe('ChartsSummary', () => {
+describe('SummaryHome', () => {
   it('should render if no data', () => {
     Firebase.getPoopsRef = jest.fn(() => {
       return {
         on: jest.fn(() => Promise.resolve())
       }
     })
-    let wrapper = shallow(<ChartsSummary/>)
+    let wrapper = shallow(<SummaryHome/>)
     expect(wrapper).toMatchSnapshot()
   });
 
@@ -28,7 +28,7 @@ describe('ChartsSummary', () => {
         ))
       }
     })
-    let wrapper = shallow(<ChartsSummary/>)
+    let wrapper = shallow(<SummaryHome/>)
     expect(wrapper).toMatchSnapshot()
   });
 });

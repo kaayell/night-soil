@@ -1,5 +1,5 @@
 import * as firebase from 'firebase'
-import { ANDROID_API_KEY, config, IOS_API_KEY } from './secrets'
+import {ANDROID_API_KEY, config, IOS_API_KEY, STANDALONE_ANDROID_KEY, STANDALONE_IOS_KEY, WEB_API_KEY} from './secrets'
 
 export default class Firebase {
   static init () {
@@ -29,6 +29,9 @@ export default class Firebase {
     const response = await Expo.Google.logInAsync({
       androidClientId: ANDROID_API_KEY,
       iosClientId: IOS_API_KEY,
+      webClientId: WEB_API_KEY,
+      androidStandaloneAppClientId: STANDALONE_ANDROID_KEY,
+      iosStandaloneAppClientId: STANDALONE_IOS_KEY,
       scopes: ['profile', 'email'],
     })
 
