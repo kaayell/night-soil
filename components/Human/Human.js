@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {View} from 'react-native'
-import {Button, FormInput, FormLabel, Icon} from 'react-native-elements'
+import {Button, View} from 'react-native'
+import {FormInput, FormLabel, Icon} from 'react-native-elements'
 import { POPPINS, POPPINS_MEDIUM } from '../StyleGuide/fonts'
 import { BLUE, OFF_WHITE } from '../StyleGuide/colors'
 import style from '../StyleGuide/styles'
@@ -72,6 +72,7 @@ export class Human extends Component {
                   borderWidth: 1,
                   borderRadius: 10,
                   backgroundColor: BLUE,
+                  justifyContent: 'center',
                   width: "100%"
                 }}
         />

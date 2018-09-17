@@ -5,7 +5,7 @@
     "sdkVersion": "26.0.0",
     "ios": {
       "bundleIdentifier": "com.kaayell.nightsoil",
-      "buildNumber": "1",
+      "buildNumber": "2",
       "config" : {
         "googleSignIn": {
           "reservedClientId": "com.googleusercontent.apps.444564626529-3qpgh05pmn2abmadfkt3rioe3mp4n8nv"

@@ -43,18 +43,13 @@ class PoopCalendarDetails extends Component {
   }
 
   render() {
-    const items = {}
-    _.forEach(this.state.poopData, data => {
-      return items[moment(data.date, 'MM-DD-YYYY').format('YYYY-MM-DD')] = [{
-        text: `${data.durationMinutes} min`,
-        poopRating: data.poopRating
-      }]
+    let dateToCount = _.flatMap(_.groupBy(poopData, 'date'), (groupedData) => {
+      return {
+        date: groupedData[0].date,
+        count: groupedData.length
+      }
     })
 
-    const markedDates = {}
-    _.forEach(this.state.poopData, data => {
-      return markedDates[moment(data.date, 'MM-DD-YYYY').format('YYYY-MM-DD')] = {marked: true}
-    })
 
     const paddingTop = Platform.OS === 'ios' ? (parseInt(Platform.Version, 10) > 10 ? 35 : 20) : StatusBar.currentHeight + 10
     return (
